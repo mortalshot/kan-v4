@@ -1,0 +1,94 @@
+// header ====================================================================================================
+.header {
+	min-height: rem(60);
+	display: flex;
+	align-items: center;
+	background-color: var(--bgColor);
+
+	@media (min-width: $mobile) {
+		min-height: rem(89);
+	}
+
+	// .header__container
+	&__container {
+		width: 100%;
+		padding-left: rem(math.div($containerPadding, 2));
+		padding-right: rem(math.div($containerPadding, 2));
+
+		@media (min-width: $mobile) {
+			@include adaptiveValue("padding-left", 49, 20, 1528, 992, 1);
+			@include adaptiveValue("padding-right", 49, 20, 1528, 992, 1);
+		}
+	}
+
+	// .header__menu
+	&__menu {
+		display: flex;
+		align-items: center;
+		padding-top: rem(15);
+		padding-bottom: rem(15);
+
+		@media (min-width: $mobile) {
+			padding-top: rem(33);
+			padding-bottom: rem(33);
+		}
+		@media (max-width: $mobile) {
+			//  .menu__list
+			.menu__list {
+				display: none;
+			}
+		}
+	}
+
+	// .header__logo
+	&__logo {
+	}
+}
+
+.menu {
+	// .menu__icon
+	&__icon {
+	}
+
+	// .menu__body
+	&__body {
+		flex: 1;
+		@include adaptiveValue("padding-left", 83, 43);
+	}
+
+	// .menu__list
+	&__list {
+		display: flex;
+		flex-wrap: wrap;
+		align-items: center;
+		@include adaptiveValue("column-gap", 30, 15);
+		row-gap: rem(10);
+	}
+
+	// .menu__item
+	&__item {
+	}
+
+	// .menu__link
+	&__link {
+		font-size: rem(14);
+		line-height: 1;
+	}
+}
+
+.logo {
+	// .logo__link
+	&__link {
+	}
+
+	// .logo__icon
+	&__icon {
+	}
+}
+
+.icon-menu {
+	font-size: rem(23);
+
+	.menu-open & {
+	}
+}
