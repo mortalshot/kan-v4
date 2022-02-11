@@ -38,3 +38,60 @@ ScrollTrigger.addEventListener("refresh", () => locoScroll.update());
 
 // after everything is set up, refresh() ScrollTrigger and update LocomotiveScroll because padding may have been added for pinning, etc.
 ScrollTrigger.refresh(); */
+
+// Анимация фокусного состояния инпута
+let input = document.querySelectorAll('.input');
+input.forEach(item => {
+    const itemParent = item.closest('.form__item-wrapper');
+    if (item.value.length > 0) {
+        itemParent.classList.add('_focus');
+    }
+
+    item.addEventListener("focus", function () {
+        const itemParent = item.closest('.form__item-wrapper');
+        itemParent.classList.add('_focus');
+    });
+    item.addEventListener("blur", function () {
+        const itemParent = item.closest('.form__item-wrapper');
+        if (!item.value.length > 0) {
+            itemParent.classList.remove('_focus');
+        }
+    });
+});
+
+/* $(".form__input").focus(function () {
+    $(this).closest('.form__item').children('.form__label').css(
+        {
+            'top': '-9px',
+            'font-size': '12px',
+            'opacity': '0.8',
+        }
+    );
+});
+$(".form__input").focusout(function () {
+    if ($(this).val() == '' || $(this).val() == '+7(___) ___-____') {
+        $(this).closest('.form__item').children('.form__label').css(
+            {
+                'top': '9px',
+                'font-size': '16px',
+                'opacity': '1',
+            }
+        );
+    }
+});
+
+let inputs = $('.form__input');
+if (inputs.length > 0) {
+    for (let index = 0; index < inputs.length; index++) {
+        const element = inputs[index];
+        if (!$(element).val() == '') {
+            $(element).closest('.form__item').children('.form__label').css(
+                {
+                    'top': '-9px',
+                    'font-size': '12px',
+                    'opacity': '0.8',
+                }
+            );
+        }
+    }
+} */

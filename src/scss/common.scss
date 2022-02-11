@@ -1,7 +1,7 @@
 // Общие стили
 section {
-    padding-top: rem(50);
-    padding-bottom: rem(50);
+    @include adaptiveValue("padding-top", 100, 50);
+    @include adaptiveValue("padding-bottom", 100, 50);
     position: relative;
     z-index: 1;
     background-color: var(--bgColor);
@@ -24,6 +24,20 @@ section {
             transform: rotate(360deg);
         }
     }
+}
+
+.link-cirlcle2 {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: rem(245);
+    height: rem(245);
+    border-radius: 50%;
+    border: 1px solid $DGrey;
+    font-weight: 300;
+    font-size: rem(22);
+    line-height: math.div(26, 22);
+    text-transform: uppercase;
 }
 
 em {
@@ -82,7 +96,7 @@ img {
     }
 }
 
-[data-goto] {
+[data-goto], [data-popup] {
     cursor: pointer;
 }
 

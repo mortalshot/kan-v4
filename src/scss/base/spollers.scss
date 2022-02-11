@@ -19,34 +19,24 @@
 	cursor: default;
 	text-align: left;
 	position: relative;
-	padding-right: rem(50);
 
 	._spoller-init & {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
 		cursor: pointer;
-		&::before,
+
 		&::after {
-			content: "";
-			position: absolute;
-			right: rem(10);
-			top: 50%;
-			background-color: $DGrey;
-			height: rem(2);
-			width: rem(15);
-			transition: transform 0.5s ease 0s;
-		}
-		&::before {
-			transform: translate(-75%, -50%) rotate(40deg);
-		}
-		&::after {
-			transform: translate(0, -50%) rotate(-40deg);
+			content: "\e909";
+			@extend %ic;
+			color: $DGrey;
+			font-size: rem(26);
+			transition: $transition ease transform 0s;
 		}
 
 		&._spoller-active {
-			&::before {
-				transform: translateX(-75%) rotate(-40deg);
-			}
 			&::after {
-				transform: rotate(40deg);
+				transform: rotate(90deg);
 			}
 		}
 	}

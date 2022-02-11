@@ -15,6 +15,15 @@
 	}
 }
 
+._icon-link2:before {
+	content: "\e901";
+}
+._icon-logo:before {
+	content: "\e905";
+}
+._icon-plus:before {
+	content: "\e909";
+}
 ._icon-home:before {
 	content: "\e907";
 }
@@ -23,9 +32,6 @@
 }
 ._icon-link:before {
 	content: "\e900";
-}
-._icon-logo:before {
-	content: "\e901";
 }
 ._icon-skype:before {
 	content: "\e902";

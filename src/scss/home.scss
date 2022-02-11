@@ -21,7 +21,7 @@
 
         @media (min-width: $mobile) {
             position: absolute;
-            @include adaptiveValue("right", 129, 20, 1528, 992, 1);
+            @include adaptiveValue("right", 50, 20, 1528, 992, 1);
             top: 50%;
             transform: translateY(-50%) rotate(-180deg);
             writing-mode: vertical-rl;
@@ -51,7 +51,6 @@
         line-height: 1;
 
         @media (min-width: $mobile) {
-            line-height: math.div(123, 100);
             max-width: rem(610);
         }
 
@@ -69,7 +68,7 @@
         line-height: math.div(55, 46);
 
         @media (min-width: $mobile) {
-            @include adaptiveValue("margin-right", 104, 0, 1528, 992, 1);
+            @include adaptiveValue("margin-right", 74, 0, 1528, 992, 1);
             max-width: rem(500);
             margin-left: auto;
         }
@@ -194,9 +193,12 @@
 
     // .about__text
     &__text {
-        @include adaptiveValue("font-size", 22, 16);
-        line-height: math.div(31, 22);
         @extend %firstletter;
+
+        p {
+            @include adaptiveValue("font-size", 22, 16);
+            line-height: math.div(31, 22);
+        }
     }
 
     // .about__title
@@ -212,8 +214,11 @@
 
     // .categories__items
     &__items {
+        padding-top: rem(100);
+        border-top: 1px solid $DGrey;
+        @include adaptiveValue("margin-left", 163, 0, 1520, 768, 1);
         display: grid;
-        row-gap: rem(48);
+        row-gap: rem(40);
     }
 
     // .categories__item
@@ -230,6 +235,178 @@
             color: $DGrey;
             margin-left: rem(20);
         }
+    }
+}
+
+// cases ------------------------------------------------------------------------------------------------------------------------------
+.cases {
+    max-width: rem($maxWidthContainer);
+    box-sizing: content-box;
+    margin: 0 auto;
+    @include adaptiveValue("margin-top", 70, 0, 1528, 992, 1);
+
+    // .cases__slider
+    &__slider {
+        @extend %container;
+        @include adaptiveValue("margin-left", -129, -20, 1528, 992, 1);
+        @include adaptiveValue("margin-right", -129, -20, 1528, 992, 1);
+    }
+
+    // .cases__wrapper
+    &__wrapper {
+    }
+
+    // .cases__slide
+    &__slide {
+    }
+}
+
+.single-case {
+    // .single-case_template1
+    &_template1 {
+        // .single-case__job
+        .single-case__job {
+            &:nth-child(1) {
+                // .single-case__link
+
+                .single-case__link {
+                    margin-left: auto;
+                    max-width: percent(280, 366);
+                }
+            }
+            &:nth-child(3) {
+                align-self: flex-end;
+                margin-top: rem(170);
+                margin-bottom: rem(70);
+
+                // .single-case__link
+                .single-case__link {
+                    max-width: percent(418, 418);
+                }
+
+                // .single-case__caption
+                .single-case__caption {
+                    margin-left: rem(88);
+                }
+            }
+            &:nth-child(4) {
+                margin-top: rem(170);
+                margin-bottom: rem(100);
+
+                // .single-case__link
+                .single-case__link {
+                    max-width: percent(366, 366);
+                }
+
+                // .single-case__caption
+                .single-case__caption {
+                    max-width: rem(159);
+                    margin-left: rem(25);
+                }
+            }
+            &:nth-child(5) {
+                align-self: flex-end;
+                justify-self: flex-end;
+                @include adaptiveValue("margin-right", 166, 20, 1520, 992, 1);
+
+                // .single-case__link
+                .single-case__link {
+                    margin-left: auto;
+                    max-width: percent(240, 741);
+                }
+            }
+        }
+    }
+
+    // .single-case__wrapper
+    &__wrapper {
+        display: grid;
+        grid-template-columns: percent(366, 1528) percent(741, 1528) percent(419, 1528);
+    }
+
+    // .single-case__job
+    &__job {
+        width: 100%;
+    }
+
+    // .single-case__link
+    &__link {
+        width: 100%;
+        display: block;
+
+        @media (any-hover: hover) {
+            &:hover {
+                // .single-case__image
+                .single-case__image {
+                    &::before {
+                        opacity: 1;
+                    }
+                }
+            }
+        }
+    }
+
+    // .single-case__image
+    &__image {
+        position: relative;
+        padding-bottom: 100%;
+
+        img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        &:not(:last-child) {
+            margin-bottom: rem(45);
+        }
+
+        &::before {
+            content: '\e900';
+            @extend %ic;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            @include adaptiveValue("width", 106, 64);
+            @include adaptiveValue("height", 106, 64);
+            border-radius: 50%;
+            background-color: var(--mainColor);
+            color: var(--bgColor);
+            @include adaptiveValue("font-size", 24, 17);
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            transform: translate(-50%, 50%);
+            z-index: 1;
+            opacity: 0;
+            transition: $transition ease opacity 0s;
+        }
+    }
+
+    // .single-case__caption
+    &__caption {
+        max-width: rem(112);
+        text-align: right;
+        text-transform: uppercase;
+        @include adaptiveValue("font-size", 16, 14);
+        line-height: math.div(22, 16);
+    }
+
+    // .single-case__title
+    &__title {
+        font-weight: 300;
+        @include adaptiveValue("font-size", 80, 45);
+        line-height: math.div(96, 80);
+        text-align: justify;
+        max-width: rem(473);
+        align-self: flex-end;
+    }
+
+    // .single-case__more
+    &__more {
+        align-self: center;
     }
 }
 

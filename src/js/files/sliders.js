@@ -7,7 +7,7 @@
 // Подключаем слайдер Swiper из node_modules
 // При необходимости подключаем дополнительные модули слайдера, указывая их в {} через запятую
 // Пример: { Navigation, Autoplay }
-import Swiper, { Navigation, Lazy } from 'swiper';
+import Swiper, { Pagination, Lazy, EffectFade } from 'swiper';
 /*
 Основниые модули слайдера:
 Navigation, Pagination, Autoplay, 
@@ -32,14 +32,19 @@ function initSliders() {
 		new Swiper('.cases__slider', { // Указываем скласс нужного слайдера
 			// Подключаем модули слайдера
 			// для конкретного случая
-			modules: [Navigation, Lazy],
+			modules: [Pagination, Lazy, EffectFade],
 			observer: true,
 			observeParents: true,
 			slidesPerView: 1,
-			spaceBetween: 0,
+			spaceBetween: 40,
 			autoHeight: false,
 			speed: 800,
 			watchOverflow: true,
+
+			effect: 'fade',
+			fadeEffect: {
+			  crossFade: true
+			},
 
 			//touchRatio: 0,
 			//simulateTouch: false,
@@ -50,6 +55,12 @@ function initSliders() {
 			lazy: {
 				loanOnTransitionStart: true,
 				loadPrevNext: true,
+			},
+
+			// Пагинация
+			pagination: {
+				el: '.swiper-pagination',
+				type: 'bullets',
 			},
 
 			/*
@@ -69,34 +80,32 @@ function initSliders() {
 			},
 			*/
 
-			// Кнопки "влево/вправо"
+			/* // Кнопки "влево/вправо"
 			navigation: {
 				prevEl: '.swiper-button-prev',
 				nextEl: '.swiper-button-next',
 			},
-
-			// Брейкпоинты
-			/*
-			breakpoints: {
-				320: {
-					slidesPerView: 1,
-					spaceBetween: 0,
-					autoHeight: true,
-				},
-				768: {
-					slidesPerView: 2,
-					spaceBetween: 20,
-				},
-				992: {
-					slidesPerView: 3,
-					spaceBetween: 20,
-				},
-				1268: {
-					slidesPerView: 4,
-					spaceBetween: 30,
-				},
-			},
-			*/
+ */
+			/* 			// Брейкпоинты
+						breakpoints: {
+							320: {
+								slidesPerView: 1,
+								spaceBetween: 0,
+								autoHeight: true,
+							},
+							768: {
+								slidesPerView: 2,
+								spaceBetween: 20,
+							},
+							992: {
+								slidesPerView: 3,
+								spaceBetween: 20,
+							},
+							1268: {
+								slidesPerView: 4,
+								spaceBetween: 30,
+							},
+						}, */
 			// События
 			on: {
 

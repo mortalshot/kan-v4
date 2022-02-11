@@ -1,19 +1,85 @@
 //<FORM>
 // Снипет (HTML):
 .form {
+	// .form__row
 	&__row {
+		display: grid;
+		@include adaptiveValue("row-gap", 40, 32);
 	}
-	&__column {
+
+	// .form__item
+	&__item {
 	}
-	&__line {
+
+	// .form__item-wrapper
+	&__item-wrapper {
+		position: relative;
+
+		&._focus {
+			// .form__label
+			.form__label {
+				font-size: rem(10);
+				opacity: 0.5;
+				top: rem(-4);
+			}
+		}
 	}
+
+	// .form__label
+	&__label {
+		font-weight: 300;
+		font-size: rem(16);
+		position: absolute;
+		left: rem(4);
+		top: rem(10);
+		pointer-events: none;
+		transition: $transition ease all 0s;
+	}
+
+	// .form__input
 	&__input {
+		font-weight: 300;
+		font-size: rem(16);
 	}
-	&__button {
+
+	// .form__submit
+	&__submit {
 	}
-	&__error {
+
+	// .form__btn
+	&__btn {
+		font-weight: 300;
+		@include adaptiveValue("font-size", 60, 32);
+		line-height: 1;
+		display: flex;
+		flex-direction: row-reverse;
+		align-items: center;
+
+		&::before {
+			font-size: rem(16);
+			@include adaptiveValue("margin-left", 36, 16);
+		}
+	}
+
+	// .form__privacy
+	&__privacy {
+		&:not(:first-child) {
+			@include adaptiveValue("margin-top", 50, 20);
+			font-size: rem(12);
+			line-height: math.div(17, 12);
+		}
+
+		@media (min-width: $mobile) {
+			max-width: rem(202);
+			margin-left: auto;
+		}
+
+		a {
+			@extend %hoverUnderline;
+		}
 	}
 }
+
 //</FORM>
 
 // <BUTTONS>
@@ -22,7 +88,7 @@
 
 // <INPUTS>
 // Снипет (HTML): inp
-// @import "input";
+@import "input";
 
 // <CHECK>
 // Снипет (HTML): chk

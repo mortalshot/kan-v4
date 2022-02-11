@@ -8,18 +8,19 @@ textarea {
 	-moz-appearance: none;
 	appearance: none;
 }
+
 .input {
 	border-radius: 0 !important;
 	width: 100%;
 	display: block;
-	padding: 0px 20px;
-	border: 1px solid #eee;
-	&._focus {
-	}
-	&._error {
-	}
+	padding: rem(10) rem(4);
+	background: transparent;
+	border-bottom: 1px solid var(--mainColor);
+	outline: 0;
+	color: var(--mainColor);
 }
+
 textarea.input {
+	min-height: rem(66);
 	resize: none;
-	padding: 0px 0px;
 }
