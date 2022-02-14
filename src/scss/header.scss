@@ -71,14 +71,30 @@
 
 	// .menu__link
 	&__link {
+		padding: rem(5);
+		margin: rem(-5);
 		font-size: rem(14);
 		line-height: 1;
+		transition: $transition ease color 0s;
+
+		@media (any-hover: hover) {
+			&:hover {
+				color: $DGrey;
+			}
+		}
 	}
 }
 
 .logo {
 	// .logo__link
 	&__link {
+		@media (any-hover: hover) {
+			transition: $transition ease color 0s;
+
+			&:hover {
+				color: $DGrey;
+			}
+		}
 	}
 
 	// .logo__icon
@@ -87,8 +103,84 @@
 }
 
 .icon-menu {
+	display: flex;
 	font-size: rem(23);
 
+	@for $i from 1 through 4 {
+		#icon-menu-rect-#{$i} {
+			transition: $transition ease transform 0s;
+		}
+	}
+
+	@media (any-hover: hover) {
+		transition: $transition ease color 0s;
+
+		&:hover {
+			color: $DGrey;
+		}
+	}
+
 	.menu-open & {
+		#icon-menu-rect-1 {
+			transform: translate(rem(4), rem(8));
+			// animation: icon-menu-anim-1 0.5s both;
+		}
+		#icon-menu-rect-2 {
+			transform: translate(rem(0), rem(-8));
+			// animation: icon-menu-anim-2 0.5s both;
+		}
+		#icon-menu-rect-3 {
+			transform: translate(rem(-4), rem(8));
+			// animation: icon-menu-anim-3 0.5s both;
+		}
+		#icon-menu-rect-4 {
+			transform: translate(rem(0), rem(-8));
+			// animation: icon-menu-anim-4 0.5s both;
+		}
+	}
+}
+
+@keyframes icon-menu-anim-1 {
+	0% {
+		transform: translate(0);
+	}
+	100% {
+		transform: translate(rem(4), rem(8));
+	}
+}
+
+@keyframes icon-menu-anim-2 {
+	0% {
+		transform: translate(0);
+	}
+	50% {
+		transform: translate(rem(8), rem(-8));
+	}
+	100% {
+		transform: translate(rem(0), rem(-8));
+	}
+}
+
+@keyframes icon-menu-anim-3 {
+	0% {
+		transform: translate(0);
+	}
+	50% {
+		transform: translate(rem(-8), rem(8));
+	}
+	100% {
+		transform: translate(rem(-4), rem(8));
+	}
+}
+
+@keyframes icon-menu-anim-4 {
+	0% {
+		transform: translate(0);
+	}
+	50% {
+		transform: translate(rem(-8), rem(-8));
+	}
+	100% {
+		transform: translate(rem(0), rem(-8));
 	}
 }

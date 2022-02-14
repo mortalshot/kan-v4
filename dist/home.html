@@ -6,7 +6,7 @@
 	<meta charset="UTF-8">
 	<meta name="format-detection" content="telephone=no">
 	<!-- <style>body{opacity: 0;}</style> -->
-	<link rel="stylesheet" href="css/style.min.css?_v=20220211171630">
+	<link rel="stylesheet" href="css/style.min.css?_v=20220214184615">
 	<link rel="shortcut icon" href="favicon.ico">
 	<!-- <meta name="robots" content="noindex, nofollow"> -->
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -17,7 +17,14 @@
 		<header class="header">
 			<div class="header__container">
 				<div class="header__menu menu">
-					<button type="button" class="menu__icon icon-menu _icon-burger"><span></span></button>
+					<button type="button" class="menu__icon icon-menu">
+						<svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+							<path id="icon-menu-rect-1" d="M0.128662 0.5H8.12866V8.5H0.128662V0.5Z" fill="#D1D1D1" />
+							<path id="icon-menu-rect-2" d="M0.128662 16.2861H8.12866V24.2861H0.128662V16.2861Z" fill="#D1D1D1" />
+							<path id="icon-menu-rect-3" d="M15.9148 0.5H23.9148V8.5H15.9148V0.5Z" fill="#D1D1D1" />
+							<path id="icon-menu-rect-4" d="M15.9148 16.2852H23.9148V24.2852H15.9148V16.2852Z" fill="#D1D1D1" />
+						</svg>
+					</button>
 
 					<nav class="menu__body">
 						<ul class="menu__list">
@@ -63,13 +70,13 @@
 					</div>
 
 					<div class="preview__body">
-						<h1 class="preview__title">Design <em>and</em> <span>develo&shy;pment</span></h1>
+						<h1 class="preview__title">Design <em>and</em> <span>development</span></h1>
 						<h2 class="preview__subtitle">
 							<span>With care and attention, we <em>launch</em> your <em>projects</em> to the moon</span>
 							<button type="button" class="_icon-link link-circle"></button>
 						</h2>
 					</div>
-					<button class="preview__scroll" data-goto="#about">scroll link</button>
+					<button class="preview__scroll _icon-link3" data-goto="#about"></button>
 				</div>
 			</section>
 
@@ -98,26 +105,27 @@
 			<section id="categories" class="categories">
 				<div class="categories__container">
 					<div class="categories__items">
-						<a href="" class="categories__item _icon-link2">Design</a>
-						<a href="" class="categories__item _icon-link2">Develo&shy;pment</a>
-						<a href="" class="categories__item _icon-link2">Branding</a>
-						<a href="" class="categories__item _icon-link2">Apps</a>
-						<a href="" class="categories__item _icon-link2">Marketing</a>
-						<a href="" class="categories__item _icon-link2">SEO</a>
-						<a href="" class="categories__item _icon-link2">SMM</a>
+						<a href="" class="categories__item _icon-link4">Design</a>
+						<a href="" class="categories__item _icon-link4">Development</a>
+						<a href="" class="categories__item _icon-link4">Branding</a>
+						<a href="" class="categories__item _icon-link4">Apps</a>
+						<a href="" class="categories__item _icon-link4">Marketing</a>
+						<a href="" class="categories__item _icon-link4">SEO</a>
+						<a href="" class="categories__item _icon-link4">SMM</a>
 					</div>
 				</div>
 			</section>
 
 			<section class="cases">
 				<div class="cases__slider swiper">
+					<div class="swiper__button swiper__button_prev"></div>
 					<div class="cases__wrapper swiper-wrapper">
 						<div class="cases__slide swiper-slide single-case single-case_template1">
 							<div class="single-case__wrapper">
 								<div class="single-case__job">
 									<a href="" class="single-case__link">
 										<div class="single-case__image"><picture><source data-srcset="img/home/home-image-3.webp" type="image/webp"><img data-src="img/home/home-image-3.jpg" class="swiper-lazy" alt="" loading="lazy"></picture></div>
-										<div class="single-case__caption">Cryptocurr&shy;encies exchange</div>
+										<div class="single-case__caption">Cryptocurrencies exchange</div>
 									</a>
 								</div>
 
@@ -178,9 +186,8 @@
 								<a href="" class="single-case__more link-cirlcle2">MORE</a>
 							</div>
 						</div>
-
-						<div class="swiper-pagination"></div>
 					</div>
+					<div class="swiper__button swiper__button_next"></div>
 				</div>
 			</section>
 
@@ -342,7 +349,7 @@
 							<em>Follow us</em> on <a href="">Instagram</a>, <a href="">Twitter</a>, <a href="">Facebook</a>, <a href="">Youtube</a>, read our <a href="">Blog</a> and learn more about <em>our approach</em>
 						</div>
 						<div class="seo__contacts">
-							<a href="mailto:info@thekan,agency" class="seo__link">info@thekan,agency</a>
+							<a href="mailto:info@thekan.agency" class="seo__link">info@thekan.agency</a>
 							<a href="" class="seo__app-link _icon-telegram"></a>
 							<a href="" class="seo__app-link _icon-whatsapp"></a>
 						</div>
@@ -409,7 +416,7 @@
 			</div>
 		</div>
 	</div>
-	<script src="js/app.min.js?_v=20220211171630"></script>
+	<script src="js/app.min.js?_v=20220214184615"></script>
 </body>
 
 </html>

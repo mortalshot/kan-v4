@@ -11,8 +11,8 @@ section {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    @include adaptiveValue("width", 106, 64);
-    @include adaptiveValue("height", 106, 64);
+    @include adaptiveValue("width", 106, 76);
+    @include adaptiveValue("height", 106, 76);
     border-radius: 50%;
     background-color: var(--mainColor);
     color: var(--bgColor);
@@ -51,11 +51,11 @@ img {
 }
 
 ._image-left {
-    @include adaptiveValue("margin-left", -129, -20, 1528, 992, 1);
+    @include adaptiveValue("margin-left", -129, -40, 1528, 992, 1);
 }
 
 ._image-right {
-    @include adaptiveValue("margin-right", -129, -20, 1528, 992, 1);
+    @include adaptiveValue("margin-right", -129, -40, 1528, 992, 1);
 }
 
 ._section-title {

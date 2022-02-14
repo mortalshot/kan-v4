@@ -130,8 +130,8 @@
 	padding-right: rem(math.div($containerPadding, 2));
 
 	@media (min-width: $mobile) {
-		@include adaptiveValue("padding-left", 129, 20, 1528, 992, 1);
-		@include adaptiveValue("padding-right", 129, 20, 1528, 992, 1);
+		@include adaptiveValue("padding-left", 129, 40, 1528, 992, 1);
+		@include adaptiveValue("padding-right", 129, 40, 1528, 992, 1);
 	}
 }
 %firstletter {

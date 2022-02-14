@@ -38,7 +38,7 @@
     // .preview__body
     &__body {
         display: grid;
-        @include adaptiveValue("row-gap", 56, 32);
+        @include adaptiveValue("row-gap", 56, 42);
 
         @media (min-width: $mobile) {
             padding-right: rem(32);
@@ -47,8 +47,9 @@
 
     // .preview__title
     &__title {
-        @include adaptiveValue("font-size", 100, 56);
+        @include adaptiveValue("font-size", 100, 87);
         line-height: 1;
+        word-break: break-word;
 
         @media (min-width: $mobile) {
             max-width: rem(610);
@@ -64,7 +65,7 @@
 
     // .preview__subtitle
     &__subtitle {
-        @include adaptiveValue("font-size", 46, 18);
+        @include adaptiveValue("font-size", 46, 36);
         line-height: math.div(55, 46);
 
         @media (min-width: $mobile) {
@@ -76,6 +77,21 @@
 
     // .preview__scroll
     &__scroll {
+        padding-left: rem(5);
+        padding-right: rem(5);
+        margin-left: rem(-5);
+        margin-right: rem(-5);
+        font-size: rem(98);
+        color: $DGrey;
+        transition: $transition ease color, $transition transform 0s;
+
+        @media (any-hover: hover) {
+            &:hover {
+                color: var(--mainColor);
+                transform: translateY(rem(3));
+            }
+        }
+
         @media (max-width: $mobile) {
             display: none;
         }
@@ -115,9 +131,13 @@
     // .about__images
     &__images {
         @media (min-width: $mobile) {
-            display: grid;
-            gap: rem(20);
             grid-template-columns: 1fr 1fr;
+        }
+        @media (min-width: $mobileM) and (max-width: $mobile) {
+            grid-template-columns: 60% 40%;
+        }
+        @media (min-width: $mobileM) {
+            display: grid;
             justify-items: flex-end;
             align-items: flex-end;
         }
@@ -125,22 +145,24 @@
 
     // .about__image
     &__image {
-        @media (max-width: $mobile) {
-            margin-left: rem(-(math.div($containerPadding, 2)));
-            margin-right: rem(-(math.div($containerPadding, 2)));
-        }
-
         &:nth-child(2n-1) {
-            @media (min-width: $mobile) {
-                @include adaptiveValue("max-width", 778, 450, 1520, 768, 1);
+            @include adaptiveValue("max-width", 778, 450, 1520, 575, 1);
+
+            @media (max-width: $mobileM) {
+                @include adaptiveValue("max-width", 450, 264, 575, 375, 1);
             }
         }
         &:nth-child(2n) {
-            @include adaptiveValue("max-width", 520, 280, 1520, 768, 1);
-            margin-bottom: -(percent(230, 520));
+            @include adaptiveValue("max-width", 520, 240, 1520, 575, 1);
 
+            @media (min-width: $mobileM) {
+                margin-bottom: -(percent(230, 520));
+            }
             @media (max-width: $mobile) {
-                display: none;
+                max-width: 100%;
+            }
+            @media (max-width: $mobileM) {
+                @include adaptiveValue("max-width", 520, 350, 575, 375, 3);
             }
         }
     }
@@ -150,17 +172,12 @@
         display: grid;
 
         &:not(:first-child) {
-            margin-top: rem(32);
+            @include adaptiveValue("margin-top", 140, 80);
         }
-
         @media (min-width: $mobile) {
             display: flex;
             align-items: flex-end;
             justify-content: space-between;
-
-            &:not(:first-child) {
-                @include adaptiveValue("margin-top", 140, 60, 1520, 768, 1);
-            }
         }
     }
 
@@ -170,12 +187,10 @@
         @include adaptiveValue("row-gap", 96, 16);
         @include adaptiveValue("padding-left", 163, 0, 1520, 768, 1);
 
-        @media (min-width: $mobile) {
-            @include adaptiveValue("max-width", 635, 472, 1520, 768, 1);
+        @include adaptiveValue("max-width", 635, 290, 1520, 575, 1);
 
-            &:not(:last-child) {
-                margin-right: rem(20);
-            }
+        &:not(:last-child) {
+            margin-right: rem(20);
         }
     }
 
@@ -203,6 +218,9 @@
 
     // .about__title
     &__title {
+        @media (max-width: $mobile) {
+            display: none;
+        }
     }
 }
 
@@ -224,7 +242,7 @@
     // .categories__item
     &__item {
         font-weight: 300;
-        @include adaptiveValue("font-size", 100, 56);
+        @include adaptiveValue("font-size", 100, 80);
         display: flex;
         flex-direction: row-reverse;
         justify-content: space-between;
@@ -234,6 +252,19 @@
             @include adaptiveValue("font-size", 52, 23);
             color: $DGrey;
             margin-left: rem(20);
+            transition: $transition ease transform 0s;
+        }
+
+        @media (any-hover: hover) {
+            transition: $transition ease color 0s;
+
+            &:hover {
+                color: $DGrey;
+
+                &::before {
+                    transform: rotate(-190deg);
+                }
+            }
         }
     }
 }
@@ -248,16 +279,36 @@
     // .cases__slider
     &__slider {
         @extend %container;
-        @include adaptiveValue("margin-left", -129, -20, 1528, 992, 1);
-        @include adaptiveValue("margin-right", -129, -20, 1528, 992, 1);
+        @include adaptiveValue("margin-left", -129, -40, 1528, 992, 1);
+        @include adaptiveValue("margin-right", -129, -40, 1528, 992, 1);
+        position: relative;
     }
 
     // .cases__wrapper
     &__wrapper {
+        transition: 0.8s ease transform 0s !important;
     }
 
     // .cases__slide
     &__slide {
+    }
+
+    .swiper {
+        &__button {
+            top: 0;
+            bottom: 0;
+            position: absolute;
+            z-index: 2;
+            display: block;
+            width: rem(200);
+            // cursor: pointer;
+            // background-color: #000;
+            // background-color: rgba($color: var(--bgColor), $alpha: 1);
+
+            &_next {
+                @include adaptiveValue("right", 129, 40, 1528, 992, 1);
+            }
+        }
     }
 }
 
@@ -268,10 +319,18 @@
         .single-case__job {
             &:nth-child(1) {
                 // .single-case__link
-
                 .single-case__link {
                     margin-left: auto;
                     max-width: percent(280, 366);
+                }
+
+                // .single-case__image
+                .single-case__image {
+                    &::before {
+                        left: auto;
+                        right: 0;
+                        transform: translate(50%, 50%);
+                    }
                 }
             }
             &:nth-child(3) {
@@ -302,6 +361,15 @@
                 .single-case__caption {
                     max-width: rem(159);
                     margin-left: rem(25);
+                }
+
+                // .single-case__image
+                .single-case__image {
+                    &::before {
+                        left: auto;
+                        right: 0;
+                        transform: translate(50%, 50%);
+                    }
                 }
             }
             &:nth-child(5) {
@@ -364,7 +432,7 @@
         }
 
         &::before {
-            content: '\e900';
+            content: "\e90a";
             @extend %ic;
             display: inline-flex;
             align-items: center;
@@ -512,7 +580,7 @@
                 background: url(../img/discover.png) no-repeat center/contain;
                 position: absolute;
                 pointer-events: none;
-                animation: rotate-left 20s linear infinite;
+                animation: rotate-left 40s linear infinite;
             }
         }
     }
@@ -687,6 +755,10 @@
                 transform: translateY(-50%) skewX(-15deg);
                 pointer-events: none;
             }
+        }
+
+        &._icon-whatsapp {
+            @include adaptiveValue("font-size", 34, 26);
         }
     }
 }

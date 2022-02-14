@@ -7,7 +7,7 @@
 // Подключаем слайдер Swiper из node_modules
 // При необходимости подключаем дополнительные модули слайдера, указывая их в {} через запятую
 // Пример: { Navigation, Autoplay }
-import Swiper, { Pagination, Lazy, EffectFade } from 'swiper';
+import Swiper, { Pagination, Lazy, Navigation } from 'swiper';
 /*
 Основниые модули слайдера:
 Navigation, Pagination, Autoplay, 
@@ -32,7 +32,7 @@ function initSliders() {
 		new Swiper('.cases__slider', { // Указываем скласс нужного слайдера
 			// Подключаем модули слайдера
 			// для конкретного случая
-			modules: [Pagination, Lazy, EffectFade],
+			modules: [Pagination, Lazy, Navigation],
 			observer: true,
 			observeParents: true,
 			slidesPerView: 1,
@@ -41,14 +41,14 @@ function initSliders() {
 			speed: 800,
 			watchOverflow: true,
 
-			effect: 'fade',
-			fadeEffect: {
-			  crossFade: true
-			},
+			/* 			effect: 'fade',
+						fadeEffect: {
+						  crossFade: true
+						}, */
 
 			//touchRatio: 0,
 			//simulateTouch: false,
-			//loop: true,
+			loop: true,
 
 			// lazy
 			preloadImages: true,
@@ -58,13 +58,13 @@ function initSliders() {
 			},
 
 			// Пагинация
-			pagination: {
+/* 			pagination: {
 				el: '.swiper-pagination',
 				type: 'bullets',
-			},
+			}, */
 
-			/*
 			// Эффекты
+			/*
 			effect: 'fade',
 			autoplay: {
 				delay: 3000,
@@ -80,12 +80,11 @@ function initSliders() {
 			},
 			*/
 
-			/* // Кнопки "влево/вправо"
-			navigation: {
-				prevEl: '.swiper-button-prev',
-				nextEl: '.swiper-button-next',
-			},
- */
+			// Кнопки "влево/вправо"
+/* 			navigation: {
+				prevEl: '.cases__slider .swiper__button_prev',
+				nextEl: '.cases__slider .swiper__button_next',
+			}, */
 			/* 			// Брейкпоинты
 						breakpoints: {
 							320: {

@@ -59,39 +59,44 @@ input.forEach(item => {
     });
 });
 
-/* $(".form__input").focus(function () {
-    $(this).closest('.form__item').children('.form__label').css(
-        {
-            'top': '-9px',
-            'font-size': '12px',
-            'opacity': '0.8',
-        }
-    );
-});
-$(".form__input").focusout(function () {
-    if ($(this).val() == '' || $(this).val() == '+7(___) ___-____') {
-        $(this).closest('.form__item').children('.form__label').css(
-            {
-                'top': '9px',
-                'font-size': '16px',
-                'opacity': '1',
-            }
-        );
-    }
-});
 
-let inputs = $('.form__input');
-if (inputs.length > 0) {
-    for (let index = 0; index < inputs.length; index++) {
-        const element = inputs[index];
-        if (!$(element).val() == '') {
-            $(element).closest('.form__item').children('.form__label').css(
-                {
-                    'top': '-9px',
-                    'font-size': '12px',
-                    'opacity': '0.8',
-                }
-            );
-        }
+// Получение значение стиля transform
+function getMatrix(element) {
+    const values = element.style.transform.split(/\w+\(|\);?/);
+    const transform = values[1].split(/,\s?/g).map(parseInt);
+
+    return {
+        x: transform[0],
+        y: transform[1],
+        z: transform[2]
+    };
+}
+
+// Анимация наведения у слайдера с кейсами
+if (document.querySelector('.cases__slider') && !isMobile.any()) {
+    const buttonPrev = document.querySelector('.cases__slider .swiper__button_prev')
+    const buttonNext = document.querySelector('.cases__slider .swiper__button_next')
+    const sliderWrapper = document.querySelector('.cases__wrapper')
+
+    buttonPrev.addEventListener('mouseover', function () {
+        moveLeftSliderWrapper();
+    })
+    buttonPrev.addEventListener('mouseout', function () {
+        moveRightSliderWrapper();
+    })
+    buttonNext.addEventListener('mouseover', function () {
+        moveRightSliderWrapper();
+    })
+    buttonNext.addEventListener('mouseout', function () {
+        moveLeftSliderWrapper();
+    })
+
+    function moveLeftSliderWrapper() {
+        let translateX = getMatrix(sliderWrapper).x;
+        sliderWrapper.style.transform = `translate3d(${translateX + 200}px, 0, 0)`;
     }
-} */
+    function moveRightSliderWrapper() {
+        let translateX = getMatrix(sliderWrapper).x;
+        sliderWrapper.style.transform = `translate3d(${translateX - 200}px, 0, 0)`;
+    }
+}
