@@ -1498,15 +1498,11 @@ img {
     width: 12.5rem;
     cursor: pointer;
   }
-  @supports (right: clamp( 2.5rem , -7.7947761194rem  +  16.6044776119vw , 8.0625rem )) {
-    .cases .swiper__button_next {
-      right: clamp( 2.5rem , -7.7947761194rem  +  16.6044776119vw , 8.0625rem );
-    }
+  .cases .swiper__button_prev {
+    left: 0;
   }
-  @supports not (right: clamp( 2.5rem , -7.7947761194rem  +  16.6044776119vw , 8.0625rem )) {
-    .cases .swiper__button_next {
-      right: calc(2.5rem + 5.5625 * (100vw - 62rem) / 33.5);
-    }
+  .cases .swiper__button_next {
+    right: 0;
   }
 }
 @media (max-width: 47.99875em) {

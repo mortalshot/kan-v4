@@ -315,8 +315,13 @@
                 width: rem(200);
                 cursor: pointer;
 
+                &_prev {
+                    left: 0;
+                }
+
                 &_next {
-                    @include adaptiveValue("right", 129, 40, 1528, 992, 1);
+                    right: 0;
+                    // @include adaptiveValue("right", 129, 40, 1528, 992, 1);
                 }
             }
             @media (max-width: $mobile) {
