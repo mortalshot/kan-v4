@@ -197,11 +197,11 @@
     // .about__caption
     &__caption {
         font-weight: 300;
-        @include adaptiveValue("font-size", 40, 18);
+        font-size: rem(40);
         line-height: math.div(48, 40);
 
         span {
-            @include adaptiveValue("font-size", 50, 22);
+            font-size: rem(50);
             line-height: math.div(60, 50);
         }
     }
@@ -211,7 +211,7 @@
         @extend %firstletter;
 
         p {
-            @include adaptiveValue("font-size", 22, 16);
+            font-size: rem(22);
             line-height: math.div(31, 22);
         }
     }
@@ -247,12 +247,23 @@
         flex-direction: row-reverse;
         justify-content: space-between;
         align-items: center;
+        transition: 1s ease transform 0s;
+
+        @media (max-width: $mobile) {
+            flex-direction: row;
+            transform: translateX(-150%);
+        }
 
         &::before {
-            @include adaptiveValue("font-size", 52, 23);
-            color: $DGrey;
-            margin-left: rem(20);
-            transition: $transition ease transform 0s;
+            @media (min-width: $mobile) {
+                @include adaptiveValue("font-size", 52, 23);
+                color: $DGrey;
+                margin-left: rem(20);
+                transition: $transition ease transform 0s;
+            }
+            @media (max-width: $mobile) {
+                display: none;
+            }
         }
 
         @media (any-hover: hover) {
@@ -295,18 +306,21 @@
 
     .swiper {
         &__button {
-            top: 0;
-            bottom: 0;
-            position: absolute;
-            z-index: 2;
-            display: block;
-            width: rem(200);
-            // cursor: pointer;
-            // background-color: #000;
-            // background-color: rgba($color: var(--bgColor), $alpha: 1);
+            @media (min-width: $mobile) {
+                top: 0;
+                bottom: 0;
+                position: absolute;
+                z-index: 2;
+                display: block;
+                width: rem(200);
+                cursor: pointer;
 
-            &_next {
-                @include adaptiveValue("right", 129, 40, 1528, 992, 1);
+                &_next {
+                    @include adaptiveValue("right", 129, 40, 1528, 992, 1);
+                }
+            }
+            @media (max-width: $mobile) {
+                display: none;
             }
         }
     }
@@ -315,13 +329,32 @@
 .single-case {
     // .single-case_template1
     &_template1 {
+        // .single-case__wrapper
+        .single-case__wrapper {
+            @media (min-width: $mobileSmall) and (max-width: $mobile) {
+                grid-template-columns: 1fr 1fr;
+                gap: rem(15);
+            }
+            @media (max-width: $mobileSmall) {
+                grid-template-columns: 1fr;
+            }
+        }
+
         // .single-case__job
         .single-case__job {
             &:nth-child(1) {
                 // .single-case__link
                 .single-case__link {
-                    margin-left: auto;
-                    max-width: percent(280, 366);
+                    max-width: rem(280);
+
+                    @media (min-width: $mobile) {
+                        margin-left: auto;
+                    }
+                    @media (max-width: $mobileSmall) {
+                        .single-case__caption {
+                            margin-left: auto;
+                        }
+                    }
                 }
 
                 // .single-case__image
@@ -335,12 +368,15 @@
             }
             &:nth-child(3) {
                 align-self: flex-end;
-                margin-top: rem(170);
-                margin-bottom: rem(70);
+                @include adaptiveValue("margin-top", 170, 80);
+
+                @media (min-width: $mobile) {
+                    margin-bottom: rem(70);
+                }
 
                 // .single-case__link
                 .single-case__link {
-                    max-width: percent(418, 418);
+                    max-width: rem(418);
                 }
 
                 // .single-case__caption
@@ -349,12 +385,12 @@
                 }
             }
             &:nth-child(4) {
-                margin-top: rem(170);
-                margin-bottom: rem(100);
+                @include adaptiveValue("margin-top", 170, 80);
+                @include adaptiveValue("margin-bottom", 100, 80);
 
                 // .single-case__link
                 .single-case__link {
-                    max-width: percent(366, 366);
+                    max-width: rem(366);
                 }
 
                 // .single-case__caption
@@ -380,8 +416,24 @@
                 // .single-case__link
                 .single-case__link {
                     margin-left: auto;
-                    max-width: percent(240, 741);
+                    max-width: rem(240);
                 }
+            }
+        }
+
+        // single-case__title
+        .single-case__title {
+            @media (max-width: $mobile) {
+                grid-row-start: 1;
+                padding-left: rem(15);
+                padding-right: rem(15);
+                max-width: 100%;
+                margin-bottom: rem(95);
+            }
+
+            @media (min-width: $mobileSmall) and (max-width: $mobile) {
+                grid-column-start: 1;
+                grid-column-end: 3;
             }
         }
     }
@@ -460,6 +512,7 @@
         text-transform: uppercase;
         @include adaptiveValue("font-size", 16, 14);
         line-height: math.div(22, 16);
+        word-break: break-word;
     }
 
     // .single-case__title
@@ -475,6 +528,11 @@
     // .single-case__more
     &__more {
         align-self: center;
+
+        @media (max-width: $mobile) {
+            transform: translateX(rem(-35));
+            margin-top: rem(80);
+        }
     }
 }
 
@@ -487,7 +545,7 @@
     // .features__body
     &__body {
         display: grid;
-        @include adaptiveValue("row-gap", 64, 48);
+        row-gap: rem(64);
 
         &:not(:last-child) {
             @include adaptiveValue("margin-bottom", 220, 72);
@@ -497,7 +555,7 @@
     // .features__title
     &__title {
         font-weight: 300;
-        @include adaptiveValue("font-size", 70, 31);
+        @include adaptiveValue("font-size", 70, 40);
         line-height: math.div(84, 70);
 
         @media (min-width: $mobile) {
@@ -507,9 +565,9 @@
 
     // .features__text
     &__text {
-        @include adaptiveValue("font-size", 20, 16);
+        font-size: rem(20);
         line-height: math.div(28, 20);
-        @include adaptiveValue("padding-bottom", 64, 24);
+        @include adaptiveValue("padding-bottom", 64, 40);
         border-bottom: 1px solid $DGrey;
         @extend %firstletter;
 
@@ -521,29 +579,25 @@
 
     // .features__row
     &__row {
+        &:not(:last-child) {
+            margin-bottom: rem(450);
+        }
+
         @media (min-width: $mobile) {
             display: flex;
             align-items: flex-end;
             justify-content: space-between;
-
-            &:not(:last-child) {
-                @include adaptiveValue("margin-bottom", 428, 350, 1520, 768, 1);
-            }
-        }
-        @media (max-width: $mobile) {
-            &:not(:last-child) {
-                @include adaptiveValue("margin-bottom", 220, 72);
-            }
         }
     }
 
     // .features__items
     &__items {
         display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        @include adaptiveValue("gap", 170, 32);
+        @include adaptiveValue("gap", 170, 100);
 
         @media (min-width: $mobile) {
+            grid-template-columns: repeat(2, 1fr);
+
             &:not(:last-child) {
                 margin-right: rem(20);
             }
@@ -558,28 +612,37 @@
     // .features__more
     &__more {
         position: relative;
-        @include adaptiveValue("font-size", 60, 26);
+        font-size: rem(60);
+
+        @media (max-width: $mobile) {
+            max-width: rem(250);
+            margin-left: auto;
+            margin-top: rem(450);
+        }
     }
 
     // .features__more-bg
     &__more-bg {
-        @media (min-width: $mobile) {
-            position: absolute;
-            left: rem(-40);
-            top: 50%;
-            transform: translateY(-50%);
+        position: absolute;
+        left: rem(-40);
+        top: 50%;
+        transform: translateY(-50%);
+        width: rem(884);
+        height: rem(884);
+        pointer-events: none;
+
+        &::before {
+            content: "";
+            display: block;
             width: rem(884);
             height: rem(884);
+            background: url(../img/discover.png) no-repeat center/contain;
+            position: absolute;
             pointer-events: none;
+        }
 
+        &._action {
             &::before {
-                content: "";
-                display: block;
-                width: rem(884);
-                height: rem(884);
-                background: url(../img/discover.png) no-repeat center/contain;
-                position: absolute;
-                pointer-events: none;
                 animation: rotate-left 40s linear infinite;
             }
         }
@@ -590,6 +653,17 @@
         font-weight: 300;
         @include adaptiveValue("font-size", 70, 31);
         line-height: math.div(84, 70);
+        position: relative;
+
+        @media (any-hover: hover) {
+            &:hover {
+                span {
+                    &::before {
+                        opacity: 0.6;
+                    }
+                }
+            }
+        }
 
         @media (min-width: $mobile) {
             max-width: rem(595);
@@ -597,8 +671,43 @@
             margin-right: auto;
         }
 
+        span {
+            &::before {
+                content: "";
+                position: absolute;
+                z-index: 1;
+                display: block;
+                width: 100%;
+                height: 100%;
+                top: 0;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                pointer-events: none;
+                background: var(--bgColor);
+                opacity: 0;
+                transition: $transition ease opacity 0s;
+            }
+        }
+
+        button {
+            position: relative;
+            z-index: 1;
+        }
+
         a {
-            @extend %hoverUnderline;
+            text-decoration: underline var(--mainColor) from-font;
+            text-underline-offset: 3px;
+            transition: $transition ease text-decoration 0s;
+            position: relative;
+
+            @media (any-hover: hover) {
+                transition: $transition ease all 0s;
+
+                &:hover {
+                    z-index: 1;
+                }
+            }
         }
     }
 }
@@ -608,6 +717,12 @@
     @include adaptiveValue("row-gap", 60, 24);
     row-gap: rem(60);
     max-width: rem(180);
+
+    @media (max-width: $mobile) {
+        &:nth-child(2n) {
+            margin-left: auto;
+        }
+    }
 
     // .feature-item__icon
     &__icon {
@@ -627,11 +742,23 @@
     flex-direction: row-reverse;
     justify-content: flex-end;
     font-weight: 300;
+    transition: $transition ease transform 0s;
+
+    @media (any-hover: hover) {
+        &:hover {
+            transform: translateX(rem(-5));
+
+            &::before {
+                transform: scaleX(1.3) translateX(rem(5));
+                transition: $transition ease transform 0s;
+            }
+        }
+    }
 
     &::before {
-        transform: rotate(45deg);
         @include adaptiveValue("margin-left", 32, 16);
-        @include adaptiveValue("font-size", 16, 14);
+        font-size: rem(18);
+        transition: $transition ease transform 0s;
     }
 }
 
@@ -668,9 +795,7 @@
         flex: 1;
 
         @media (max-width: $mobile) {
-            grid-row-start: 1;
-
-            margin-bottom: rem(40);
+            display: none;
         }
     }
 }
@@ -684,7 +809,7 @@
     &__container {
         display: grid;
         @include adaptiveValue("column-gap", 40, 20, 1520, 992, 1);
-        row-gap: rem(48);
+        row-gap: rem(143);
 
         @media (min-width: $mobile) {
             grid-template-columns: 1fr 1fr;
@@ -699,23 +824,68 @@
 
     // .seo__right
     &__right {
-        max-width: rem(390);
         display: grid;
-        gap: rem(48);
+        gap: rem(165);
         grid-template-rows: 1fr;
 
         @media (min-width: $mobile) {
             margin-left: auto;
+            max-width: rem(390);
         }
     }
 
     // .seo__social
     &__social {
-        @include adaptiveValue("font-size", 30, 17);
+        font-size: rem(30);
         line-height: math.div(36, 30);
 
+        @media (max-width: $mobile) {
+            font-size: rem(42);
+        }
+
+        span {
+            display: block;
+            position: relative;
+
+            @media (any-hover: hover) {
+                &:hover {
+                    &::before {
+                        opacity: 0.6;
+                    }
+                }
+            }
+
+            &::before {
+                content: "";
+                position: absolute;
+                z-index: 1;
+                display: block;
+                width: 100%;
+                height: 100%;
+                top: 0;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                pointer-events: none;
+                background: var(--bgColor);
+                opacity: 0;
+                transition: $transition ease opacity 0s;
+            }
+        }
+
         a {
-            @extend %hoverUnderline;
+            text-decoration: underline var(--mainColor) from-font;
+            text-underline-offset: 3px;
+            transition: $transition ease text-decoration 0s;
+            position: relative;
+
+            @media (any-hover: hover) {
+                transition: $transition ease all 0s;
+
+                &:hover {
+                    z-index: 1;
+                }
+            }
         }
     }
 
@@ -723,6 +893,11 @@
     &__contacts {
         display: flex;
         align-items: center;
+
+        @media (max-width: $mobile) {
+            flex-wrap: wrap;
+            justify-content: center;
+        }
 
         & > * {
             &:not(:last-child) {
@@ -733,32 +908,54 @@
 
     // .seo__link
     &__link {
+        display: inline-flex;
         @extend %hoverUnderline;
-        @include adaptiveValue("font-size", 18, 14);
+        font-size: rem(20);
+
+        @media (max-width: $mobile) {
+            justify-content: center;
+            flex: 0 0 100%;
+
+            &:not(:last-child) {
+                margin-bottom: rem(63);
+                margin-right: 0;
+            }
+        }
     }
 
     // .seo__app-link
     &__app-link {
-        @include adaptiveValue("font-size", 32, 24);
+        display: inline-flex;
+        font-size: rem(32);
         position: relative;
+        transition: $transition ease transform 0s;
 
-        &:not(:last-child) {
-            &::after {
-                content: "";
-                display: block;
-                position: absolute;
-                right: rem(-20);
-                top: 50%;
-                height: 200%;
-                width: rem(1);
-                background-color: $DGrey;
-                transform: translateY(-50%) skewX(-15deg);
-                pointer-events: none;
+        @media (any-hover: hover) {
+            &:hover {
+                transform: translateY(rem(3));
             }
         }
 
         &._icon-whatsapp {
-            @include adaptiveValue("font-size", 34, 26);
+            font-size: rem(34);
+        }
+    }
+
+    // .seo__app-separator
+    &__app-separator {
+        position: relative;
+        height: 100%;
+        pointer-events: none;
+
+        &::after {
+            content: "";
+            display: block;
+            position: absolute;
+            top: 50%;
+            height: rem(64);
+            width: rem(1);
+            background-color: $DGrey;
+            transform: translateY(-50%) skewX(-15deg);
         }
     }
 }

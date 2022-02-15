@@ -136,7 +136,7 @@
 }
 %firstletter {
 	&::first-letter {
-		@include adaptiveValue("padding-left", 80, 0, 1520, 768, 1);
+		padding-left: rem(80);
 	}
 }
 %scrollbar {

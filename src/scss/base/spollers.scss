@@ -7,13 +7,13 @@
 // Спойлер
 .spollers__item {
 	&:not(:last-child) {
-		@include adaptiveValue("margin-bottom", 60, 32);
+		@include adaptiveValue("margin-bottom", 60, 40);
 	}
 }
 // Заголовок спойлера
 .spollers__title {
 	font-weight: 300;
-	@include adaptiveValue("font-size", 22, 16);
+	@include adaptiveValue("font-size", 22, 18);
 	line-height: math.div(26, 22);
 	width: 100%;
 	cursor: default;
@@ -31,6 +31,7 @@
 			@extend %ic;
 			color: $DGrey;
 			font-size: rem(26);
+			margin-left: rem(20);
 			transition: $transition ease transform 0s;
 		}
 

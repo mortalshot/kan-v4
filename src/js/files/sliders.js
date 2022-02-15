@@ -36,7 +36,7 @@ function initSliders() {
 			observer: true,
 			observeParents: true,
 			slidesPerView: 1,
-			spaceBetween: 40,
+			spaceBetween: 60,
 			autoHeight: false,
 			speed: 800,
 			watchOverflow: true,
@@ -81,10 +81,10 @@ function initSliders() {
 			*/
 
 			// Кнопки "влево/вправо"
-/* 			navigation: {
+			navigation: {
 				prevEl: '.cases__slider .swiper__button_prev',
 				nextEl: '.cases__slider .swiper__button_next',
-			}, */
+			},
 			/* 			// Брейкпоинты
 						breakpoints: {
 							320: {
@@ -107,7 +107,9 @@ function initSliders() {
 						}, */
 			// События
 			on: {
-
+				slideChange: function () {
+					document.querySelector('.cases__slider').classList.add('_slide-change');
+				}
 			}
 		});
 	}

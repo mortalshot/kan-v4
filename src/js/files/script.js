@@ -4,11 +4,125 @@ import { isMobile } from "./functions.js";
 import { flsModules } from "./modules.js";
 
 
-/* import { gsap } from 'gsap';
+import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger.js';
+import Scrolltrigger from "scrolltrigger";
 gsap.registerPlugin(ScrollTrigger);
 
+// Смена цветовой темы при достижении секции #categories
+const categories = document.getElementById('categories');
+if (categories) {
+    ScrollTrigger.create({
+        trigger: "#categories",
+        start: "top bottom",
+        end: "bottom top",
+        onToggle: function () {
+            document.documentElement.classList.toggle('dark');
+            document.documentElement.classList.toggle('light');
+        },
+        /*     onEnter: function () {
+                document.documentElement.classList.remove('dark');
+                document.documentElement.classList.add('light');
+            },
+            onLeaveBack: function () {
+                document.documentElement.classList.add('dark');
+                document.documentElement.classList.remove('light');
+            }, */
+    });
+}
 
+// Печатаем текст категорий при скролле только один раз на десктопе
+const categoriesItems = document.querySelectorAll('.categories__item');
+if (categoriesItems.length > 0) {
+
+    const mediaQueryMmd3 = window.matchMedia('(min-width: 767.98px)')
+    function handleMmd3Change(e) {
+        if (e.matches) {
+            categoriesItems.forEach(element => {
+                const elementText = element.innerHTML;
+
+                const elementStyleHeight = element.getBoundingClientRect().height;
+                element.style.height = elementStyleHeight + "px";
+                element.innerHTML = "";
+
+                ScrollTrigger.create({
+                    trigger: element,
+                    start: "top bottom",
+                    end: "bottom top",
+                    once: true,
+
+                    onEnter: function () {
+                        let line = 0;
+                        let count = 0;
+                        let result = '';
+
+                        function typeLine() {
+                            let interval = setTimeout(
+                                () => {
+                                    result += elementText[line]
+                                    element.innerHTML = result + '|';
+
+
+                                    count++;
+                                    if (count >= elementText[line].length) {
+                                        count = 0;
+                                        line++;
+                                        if (line == elementText.length) {
+                                            clearTimeout(interval);
+                                            element.innerHTML = result;
+                                            return true;
+                                        }
+                                    }
+                                    typeLine();
+                                }, 150)
+                        }
+
+                        typeLine();
+                    },
+                })
+
+            });
+        }
+    }
+    mediaQueryMmd3.addEventListener('change', handleMmd3Change);
+    handleMmd3Change(mediaQueryMmd3);
+
+    // Выезд текста категорий на мобилах
+    const mediaQueryMd3 = window.matchMedia('(max-width: 767.98px)')
+    function handleMd3Change(e) {
+        if (e.matches) {
+            categoriesItems.forEach(element => {
+                ScrollTrigger.create({
+                    trigger: element,
+                    start: "bottom bottom",
+                    end: "bottom top",
+                    onEnter: function () {
+                        element.style.transform = "translateX(0)";
+                    }
+                })
+            });
+        }
+    }
+    mediaQueryMd3.addEventListener('change', handleMd3Change);
+    handleMd3Change(mediaQueryMd3);
+}
+
+
+// Текст по кругу кнопки more
+const featuresMore = document.querySelector('.features__more-bg');
+if (featuresMore) {
+    ScrollTrigger.create({
+        trigger: ".features",
+        start: "top bottom",
+        end: "bottom top",
+
+        onToggle: function () {
+            featuresMore.classList.toggle('_action');
+        },
+    })
+}
+
+/* 
 import LocomotiveScroll from 'locomotive-scroll';
 import "../../scss/libs/locomotive-scroll.scss";
 
@@ -41,23 +155,25 @@ ScrollTrigger.refresh(); */
 
 // Анимация фокусного состояния инпута
 let input = document.querySelectorAll('.input');
-input.forEach(item => {
-    const itemParent = item.closest('.form__item-wrapper');
-    if (item.value.length > 0) {
-        itemParent.classList.add('_focus');
-    }
-
-    item.addEventListener("focus", function () {
+if (input.length > 0) {
+    input.forEach(item => {
         const itemParent = item.closest('.form__item-wrapper');
-        itemParent.classList.add('_focus');
-    });
-    item.addEventListener("blur", function () {
-        const itemParent = item.closest('.form__item-wrapper');
-        if (!item.value.length > 0) {
-            itemParent.classList.remove('_focus');
+        if (item.value.length > 0) {
+            itemParent.classList.add('_focus');
         }
+
+        item.addEventListener("focus", function () {
+            const itemParent = item.closest('.form__item-wrapper');
+            itemParent.classList.add('_focus');
+        });
+        item.addEventListener("blur", function () {
+            const itemParent = item.closest('.form__item-wrapper');
+            if (!item.value.length > 0) {
+                itemParent.classList.remove('_focus');
+            }
+        });
     });
-});
+}
 
 
 // Получение значение стиля transform
@@ -73,22 +189,29 @@ function getMatrix(element) {
 }
 
 // Анимация наведения у слайдера с кейсами
-if (document.querySelector('.cases__slider') && !isMobile.any()) {
+const slider = document.querySelector('.cases__slider');
+if (slider && !isMobile.any()) {
     const buttonPrev = document.querySelector('.cases__slider .swiper__button_prev')
     const buttonNext = document.querySelector('.cases__slider .swiper__button_next')
     const sliderWrapper = document.querySelector('.cases__wrapper')
 
     buttonPrev.addEventListener('mouseover', function () {
+        slider.classList.remove('_slide-change');
         moveLeftSliderWrapper();
     })
     buttonPrev.addEventListener('mouseout', function () {
-        moveRightSliderWrapper();
+        if (!slider.classList.contains('_slide-change')) {
+            moveRightSliderWrapper();
+        }
     })
     buttonNext.addEventListener('mouseover', function () {
+        slider.classList.remove('_slide-change');
         moveRightSliderWrapper();
     })
     buttonNext.addEventListener('mouseout', function () {
-        moveLeftSliderWrapper();
+        if (!slider.classList.contains('_slide-change')) {
+            moveLeftSliderWrapper();
+        }
     })
 
     function moveLeftSliderWrapper() {
@@ -100,3 +223,4 @@ if (document.querySelector('.cases__slider') && !isMobile.any()) {
         sliderWrapper.style.transform = `translate3d(${translateX - 200}px, 0, 0)`;
     }
 }
+
