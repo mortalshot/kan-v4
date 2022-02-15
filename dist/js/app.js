@@ -8485,7 +8485,6 @@
             trigger: ".features__located",
             start: "top bottom",
             end: "bottom top",
-            markers: true,
             onEnter: function() {
                 document.documentElement.classList.remove("dark");
                 document.documentElement.classList.add("light");

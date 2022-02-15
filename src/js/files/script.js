@@ -16,7 +16,7 @@ if (featuresLocated) {
         trigger: ".features__located",
         start: "top bottom",
         end: "bottom top",
-        markers: true,
+        // markers: true,
         /* onToggle: function () {
             document.documentElement.classList.toggle('dark');
             document.documentElement.classList.toggle('light');
