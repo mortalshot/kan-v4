@@ -9,25 +9,26 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger.js';
 import Scrolltrigger from "scrolltrigger";
 gsap.registerPlugin(ScrollTrigger);
 
-// Смена цветовой темы при достижении секции #categories
-const categories = document.getElementById('categories');
-if (categories) {
+// Смена цветовой темы при достижении секции #features__located
+const featuresLocated = document.querySelector('.features__located');
+if (featuresLocated) {
     ScrollTrigger.create({
-        trigger: "#categories",
+        trigger: ".features__located",
         start: "top bottom",
         end: "bottom top",
-        onToggle: function () {
+        markers: true,
+        /* onToggle: function () {
             document.documentElement.classList.toggle('dark');
             document.documentElement.classList.toggle('light');
-        },
-        /*     onEnter: function () {
+        }, */
+            onEnter: function () {
                 document.documentElement.classList.remove('dark');
                 document.documentElement.classList.add('light');
             },
             onLeaveBack: function () {
                 document.documentElement.classList.add('dark');
                 document.documentElement.classList.remove('light');
-            }, */
+            },
     });
 }
 

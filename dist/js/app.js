@@ -8480,14 +8480,19 @@
         _getGSAP() && ScrollTrigger_gsap.registerPlugin(ScrollTrigger);
         __webpack_require__(758);
         gsapWithCSS.registerPlugin(ScrollTrigger);
-        const categories = document.getElementById("categories");
-        if (categories) ScrollTrigger.create({
-            trigger: "#categories",
+        const featuresLocated = document.querySelector(".features__located");
+        if (featuresLocated) ScrollTrigger.create({
+            trigger: ".features__located",
             start: "top bottom",
             end: "bottom top",
-            onToggle: function() {
-                document.documentElement.classList.toggle("dark");
-                document.documentElement.classList.toggle("light");
+            markers: true,
+            onEnter: function() {
+                document.documentElement.classList.remove("dark");
+                document.documentElement.classList.add("light");
+            },
+            onLeaveBack: function() {
+                document.documentElement.classList.add("dark");
+                document.documentElement.classList.remove("light");
             }
         });
         const categoriesItems = document.querySelectorAll(".categories__item");
