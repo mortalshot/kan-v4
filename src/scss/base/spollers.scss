@@ -7,22 +7,26 @@
 // Спойлер
 .spollers__item {
 	&:not(:last-child) {
-		@include adaptiveValue("margin-bottom", 60, 40);
+		@include adaptiveValue("margin-bottom", 60, 42, 768, 375, 2);
 	}
 }
 // Заголовок спойлера
 .spollers__title {
-	font-weight: 300;
-	@include adaptiveValue("font-size", 22, 18);
+	font-size: rem(18);
 	line-height: math.div(26, 22);
 	width: 100%;
 	cursor: default;
 	text-align: left;
 	position: relative;
 
+	@media (min-width:$mobile){
+	font-size: rem(22);
+		  
+	}
+
 	._spoller-init & {
 		display: flex;
-		align-items: center;
+		align-items: flex-start;
 		justify-content: space-between;
 		cursor: pointer;
 

@@ -21,14 +21,14 @@ if (featuresLocated) {
             document.documentElement.classList.toggle('dark');
             document.documentElement.classList.toggle('light');
         }, */
-            onEnter: function () {
-                document.documentElement.classList.remove('dark');
-                document.documentElement.classList.add('light');
-            },
-            onLeaveBack: function () {
-                document.documentElement.classList.add('dark');
-                document.documentElement.classList.remove('light');
-            },
+        /*             onEnter: function () {
+                        document.documentElement.classList.remove('dark');
+                        document.documentElement.classList.add('light');
+                    },
+                    onLeaveBack: function () {
+                        document.documentElement.classList.add('dark');
+                        document.documentElement.classList.remove('light');
+                    }, */
     });
 }
 
@@ -36,7 +36,7 @@ if (featuresLocated) {
 const categoriesItems = document.querySelectorAll('.categories__item');
 if (categoriesItems.length > 0) {
 
-    const mediaQueryMmd3 = window.matchMedia('(min-width: 767.98px)')
+    let mediaQueryMmd3 = window.matchMedia('(min-width: 743.98px)')
     function handleMmd3Change(e) {
         if (e.matches) {
             categoriesItems.forEach(element => {
@@ -89,7 +89,7 @@ if (categoriesItems.length > 0) {
     handleMmd3Change(mediaQueryMmd3);
 
     // Выезд текста категорий на мобилах
-    const mediaQueryMd3 = window.matchMedia('(max-width: 767.98px)')
+    let mediaQueryMd3 = window.matchMedia('(max-width: 743.98px)')
     function handleMd3Change(e) {
         if (e.matches) {
             categoriesItems.forEach(element => {
@@ -108,6 +108,54 @@ if (categoriesItems.length > 0) {
     handleMd3Change(mediaQueryMd3);
 }
 
+// Появление сверху
+const animShowTop = document.querySelectorAll('.anim-show-top');
+if (animShowTop.length > 0) {
+    animShowTop.forEach(element => {
+        ScrollTrigger.create({
+            trigger: element,
+            start: "top 70%",
+            end: "bottom top",
+
+            onToggle: function () {
+                element.classList.toggle('_active');
+            }
+        })
+    });
+}
+
+// Появление снизу
+const animShowBottom = document.querySelectorAll('.anim-show-bottom');
+if (animShowBottom.length > 0) {
+    animShowBottom.forEach(element => {
+        ScrollTrigger.create({
+            trigger: element,
+            start: "top 70%",
+            end: "bottom top",
+
+            onToggle: function () {
+                element.classList.toggle('_active');
+            }
+        })
+    });
+}
+
+// Появление c поворотом
+const animShowRotate = document.querySelectorAll('.anim-show-rotate');
+if (animShowRotate.length > 0) {
+    animShowRotate.forEach(element => {
+        ScrollTrigger.create({
+            trigger: element,
+            start: "top 70%",
+            end: "bottom top",
+            markers: true,
+
+            onToggle: function () {
+                element.classList.toggle('_active');
+            }
+        })
+    });
+}
 
 // Текст по кругу кнопки more
 const featuresMore = document.querySelector('.features__more-bg');
@@ -217,11 +265,11 @@ if (slider && !isMobile.any()) {
 
     function moveLeftSliderWrapper() {
         let translateX = getMatrix(sliderWrapper).x;
-        sliderWrapper.style.transform = `translate3d(${translateX + 200}px, 0, 0)`;
+        sliderWrapper.style.transform = `translate3d(${translateX + 300}px, 0, 0)`;
     }
     function moveRightSliderWrapper() {
         let translateX = getMatrix(sliderWrapper).x;
-        sliderWrapper.style.transform = `translate3d(${translateX - 200}px, 0, 0)`;
+        sliderWrapper.style.transform = `translate3d(${translateX - 300}px, 0, 0)`;
     }
 }
 

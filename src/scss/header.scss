@@ -1,23 +1,19 @@
 // header ====================================================================================================
 .header {
-	min-height: rem(60);
+	min-height: rem(89);
 	display: flex;
 	align-items: center;
 	background-color: var(--bgColor);
 
-	@media (min-width: $mobile) {
-		min-height: rem(89);
-	}
-
 	// .header__container
 	&__container {
 		width: 100%;
-		padding-left: rem(math.div($containerPadding, 2));
-		padding-right: rem(math.div($containerPadding, 2));
+		padding-left: rem(30);
+		padding-right: rem(30);
 
 		@media (min-width: $mobile) {
-			@include adaptiveValue("padding-left", 49, 20, 1528, 992, 1);
-			@include adaptiveValue("padding-right", 49, 20, 1528, 992, 1);
+			@include adaptiveValue("padding-left", 49, 38, 1528, 744, 1);
+			@include adaptiveValue("padding-right", 49, 38, 1528, 744, 1);
 		}
 	}
 
@@ -31,12 +27,6 @@
 		@media (min-width: $mobile) {
 			padding-top: rem(33);
 			padding-bottom: rem(33);
-		}
-		@media (max-width: $mobile) {
-			//  .menu__list
-			.menu__list {
-				display: none;
-			}
 		}
 	}
 
@@ -53,7 +43,7 @@
 	// .menu__body
 	&__body {
 		flex: 1;
-		@include adaptiveValue("padding-left", 83, 43);
+		padding-left: rem(56);
 	}
 
 	// .menu__list
@@ -61,8 +51,12 @@
 		display: flex;
 		flex-wrap: wrap;
 		align-items: center;
-		@include adaptiveValue("column-gap", 30, 15);
+		column-gap: rem(31);
 		row-gap: rem(10);
+
+		@media (max-width: $mobile) {
+			display: none;
+		}
 	}
 
 	// .menu__item
@@ -79,20 +73,22 @@
 
 		@media (any-hover: hover) {
 			&:hover {
-				color: $DGrey;
+				color: var(--DGrey);
 			}
 		}
 	}
 }
 
 .logo {
+	font-size: rem(20);
+
 	// .logo__link
 	&__link {
 		@media (any-hover: hover) {
 			transition: $transition ease color 0s;
 
 			&:hover {
-				color: $DGrey;
+				color: var(--DGrey);
 			}
 		}
 	}
@@ -104,7 +100,6 @@
 
 .icon-menu {
 	display: flex;
-	font-size: rem(23);
 
 	@for $i from 1 through 4 {
 		#icon-menu-rect-#{$i} {
@@ -112,75 +107,25 @@
 		}
 	}
 
-	@media (any-hover: hover) {
-		transition: $transition ease color 0s;
-
-		&:hover {
-			color: $DGrey;
+	svg {
+		path {
+			fill: var(--mainColor);
+			transition: $transition ease all 0s;
 		}
 	}
 
 	.menu-open & {
 		#icon-menu-rect-1 {
-			transform: translate(rem(4), rem(8));
-			// animation: icon-menu-anim-1 0.5s both;
+			transform: translate(rem(5), rem(8));
 		}
 		#icon-menu-rect-2 {
 			transform: translate(rem(0), rem(-8));
-			// animation: icon-menu-anim-2 0.5s both;
 		}
 		#icon-menu-rect-3 {
-			transform: translate(rem(-4), rem(8));
-			// animation: icon-menu-anim-3 0.5s both;
+			transform: translate(rem(-5), rem(8));
 		}
 		#icon-menu-rect-4 {
 			transform: translate(rem(0), rem(-8));
-			// animation: icon-menu-anim-4 0.5s both;
 		}
-	}
-}
-
-@keyframes icon-menu-anim-1 {
-	0% {
-		transform: translate(0);
-	}
-	100% {
-		transform: translate(rem(4), rem(8));
-	}
-}
-
-@keyframes icon-menu-anim-2 {
-	0% {
-		transform: translate(0);
-	}
-	50% {
-		transform: translate(rem(8), rem(-8));
-	}
-	100% {
-		transform: translate(rem(0), rem(-8));
-	}
-}
-
-@keyframes icon-menu-anim-3 {
-	0% {
-		transform: translate(0);
-	}
-	50% {
-		transform: translate(rem(-8), rem(8));
-	}
-	100% {
-		transform: translate(rem(-4), rem(8));
-	}
-}
-
-@keyframes icon-menu-anim-4 {
-	0% {
-		transform: translate(0);
-	}
-	50% {
-		transform: translate(rem(-8), rem(-8));
-	}
-	100% {
-		transform: translate(rem(0), rem(-8));
 	}
 }

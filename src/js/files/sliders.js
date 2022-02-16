@@ -29,7 +29,7 @@ function initSliders() {
 	// Проверяем, есть ли слайдер на стронице
 	if (document.querySelector('.cases__slider')) { // Указываем скласс нужного слайдера
 		// Создаем слайдер
-		new Swiper('.cases__slider', { // Указываем скласс нужного слайдера
+		let casesSlider = new Swiper('.cases__slider', { // Указываем скласс нужного слайдера
 			// Подключаем модули слайдера
 			// для конкретного случая
 			modules: [Pagination, Lazy, Navigation],
@@ -58,10 +58,10 @@ function initSliders() {
 			},
 
 			// Пагинация
-/* 			pagination: {
-				el: '.swiper-pagination',
-				type: 'bullets',
-			}, */
+			/* 			pagination: {
+							el: '.swiper-pagination',
+							type: 'bullets',
+						}, */
 
 			// Эффекты
 			/*
@@ -112,6 +112,15 @@ function initSliders() {
 				}
 			}
 		});
+
+		let mediaQueryMd4 = window.matchMedia('(max-width: 574.98px)')
+		function handleMd4Change(e) {
+			if (e.matches) {
+				casesSlider.destroy();
+			}
+		}
+		mediaQueryMd4.addEventListener('change', handleMd4Change);
+		handleMd4Change(mediaQueryMd4);
 	}
 }
 // Скролл на базе слайдера (по классу swiper_scroll для оболочки слайдера)
@@ -153,3 +162,4 @@ window.addEventListener("load", function (e) {
 	// Запуск инициализации скролла на базе слайдера (по классу swiper_scroll)
 	//initSlidersScroll();
 });
+

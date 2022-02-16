@@ -26,10 +26,12 @@ $scrollThumb: #545454;
 html.dark {
 	--mainColor: #d1d1d1;
 	--bgColor: #191a1d;
+	--DGrey: #545454;
 }
 html.light {
 	--mainColor: #191a1d;
 	--bgColor: #fff;
+	--DGrey: #d1d1d1;
 }
 
 $transition: 0.3s;
@@ -51,7 +53,7 @@ $containerWidth: $maxWidthContainer + $containerPadding;
 // Брейк-поинты
 $pc: em($containerWidth); // ПК, ноутбуки, некоторые планшеты в горизонтальном положении
 $tablet: em(991.98); // Планшеты, некоторые телефоны в горизонтальном положении
-$mobile: em(767.98); // Телефоны L
+$mobile: em(743.98); // Телефоны L
 $mobileM: em(574.98); // Телефоны M
 $mobileSmall: em(479.98); // Телефоны S
 

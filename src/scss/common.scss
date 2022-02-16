@@ -12,12 +12,13 @@ section {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    @include adaptiveValue("width", 106, 76);
-    @include adaptiveValue("height", 106, 76);
+    width: rem(106);
+    flex: 0 0 rem(106);
+    height: rem(106);
     border-radius: 50%;
     background-color: var(--mainColor);
     color: var(--bgColor);
-    @include adaptiveValue("font-size", 24, 17);
+    font-size: rem(24);
     transition: $transition ease transform 0s;
 
     @media (any-hover: hover) {
@@ -63,7 +64,7 @@ img {
     text-transform: uppercase;
     font-size: rem(14);
     line-height: math.div(20, 14);
-    color: $DGrey;
+    color: var(--DGrey);
 
     @media (min-width: $mobile) {
         text-align: right;
@@ -95,10 +96,59 @@ img {
         margin-top: rem(16);
         margin-bottom: rem(16);
     }
+
+    :first-child {
+        margin-top: 0;
+    }
+    :last-child {
+        margin-bottom: 0;
+    }
 }
 
-[data-goto], [data-popup] {
+[data-goto],
+[data-popup] {
     cursor: pointer;
+}
+
+.anim-show-top {
+    overflow: hidden;
+
+    div {
+        transition: 0.8s ease transform;
+        transform: translateY(-120%);
+    }
+
+    &._active {
+        div {
+            transform: translateY(0);
+        }
+    }
+}
+
+.anim-show-bottom {
+    overflow: hidden;
+
+    div {
+        transition: 0.8s ease transform;
+        transform: translateY(120%);
+    }
+
+    &._active {
+        div {
+            transform: translateY(0);
+        }
+    }
+}
+
+.anim-show-rotate {
+    opacity: 0;
+    transform: rotate(-180deg) scale(0.5);
+    transition: 0.8s ease transform, 0.8s opacity;
+
+    &._active {
+        opacity: 1;
+        transform: rotate(0deg) scale(1);
+    }
 }
 
 // Анимации
@@ -122,8 +172,8 @@ img {
 // блоки
 
 .marquee {
-    margin-top: rem(100);
-    margin-bottom: rem(100);
+    @include adaptiveValue("margin-top", 100, 30);
+    @include adaptiveValue("margin-bottom", 100, 30);
 
     // .marquee__right
     &__left {

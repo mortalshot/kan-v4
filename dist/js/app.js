@@ -4228,31 +4228,39 @@
             });
         }
         function initSliders() {
-            if (document.querySelector(".cases__slider")) new core(".cases__slider", {
-                modules: [ Pagination, Lazy, Navigation ],
-                observer: true,
-                observeParents: true,
-                slidesPerView: 1,
-                spaceBetween: 60,
-                autoHeight: false,
-                speed: 800,
-                watchOverflow: true,
-                loop: true,
-                preloadImages: true,
-                lazy: {
-                    loanOnTransitionStart: true,
-                    loadPrevNext: true
-                },
-                navigation: {
-                    prevEl: ".cases__slider .swiper__button_prev",
-                    nextEl: ".cases__slider .swiper__button_next"
-                },
-                on: {
-                    slideChange: function() {
-                        document.querySelector(".cases__slider").classList.add("_slide-change");
+            if (document.querySelector(".cases__slider")) {
+                let casesSlider = new core(".cases__slider", {
+                    modules: [ Pagination, Lazy, Navigation ],
+                    observer: true,
+                    observeParents: true,
+                    slidesPerView: 1,
+                    spaceBetween: 60,
+                    autoHeight: false,
+                    speed: 800,
+                    watchOverflow: true,
+                    loop: true,
+                    preloadImages: true,
+                    lazy: {
+                        loanOnTransitionStart: true,
+                        loadPrevNext: true
+                    },
+                    navigation: {
+                        prevEl: ".cases__slider .swiper__button_prev",
+                        nextEl: ".cases__slider .swiper__button_next"
+                    },
+                    on: {
+                        slideChange: function() {
+                            document.querySelector(".cases__slider").classList.add("_slide-change");
+                        }
                     }
+                });
+                let mediaQueryMd4 = window.matchMedia("(max-width: 574.98px)");
+                function handleMd4Change(e) {
+                    if (e.matches) casesSlider.destroy();
                 }
-            });
+                mediaQueryMd4.addEventListener("change", handleMd4Change);
+                handleMd4Change(mediaQueryMd4);
+            }
         }
         window.addEventListener("load", (function(e) {
             initSliders();
@@ -8484,19 +8492,11 @@
         if (featuresLocated) ScrollTrigger.create({
             trigger: ".features__located",
             start: "top bottom",
-            end: "bottom top",
-            onEnter: function() {
-                document.documentElement.classList.remove("dark");
-                document.documentElement.classList.add("light");
-            },
-            onLeaveBack: function() {
-                document.documentElement.classList.add("dark");
-                document.documentElement.classList.remove("light");
-            }
+            end: "bottom top"
         });
         const categoriesItems = document.querySelectorAll(".categories__item");
         if (categoriesItems.length > 0) {
-            const mediaQueryMmd3 = window.matchMedia("(min-width: 767.98px)");
+            let mediaQueryMmd3 = window.matchMedia("(min-width: 743.98px)");
             function handleMmd3Change(e) {
                 if (e.matches) categoriesItems.forEach((element => {
                     const elementText = element.innerHTML;
@@ -8536,7 +8536,7 @@
             }
             mediaQueryMmd3.addEventListener("change", handleMmd3Change);
             handleMmd3Change(mediaQueryMmd3);
-            const mediaQueryMd3 = window.matchMedia("(max-width: 767.98px)");
+            let mediaQueryMd3 = window.matchMedia("(max-width: 743.98px)");
             function handleMd3Change(e) {
                 if (e.matches) categoriesItems.forEach((element => {
                     ScrollTrigger.create({
@@ -8552,6 +8552,40 @@
             mediaQueryMd3.addEventListener("change", handleMd3Change);
             handleMd3Change(mediaQueryMd3);
         }
+        const animShowTop = document.querySelectorAll(".anim-show-top");
+        if (animShowTop.length > 0) animShowTop.forEach((element => {
+            ScrollTrigger.create({
+                trigger: element,
+                start: "top 70%",
+                end: "bottom top",
+                onToggle: function() {
+                    element.classList.toggle("_active");
+                }
+            });
+        }));
+        const animShowBottom = document.querySelectorAll(".anim-show-bottom");
+        if (animShowBottom.length > 0) animShowBottom.forEach((element => {
+            ScrollTrigger.create({
+                trigger: element,
+                start: "top 70%",
+                end: "bottom top",
+                onToggle: function() {
+                    element.classList.toggle("_active");
+                }
+            });
+        }));
+        const animShowRotate = document.querySelectorAll(".anim-show-rotate");
+        if (animShowRotate.length > 0) animShowRotate.forEach((element => {
+            ScrollTrigger.create({
+                trigger: element,
+                start: "top 70%",
+                end: "bottom top",
+                markers: true,
+                onToggle: function() {
+                    element.classList.toggle("_active");
+                }
+            });
+        }));
         const featuresMore = document.querySelector(".features__more-bg");
         if (featuresMore) ScrollTrigger.create({
             trigger: ".features",
@@ -8604,11 +8638,11 @@
             }));
             function moveLeftSliderWrapper() {
                 let translateX = getMatrix(sliderWrapper).x;
-                sliderWrapper.style.transform = `translate3d(${translateX + 200}px, 0, 0)`;
+                sliderWrapper.style.transform = `translate3d(${translateX + 300}px, 0, 0)`;
             }
             function moveRightSliderWrapper() {
                 let translateX = getMatrix(sliderWrapper).x;
-                sliderWrapper.style.transform = `translate3d(${translateX - 200}px, 0, 0)`;
+                sliderWrapper.style.transform = `translate3d(${translateX - 300}px, 0, 0)`;
             }
         }
         window["FLS"] = true;
