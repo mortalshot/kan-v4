@@ -41,6 +41,12 @@
 
 // Адаптивное свойство (clamp)
 @mixin adaptiveValue($property, $startSize, $minSize, $widthFrom: $containerWidth, $widthTo: $minWidth, $keepSize: 0) {
+	@if ($startSize==0) {
+		$startSize: 0.0001;
+	}
+	@if ($minSize==0) {
+		$minSize: 0.0001;
+	}
 	// Для calc();
 	$addSize: math.div($startSize - $minSize, 16);
 

@@ -6,21 +6,48 @@ import { flsModules } from "./modules.js";
 
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger.js';
-import Scrolltrigger from "scrolltrigger";
 gsap.registerPlugin(ScrollTrigger);
+
+
+
+
+import LocomotiveScroll from 'locomotive-scroll';
+import "../../scss/libs/locomotive-scroll.scss";
+
+const locoScroll = new LocomotiveScroll({
+    el: document.querySelector(".page"),
+    smooth: true,
+    lerp: 0.02,
+});
+// each time Locomotive Scroll updates, tell ScrollTrigger to update too (sync positioning)
+locoScroll.on("scroll", ScrollTrigger.update);
+
+// tell ScrollTrigger to use these proxy methods for the ".page" element since Locomotive Scroll is hijacking things
+// !scroller: ".page",
+ScrollTrigger.scrollerProxy(".page", {
+    scrollTop(value) {
+        return arguments.length ? locoScroll.scrollTo(value, 0, 0) : locoScroll.scroll.instance.scroll.y;
+    }, // we don't have to define a scrollLeft because we're only scrolling vertically.
+    getBoundingClientRect() {
+        return { top: 0, left: 0, width: window.innerWidth, height: window.innerHeight };
+    },
+    // LocomotiveScroll handles things completely differently on mobile devices - it doesn't even transform the container at all! So to get the correct behavior and avoid jitters, we should pin things with position: fixed on mobile. We sense it by checking to see if there's a transform applied to the container (the LocomotiveScroll-controlled element).
+    pinType: document.querySelector(".page").style.transform ? "transform" : "fixed"
+});
 
 // Смена цветовой темы при достижении секции #features__located
 const featuresLocated = document.querySelector('.features__located');
 if (featuresLocated) {
     ScrollTrigger.create({
         trigger: ".features__located",
+        scroller: ".page",
         start: "top bottom",
         end: "bottom top",
         // markers: true,
-        /* onToggle: function () {
+        onToggle: function () {
             document.documentElement.classList.toggle('dark');
             document.documentElement.classList.toggle('light');
-        }, */
+        },
         /*             onEnter: function () {
                         document.documentElement.classList.remove('dark');
                         document.documentElement.classList.add('light');
@@ -48,6 +75,7 @@ if (categoriesItems.length > 0) {
 
                 ScrollTrigger.create({
                     trigger: element,
+                    scroller: ".page",
                     start: "top bottom",
                     end: "bottom top",
                     once: true,
@@ -95,6 +123,7 @@ if (categoriesItems.length > 0) {
             categoriesItems.forEach(element => {
                 ScrollTrigger.create({
                     trigger: element,
+                    scroller: ".page",
                     start: "bottom bottom",
                     end: "bottom top",
                     onEnter: function () {
@@ -114,7 +143,8 @@ if (animShowTop.length > 0) {
     animShowTop.forEach(element => {
         ScrollTrigger.create({
             trigger: element,
-            start: "top 70%",
+            scroller: ".page",
+            start: "top 90%",
             end: "bottom top",
 
             onToggle: function () {
@@ -130,7 +160,8 @@ if (animShowBottom.length > 0) {
     animShowBottom.forEach(element => {
         ScrollTrigger.create({
             trigger: element,
-            start: "top 70%",
+            scroller: ".page",
+            start: "top 90%",
             end: "bottom top",
 
             onToggle: function () {
@@ -146,9 +177,9 @@ if (animShowRotate.length > 0) {
     animShowRotate.forEach(element => {
         ScrollTrigger.create({
             trigger: element,
-            start: "top 70%",
+            scroller: ".page",
+            start: "top 90%",
             end: "bottom top",
-            markers: true,
 
             onToggle: function () {
                 element.classList.toggle('_active');
@@ -162,6 +193,7 @@ const featuresMore = document.querySelector('.features__more-bg');
 if (featuresMore) {
     ScrollTrigger.create({
         trigger: ".features",
+        scroller: ".page",
         start: "top bottom",
         end: "bottom top",
 
@@ -171,36 +203,11 @@ if (featuresMore) {
     })
 }
 
-/* 
-import LocomotiveScroll from 'locomotive-scroll';
-import "../../scss/libs/locomotive-scroll.scss";
-
-const locoScroll = new LocomotiveScroll({
-    el: document.querySelector(".page"),
-    smooth: true,
-    lerp: 0.01,
-});
-// each time Locomotive Scroll updates, tell ScrollTrigger to update too (sync positioning)
-locoScroll.on("scroll", ScrollTrigger.update);
-
-// tell ScrollTrigger to use these proxy methods for the ".page" element since Locomotive Scroll is hijacking things
-// !scroller: ".page",
-ScrollTrigger.scrollerProxy(".page", {
-    scrollTop(value) {
-        return arguments.length ? locoScroll.scrollTo(value, 0, 0) : locoScroll.scroll.instance.scroll.y;
-    }, // we don't have to define a scrollLeft because we're only scrolling vertically.
-    getBoundingClientRect() {
-        return { top: 0, left: 0, width: window.innerWidth, height: window.innerHeight };
-    },
-    // LocomotiveScroll handles things completely differently on mobile devices - it doesn't even transform the container at all! So to get the correct behavior and avoid jitters, we should pin things with position: fixed on mobile. We sense it by checking to see if there's a transform applied to the container (the LocomotiveScroll-controlled element).
-    pinType: document.querySelector(".page").style.transform ? "transform" : "fixed"
-});
-
 // each time the window updates, we should refresh ScrollTrigger and then update LocomotiveScroll. 
 ScrollTrigger.addEventListener("refresh", () => locoScroll.update());
 
 // after everything is set up, refresh() ScrollTrigger and update LocomotiveScroll because padding may have been added for pinning, etc.
-ScrollTrigger.refresh(); */
+ScrollTrigger.refresh();
 
 // Анимация фокусного состояния инпута
 let input = document.querySelectorAll('.input');
