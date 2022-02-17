@@ -4105,7 +4105,6 @@
                 autoHeight: false,
                 speed: 800,
                 watchOverflow: true,
-                loop: true,
                 preloadImages: true,
                 lazy: {
                     loanOnTransitionStart: true,
@@ -10401,6 +10400,70 @@ object-assign
         },
         pinType: document.querySelector(".page").style.transform ? "transform" : "fixed"
     });
+    if (document.querySelector(".preview")) {
+        const previewTimeLine = gsapWithCSS.timeline({
+            scrollTrigger: {
+                trigger: ".preview",
+                scroller: ".page",
+                start: "top bottom",
+                end: "bottom top"
+            }
+        });
+        previewTimeLine.to(".preview__title", {
+            onComplete: function() {
+                document.querySelector(".preview__title").classList.add("_active");
+            }
+        });
+        previewTimeLine.to(".preview__subtitle", {
+            onComplete: function() {
+                document.querySelector(".preview__subtitle").classList.add("_active");
+            }
+        });
+        previewTimeLine.from(".preview__subtitle .link-circle", {
+            opacity: 0,
+            rotate: -180,
+            scale: .5,
+            delay: .5
+        });
+        previewTimeLine.from(".preview__social", {
+            opacity: 0,
+            x: "200%"
+        });
+        previewTimeLine.from(".preview__scroll button", {
+            opacity: 0
+        });
+    }
+    if (document.querySelector(".about")) {
+        ScrollTrigger.create({
+            trigger: ".about",
+            scroller: ".page",
+            start: "top top",
+            end: "+=100%",
+            pin: true
+        });
+        const aboutTimeLine = gsapWithCSS.timeline({
+            scrollTrigger: {
+                trigger: ".about",
+                scroller: ".page",
+                start: "50% bottom",
+                end: "bottom top",
+                scrub: 1
+            }
+        });
+        aboutTimeLine.from(".about__content", {
+            y: "-100%"
+        });
+        aboutTimeLine.from(".about__image._image-left", {
+            opacity: 0,
+            scale: .5,
+            y: "-100%"
+        }, "-=0.3");
+        aboutTimeLine.from(".about__image._image-right", {
+            opacity: 0,
+            scale: .5,
+            y: "-100%"
+        });
+    }
     const featuresLocated = document.querySelector(".features__located");
     if (featuresLocated) ScrollTrigger.create({
         trigger: ".features__located",
@@ -10418,9 +10481,31 @@ object-assign
         function handleMmd3Change(e) {
             if (e.matches) categoriesItems.forEach((element => {
                 const elementText = element.innerHTML;
-                const elementStyleHeight = element.getBoundingClientRect().height;
-                element.style.height = elementStyleHeight + "px";
-                element.innerHTML = "";
+                const isRolling = Symbol(elementText);
+                function getPositions(length) {
+                    return Array.from(new Array(length), (() => [ (length * Math.random() | 0) % length, (length * Math.random() | 0) % length ]));
+                }
+                async function rollText(item) {
+                    if (item[isRolling]) return;
+                    item[isRolling] = true;
+                    const word = [ ...item.textContent ];
+                    const ps = getPositions(word.length);
+                    const computedWords = [ word.join("") ];
+                    for (const [p1, p2] of ps) {
+                        [word[p1], word[p2]] = [ word[p2], word[p1] ];
+                        computedWords.push(item.textContent = word.join(""));
+                        await delay(100);
+                    }
+                    while (computedWords.length) {
+                        const word = computedWords.pop();
+                        item.textContent = word;
+                        await delay(100);
+                    }
+                    item[isRolling] = false;
+                }
+                function delay(ms) {
+                    return new Promise((resolve => setTimeout(resolve, ms)));
+                }
                 ScrollTrigger.create({
                     trigger: element,
                     scroller: ".page",
@@ -10428,27 +10513,7 @@ object-assign
                     end: "bottom top",
                     once: true,
                     onEnter: function() {
-                        let line = 0;
-                        let count = 0;
-                        let result = "";
-                        function typeLine() {
-                            let interval = setTimeout((() => {
-                                result += elementText[line];
-                                element.innerHTML = result + "|";
-                                count++;
-                                if (count >= elementText[line].length) {
-                                    count = 0;
-                                    line++;
-                                    if (line == elementText.length) {
-                                        clearTimeout(interval);
-                                        element.innerHTML = result;
-                                        return true;
-                                    }
-                                }
-                                typeLine();
-                            }), 150);
-                        }
-                        typeLine();
+                        rollText(element);
                     }
                 });
             }));
@@ -10472,42 +10537,6 @@ object-assign
         mediaQueryMd3.addEventListener("change", handleMd3Change);
         handleMd3Change(mediaQueryMd3);
     }
-    const animShowTop = document.querySelectorAll(".anim-show-top");
-    if (animShowTop.length > 0) animShowTop.forEach((element => {
-        ScrollTrigger.create({
-            trigger: element,
-            scroller: ".page",
-            start: "top 90%",
-            end: "bottom top",
-            onToggle: function() {
-                element.classList.toggle("_active");
-            }
-        });
-    }));
-    const animShowBottom = document.querySelectorAll(".anim-show-bottom");
-    if (animShowBottom.length > 0) animShowBottom.forEach((element => {
-        ScrollTrigger.create({
-            trigger: element,
-            scroller: ".page",
-            start: "top 90%",
-            end: "bottom top",
-            onToggle: function() {
-                element.classList.toggle("_active");
-            }
-        });
-    }));
-    const animShowRotate = document.querySelectorAll(".anim-show-rotate");
-    if (animShowRotate.length > 0) animShowRotate.forEach((element => {
-        ScrollTrigger.create({
-            trigger: element,
-            scroller: ".page",
-            start: "top 90%",
-            end: "bottom top",
-            onToggle: function() {
-                element.classList.toggle("_active");
-            }
-        });
-    }));
     const featuresMore = document.querySelector(".features__more-bg");
     if (featuresMore) ScrollTrigger.create({
         trigger: ".features",
@@ -10533,43 +10562,6 @@ object-assign
             if (!item.value.length > 0) itemParent.classList.remove("_focus");
         }));
     }));
-    function getMatrix(element) {
-        const values = element.style.transform.split(/\w+\(|\);?/);
-        const transform = values[1].split(/,\s?/g).map(parseInt);
-        return {
-            x: transform[0],
-            y: transform[1],
-            z: transform[2]
-        };
-    }
-    const slider = document.querySelector(".cases__slider");
-    if (slider && !isMobile.any()) {
-        const buttonPrev = document.querySelector(".cases__slider .swiper__button_prev");
-        const buttonNext = document.querySelector(".cases__slider .swiper__button_next");
-        const sliderWrapper = document.querySelector(".cases__wrapper");
-        buttonPrev.addEventListener("mouseover", (function() {
-            slider.classList.remove("_slide-change");
-            moveLeftSliderWrapper();
-        }));
-        buttonPrev.addEventListener("mouseout", (function() {
-            if (!slider.classList.contains("_slide-change")) moveRightSliderWrapper();
-        }));
-        buttonNext.addEventListener("mouseover", (function() {
-            slider.classList.remove("_slide-change");
-            moveRightSliderWrapper();
-        }));
-        buttonNext.addEventListener("mouseout", (function() {
-            if (!slider.classList.contains("_slide-change")) moveLeftSliderWrapper();
-        }));
-        function moveLeftSliderWrapper() {
-            let translateX = getMatrix(sliderWrapper).x;
-            sliderWrapper.style.transform = `translate3d(${translateX + 300}px, 0, 0)`;
-        }
-        function moveRightSliderWrapper() {
-            let translateX = getMatrix(sliderWrapper).x;
-            sliderWrapper.style.transform = `translate3d(${translateX - 300}px, 0, 0)`;
-        }
-    }
     window["FLS"] = true;
     isWebp();
     addLoadedClass();

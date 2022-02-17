@@ -74,10 +74,39 @@
             line-height: 0.92;
         }
 
+        & > div {
+            padding: rem(4) rem(10);
+            margin: rem(-4) rem(-10);
+            overflow: hidden;
+
+            div {
+                transform: translateY(-110%);
+            }
+        }
+
+        div {
+            display: inline-block;
+        }
+
         span {
             @media (min-width: $mobile) {
                 display: block;
                 @include adaptiveValue("margin-left", 52, 0, 1528, 992, 1);
+            }
+        }
+
+        &._active {
+            & > div {
+                &:nth-child(2) {
+                    div {
+                        transition-delay: 0.1s;
+                    }
+                }
+
+                div {
+                    transform: translateY(0);
+                    transition: 0.5s ease all 0s;
+                }
             }
         }
     }
@@ -95,14 +124,45 @@
         @media (min-width: $mobileM) {
             margin-left: auto;
         }
-        @media (max-width: $mobile) {
-            position: relative;
 
-            .link-circle {
-                position: absolute;
-                bottom: 0;
-                right: 0;
+        div {
+            display: inline-block;
+        }
+
+        span > div {
+            padding: rem(4) rem(10);
+            margin: rem(-4) rem(-10);
+            overflow: hidden;
+
+            div {
+                transform: translateY(110%);
             }
+        }
+
+        &._active {
+            span > div {
+                &:nth-child(2) {
+                    div {
+                        transition-delay: 0.1s;
+                    }
+                }
+                &:nth-child(3) {
+                    div {
+                        transition-delay: 0.2s;
+                    }
+                }
+
+                div {
+                    transform: translateY(0);
+                    transition: 0.5s ease all 0s;
+                }
+            }
+        }
+
+        .link-circle {
+            position: absolute;
+            bottom: -55px;
+            margin-left: rem(15);
         }
     }
 
@@ -168,6 +228,8 @@
 
 // about ------------------------------------------------------------------------------------------------------------------------------
 .about {
+    padding-top: 0;
+    
     // .about__container
     &__container {
     }
@@ -349,6 +411,7 @@
     max-width: rem($maxWidthContainer);
     box-sizing: content-box;
     margin: 0 auto;
+    overflow: hidden;
 
     // .cases__slider
     &__slider {
@@ -662,6 +725,8 @@
 
 // features ------------------------------------------------------------------------------------------------------------------------------
 .features {
+    overflow: hidden;
+
     // .features__container
     &__container {
         @media (min-width: $mobile) and (max-width: $tablet) {

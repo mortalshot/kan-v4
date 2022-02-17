@@ -8,9 +8,6 @@ import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger.js';
 gsap.registerPlugin(ScrollTrigger);
 
-
-
-
 import LocomotiveScroll from 'locomotive-scroll';
 import "../../scss/libs/locomotive-scroll.scss";
 
@@ -34,6 +31,59 @@ ScrollTrigger.scrollerProxy(".page", {
     // LocomotiveScroll handles things completely differently on mobile devices - it doesn't even transform the container at all! So to get the correct behavior and avoid jitters, we should pin things with position: fixed on mobile. We sense it by checking to see if there's a transform applied to the container (the LocomotiveScroll-controlled element).
     pinType: document.querySelector(".page").style.transform ? "transform" : "fixed"
 });
+
+// Анимация home preview
+if (document.querySelector('.preview')) {
+    const previewTimeLine = gsap.timeline({
+        scrollTrigger: {
+            trigger: ".preview",
+            scroller: ".page",
+            start: "top bottom",
+            end: "bottom top",
+        }
+    })
+
+    previewTimeLine.to(".preview__title", {
+        onComplete: function () {
+            document.querySelector('.preview__title').classList.add('_active');
+        },
+    });
+    previewTimeLine.to(".preview__subtitle", {
+        onComplete: function () {
+            document.querySelector('.preview__subtitle').classList.add('_active');
+        },
+    });
+    previewTimeLine.from(".preview__subtitle .link-circle", { opacity: 0, rotate: -180, scale: 0.5, delay: 0.5 });
+    previewTimeLine.from(".preview__social", { opacity: 0, x: "200%" });
+    previewTimeLine.from(".preview__scroll button", { opacity: 0 });
+}
+
+// Анимация секции about
+if (document.querySelector('.about')) {
+    ScrollTrigger.create({
+        trigger: ".about",
+        scroller: ".page",
+        start: "top top",
+        end: "+=100%",
+        // markers: true,
+        pin: true,
+    })
+
+    const aboutTimeLine = gsap.timeline({
+        scrollTrigger: {
+            trigger: ".about",
+            scroller: ".page",
+            start: "50% bottom",
+            end: "bottom top",
+            scrub: 1,
+            // markers: true,
+        }
+    })
+
+    aboutTimeLine.from(".about__content", { y: "-100%" })
+    aboutTimeLine.from(".about__image._image-left", { opacity: 0, scale: 0.5, y: "-100%" }, "-=0.3")
+    aboutTimeLine.from(".about__image._image-right", { opacity: 0, scale: 0.5, y: "-100%" })
+}
 
 // Смена цветовой темы при достижении секции #features__located
 const featuresLocated = document.querySelector('.features__located');
@@ -62,16 +112,45 @@ if (featuresLocated) {
 // Печатаем текст категорий при скролле только один раз на десктопе
 const categoriesItems = document.querySelectorAll('.categories__item');
 if (categoriesItems.length > 0) {
-
     let mediaQueryMmd3 = window.matchMedia('(min-width: 743.98px)')
     function handleMmd3Change(e) {
         if (e.matches) {
             categoriesItems.forEach(element => {
                 const elementText = element.innerHTML;
+                const isRolling = Symbol(elementText);
 
-                const elementStyleHeight = element.getBoundingClientRect().height;
-                element.style.height = elementStyleHeight + "px";
-                element.innerHTML = "";
+                function getPositions(length) {
+                    return Array.from(new Array(length), () => [
+                        (length * Math.random() | 0) % length,
+                        (length * Math.random() | 0) % length,
+                    ]);
+                }
+
+                async function rollText(item) {
+                    if (item[isRolling]) return;
+                    item[isRolling] = true;
+                    const word = [...item.textContent];
+                    const ps = getPositions(word.length);
+                    const computedWords = [word.join("")];
+                    for (const [p1, p2] of ps) {
+                        [word[p1], word[p2]] = [word[p2], word[p1]];
+                        computedWords.push(item.textContent = word.join(""));
+                        await delay(100);
+                    }
+
+                    while (computedWords.length) {
+                        const word = computedWords.pop();
+                        item.textContent = word;
+                        await delay(100);
+                    }
+
+                    item[isRolling] = false;
+                }
+
+                function delay(ms) {
+                    return new Promise(resolve => setTimeout(resolve, ms));
+                }
+
 
                 ScrollTrigger.create({
                     trigger: element,
@@ -81,34 +160,52 @@ if (categoriesItems.length > 0) {
                     once: true,
 
                     onEnter: function () {
-                        let line = 0;
-                        let count = 0;
-                        let result = '';
-
-                        function typeLine() {
-                            let interval = setTimeout(
-                                () => {
-                                    result += elementText[line]
-                                    element.innerHTML = result + '|';
-
-
-                                    count++;
-                                    if (count >= elementText[line].length) {
-                                        count = 0;
-                                        line++;
-                                        if (line == elementText.length) {
-                                            clearTimeout(interval);
-                                            element.innerHTML = result;
-                                            return true;
-                                        }
-                                    }
-                                    typeLine();
-                                }, 150)
-                        }
-
-                        typeLine();
+                        rollText(element);
                     },
                 })
+
+
+
+                /*                 const elementStyleHeight = element.getBoundingClientRect().height;
+                                element.style.height = elementStyleHeight + "px";
+                                element.innerHTML = "";
+                
+                                ScrollTrigger.create({
+                                    trigger: element,
+                                    scroller: ".page",
+                                    start: "top bottom",
+                                    end: "bottom top",
+                                    once: true,
+                
+                                    onEnter: function () {
+                                        let line = 0;
+                                        let count = 0;
+                                        let result = '';
+                
+                                        function typeLine() {
+                                            let interval = setTimeout(
+                                                () => {
+                                                    result += elementText[line]
+                                                    element.innerHTML = result + '|';
+                
+                
+                                                    count++;
+                                                    if (count >= elementText[line].length) {
+                                                        count = 0;
+                                                        line++;
+                                                        if (line == elementText.length) {
+                                                            clearTimeout(interval);
+                                                            element.innerHTML = result;
+                                                            return true;
+                                                        }
+                                                    }
+                                                    typeLine();
+                                                }, 150)
+                                        }
+                
+                                        typeLine();
+                                    },
+                                }) */
 
             });
         }
@@ -135,57 +232,6 @@ if (categoriesItems.length > 0) {
     }
     mediaQueryMd3.addEventListener('change', handleMd3Change);
     handleMd3Change(mediaQueryMd3);
-}
-
-// Появление сверху
-const animShowTop = document.querySelectorAll('.anim-show-top');
-if (animShowTop.length > 0) {
-    animShowTop.forEach(element => {
-        ScrollTrigger.create({
-            trigger: element,
-            scroller: ".page",
-            start: "top 90%",
-            end: "bottom top",
-
-            onToggle: function () {
-                element.classList.toggle('_active');
-            }
-        })
-    });
-}
-
-// Появление снизу
-const animShowBottom = document.querySelectorAll('.anim-show-bottom');
-if (animShowBottom.length > 0) {
-    animShowBottom.forEach(element => {
-        ScrollTrigger.create({
-            trigger: element,
-            scroller: ".page",
-            start: "top 90%",
-            end: "bottom top",
-
-            onToggle: function () {
-                element.classList.toggle('_active');
-            }
-        })
-    });
-}
-
-// Появление c поворотом
-const animShowRotate = document.querySelectorAll('.anim-show-rotate');
-if (animShowRotate.length > 0) {
-    animShowRotate.forEach(element => {
-        ScrollTrigger.create({
-            trigger: element,
-            scroller: ".page",
-            start: "top 90%",
-            end: "bottom top",
-
-            onToggle: function () {
-                element.classList.toggle('_active');
-            }
-        })
-    });
 }
 
 // Текст по кругу кнопки more
@@ -232,7 +278,7 @@ if (input.length > 0) {
 }
 
 
-// Получение значение стиля transform
+/* // Получение значение стиля transform
 function getMatrix(element) {
     const values = element.style.transform.split(/\w+\(|\);?/);
     const transform = values[1].split(/,\s?/g).map(parseInt);
@@ -247,9 +293,9 @@ function getMatrix(element) {
 // Анимация наведения у слайдера с кейсами
 const slider = document.querySelector('.cases__slider');
 if (slider && !isMobile.any()) {
-    const buttonPrev = document.querySelector('.cases__slider .swiper__button_prev')
-    const buttonNext = document.querySelector('.cases__slider .swiper__button_next')
-    const sliderWrapper = document.querySelector('.cases__wrapper')
+    const buttonPrev = document.querySelector('.cases__slider .swiper__button_prev');
+    const buttonNext = document.querySelector('.cases__slider .swiper__button_next');
+    const sliderWrapper = document.querySelector('.cases__wrapper');
 
     buttonPrev.addEventListener('mouseover', function () {
         slider.classList.remove('_slide-change');
@@ -278,5 +324,5 @@ if (slider && !isMobile.any()) {
         let translateX = getMatrix(sliderWrapper).x;
         sliderWrapper.style.transform = `translate3d(${translateX - 300}px, 0, 0)`;
     }
-}
+} */
 

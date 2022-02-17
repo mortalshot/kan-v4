@@ -1,3 +1,7 @@
+[data-scroll-container] {
+    overflow-y: hidden !important;
+}
+
 // Общие стили
 section {
     @include adaptiveValue("padding-top", 100, 50);
@@ -78,11 +82,16 @@ section {
     background-color: var(--mainColor);
     color: var(--bgColor);
     font-size: rem(24);
-    transition: $transition ease transform 0s;
+
+    &::before {
+        transition: $transition ease transform 0s;
+    }
 
     @media (any-hover: hover) {
         &:hover {
-            transform: rotate(360deg);
+            &::before {
+                transform: rotate(360deg);
+            }
         }
     }
 }
@@ -174,6 +183,7 @@ img {
 .marquee {
     @include adaptiveValue("padding-top", 200, 80);
     @include adaptiveValue("padding-bottom", 200, 80);
+    overflow: hidden;
 
     // .marquee__right
     &__left {
