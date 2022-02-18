@@ -63,7 +63,7 @@
         flex: 1;
 
         &:not(:last-child) {
-            margin-bottom: rem(48);
+            margin-bottom: rem(24);
         }
 
         @media (min-width: $tablet) {
@@ -105,7 +105,7 @@
 
                 div {
                     transform: translateY(0);
-                    transition: 0.5s ease all 0s;
+                    transition: 1s ease all 0s;
                 }
             }
         }
@@ -154,7 +154,7 @@
 
                 div {
                     transform: translateY(0);
-                    transition: 0.5s ease all 0s;
+                    transition: 1s ease all 0s;
                 }
             }
         }
@@ -176,7 +176,8 @@
             @include adaptiveValue("margin-top", -48, -98, 1528, 744, 1);
         }
 
-        button {
+        button,
+        a {
             @media (min-width: $mobile) {
                 padding-left: rem(5);
                 padding-right: rem(5);
@@ -229,7 +230,7 @@
 // about ------------------------------------------------------------------------------------------------------------------------------
 .about {
     padding-top: 0;
-    
+
     // .about__container
     &__container {
     }
@@ -344,6 +345,7 @@
 // categories ------------------------------------------------------------------------------------------------------------------------------
 .categories {
     padding-top: 0;
+    overflow: hidden;
 
     &:not(:last-child) {
         @include adaptiveValue("padding-bottom", 200, 150);
@@ -710,6 +712,52 @@
         text-align: justify;
         max-width: rem(473);
         align-self: flex-end;
+
+        @media (any-hover: hover) {
+            &:hover {
+                span {
+                    &::before {
+                        opacity: 0.6;
+                    }
+                }
+            }
+        }
+
+        span {
+            position: relative;
+
+            &::before {
+                content: "";
+                position: absolute;
+                z-index: 1;
+                display: block;
+                width: 100%;
+                height: 100%;
+                top: 0;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                pointer-events: none;
+                background: var(--bgColor);
+                opacity: 0;
+                transition: $transition ease opacity 0s;
+            }
+        }
+
+        a {
+            text-decoration: underline var(--mainColor) from-font;
+            text-underline-offset: 3px;
+            position: relative;
+
+            @media (any-hover: hover) {
+                transition: $transition ease text-decoration 0s;
+
+                &:hover {
+                    text-decoration: underline transparent from-font;
+                    z-index: 1;
+                }
+            }
+        }
     }
 
     // .single-case__more
@@ -725,6 +773,7 @@
 
 // features ------------------------------------------------------------------------------------------------------------------------------
 .features {
+    @include adaptiveValue("padding-top", 200, 100);
     overflow: hidden;
 
     // .features__container
@@ -756,6 +805,39 @@
 
         @media (min-width: $mobile) {
             max-width: rem(502);
+        }
+
+        span > div {
+            padding: rem(4) rem(10);
+            margin: rem(-4) rem(-10);
+            overflow: hidden;
+
+            div {
+                transform: translateY(110%);
+            }
+        }
+        div {
+            display: inline-block;
+        }
+
+        &._active {
+            span > div {
+                &:nth-child(2) {
+                    div {
+                        transition-delay: 0.1s;
+                    }
+                }
+                &:nth-child(3) {
+                    div {
+                        transition-delay: 0.2s;
+                    }
+                }
+
+                div {
+                    transform: translateY(0);
+                    transition: 1s ease all 0s;
+                }
+            }
         }
     }
 
@@ -899,6 +981,64 @@
                 background: var(--bgColor);
                 opacity: 0;
                 transition: $transition ease opacity 0s;
+            }
+        }
+
+        div {
+            display: inline-block;
+        }
+
+        span > div {
+            padding: rem(4) rem(10);
+            margin: rem(-4) rem(-10);
+            overflow: hidden;
+
+            div {
+                transform: translateY(110%);
+
+                @media (any-hover: hover) {
+                    &:hover {
+                        position: relative;
+                        z-index: 1;
+
+                        &::before {
+                            opacity: 0.6;
+                        }
+                    }
+                }
+
+                &::before {
+                    content: "";
+                    position: absolute;
+                    z-index: 1;
+                    display: block;
+                    width: 100%;
+                    height: 100%;
+                    top: 0;
+                    bottom: 0;
+                    left: 0;
+                    right: 0;
+                    pointer-events: none;
+                    background: var(--bgColor);
+                    opacity: 0;
+                }
+            }
+        }
+
+        &._active {
+            span > div {
+                @for $i from 1 through 6 {
+                    &:nth-child(#{$i}) {
+                        div {
+                            transition-delay: (0.1s * $i);
+                        }
+                    }
+                }
+
+                div {
+                    transform: translateY(0);
+                    transition: 1s ease all 0s;
+                }
             }
         }
 

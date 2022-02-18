@@ -48,3 +48,9 @@
 .swiper-fade .swiper-slide-active .swiper-slide-active {
 	pointer-events: auto;
 }
+
+.swiper__button.swiper-button-disabled {
+	opacity: 0.35;
+	cursor: auto;
+	pointer-events: none;
+}

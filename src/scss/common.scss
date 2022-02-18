@@ -181,24 +181,30 @@ img {
 // блоки
 
 .marquee {
-    @include adaptiveValue("padding-top", 200, 80);
-    @include adaptiveValue("padding-bottom", 200, 80);
+    @include adaptiveValue("padding-top", 100, 80);
+    @include adaptiveValue("padding-bottom", 100, 80);
     overflow: hidden;
 
-    // .marquee__right
+    // .marquee__left
     &__left {
         display: flex;
         align-items: center;
         font-weight: 300;
         font-size: rem(235);
         line-height: math.div(281, 234);
-        animation: marquee-left 20s linear infinite;
+
         width: 200%;
 
         & > * {
             &:not(:last-child) {
                 margin-right: rem(80);
             }
+        }
+    }
+
+    &._active {
+        .marquee__left {
+            animation: marquee-left 20s linear infinite;
         }
     }
 

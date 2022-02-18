@@ -14,13 +14,14 @@ import "../../scss/libs/locomotive-scroll.scss";
 const locoScroll = new LocomotiveScroll({
     el: document.querySelector(".page"),
     smooth: true,
-    lerp: 0.02,
+    lerp: 0.01,
 });
 // each time Locomotive Scroll updates, tell ScrollTrigger to update too (sync positioning)
 locoScroll.on("scroll", ScrollTrigger.update);
 
-// tell ScrollTrigger to use these proxy methods for the ".page" element since Locomotive Scroll is hijacking things
-// !scroller: ".page",
+let mediaQueryMmd3 = window.matchMedia('(min-width: 743.98px)');
+let mediaQueryMd3 = window.matchMedia('(max-width: 743.98px)');
+
 ScrollTrigger.scrollerProxy(".page", {
     scrollTop(value) {
         return arguments.length ? locoScroll.scrollTo(value, 0, 0) : locoScroll.scroll.instance.scroll.y;
@@ -55,64 +56,45 @@ if (document.querySelector('.preview')) {
     });
     previewTimeLine.from(".preview__subtitle .link-circle", { opacity: 0, rotate: -180, scale: 0.5, delay: 0.5 });
     previewTimeLine.from(".preview__social", { opacity: 0, x: "200%" });
-    previewTimeLine.from(".preview__scroll button", { opacity: 0 });
+    previewTimeLine.from(".preview__scroll a", { opacity: 0 });
 }
 
 // Анимация секции about
 if (document.querySelector('.about')) {
-    ScrollTrigger.create({
-        trigger: ".about",
-        scroller: ".page",
-        start: "top top",
-        end: "+=100%",
-        // markers: true,
-        pin: true,
-    })
+    function handleMmd3Change(e) {
+        if (e.matches) {
+            ScrollTrigger.create({
+                trigger: ".about",
+                scroller: ".page",
+                start: "top top",
+                end: "+=100%",
+                // markers: true,
+                pin: true,
+            })
 
-    const aboutTimeLine = gsap.timeline({
-        scrollTrigger: {
-            trigger: ".about",
-            scroller: ".page",
-            start: "50% bottom",
-            end: "bottom top",
-            scrub: 1,
-            // markers: true,
+            const aboutTimeLine = gsap.timeline({
+                scrollTrigger: {
+                    trigger: ".about",
+                    scroller: ".page",
+                    start: "50% bottom",
+                    end: "bottom top",
+                    scrub: 1,
+                    // markers: true,
+                }
+            })
+
+            aboutTimeLine.from(".about__content", { y: "-100%", duration: 1 })
+            aboutTimeLine.from(".about__image._image-left", { opacity: 0, y: "-10%" }, "-=0.5")
+            aboutTimeLine.from(".about__image._image-right", { opacity: 0, y: "70%" }, "-=0.5")
         }
-    })
-
-    aboutTimeLine.from(".about__content", { y: "-100%" })
-    aboutTimeLine.from(".about__image._image-left", { opacity: 0, scale: 0.5, y: "-100%" }, "-=0.3")
-    aboutTimeLine.from(".about__image._image-right", { opacity: 0, scale: 0.5, y: "-100%" })
-}
-
-// Смена цветовой темы при достижении секции #features__located
-const featuresLocated = document.querySelector('.features__located');
-if (featuresLocated) {
-    ScrollTrigger.create({
-        trigger: ".features__located",
-        scroller: ".page",
-        start: "top bottom",
-        end: "bottom top",
-        // markers: true,
-        onToggle: function () {
-            document.documentElement.classList.toggle('dark');
-            document.documentElement.classList.toggle('light');
-        },
-        /*             onEnter: function () {
-                        document.documentElement.classList.remove('dark');
-                        document.documentElement.classList.add('light');
-                    },
-                    onLeaveBack: function () {
-                        document.documentElement.classList.add('dark');
-                        document.documentElement.classList.remove('light');
-                    }, */
-    });
+    }
+    mediaQueryMmd3.addEventListener('change', handleMmd3Change);
+    handleMmd3Change(mediaQueryMmd3);
 }
 
 // Печатаем текст категорий при скролле только один раз на десктопе
 const categoriesItems = document.querySelectorAll('.categories__item');
 if (categoriesItems.length > 0) {
-    let mediaQueryMmd3 = window.matchMedia('(min-width: 743.98px)')
     function handleMmd3Change(e) {
         if (e.matches) {
             categoriesItems.forEach(element => {
@@ -151,7 +133,6 @@ if (categoriesItems.length > 0) {
                     return new Promise(resolve => setTimeout(resolve, ms));
                 }
 
-
                 ScrollTrigger.create({
                     trigger: element,
                     scroller: ".page",
@@ -163,60 +144,8 @@ if (categoriesItems.length > 0) {
                         rollText(element);
                     },
                 })
-
-
-
-                /*                 const elementStyleHeight = element.getBoundingClientRect().height;
-                                element.style.height = elementStyleHeight + "px";
-                                element.innerHTML = "";
-                
-                                ScrollTrigger.create({
-                                    trigger: element,
-                                    scroller: ".page",
-                                    start: "top bottom",
-                                    end: "bottom top",
-                                    once: true,
-                
-                                    onEnter: function () {
-                                        let line = 0;
-                                        let count = 0;
-                                        let result = '';
-                
-                                        function typeLine() {
-                                            let interval = setTimeout(
-                                                () => {
-                                                    result += elementText[line]
-                                                    element.innerHTML = result + '|';
-                
-                
-                                                    count++;
-                                                    if (count >= elementText[line].length) {
-                                                        count = 0;
-                                                        line++;
-                                                        if (line == elementText.length) {
-                                                            clearTimeout(interval);
-                                                            element.innerHTML = result;
-                                                            return true;
-                                                        }
-                                                    }
-                                                    typeLine();
-                                                }, 150)
-                                        }
-                
-                                        typeLine();
-                                    },
-                                }) */
-
             });
-        }
-    }
-    mediaQueryMmd3.addEventListener('change', handleMmd3Change);
-    handleMmd3Change(mediaQueryMmd3);
-
-    // Выезд текста категорий на мобилах
-    let mediaQueryMd3 = window.matchMedia('(max-width: 743.98px)')
-    function handleMd3Change(e) {
-        if (e.matches) {
+        } else {
             categoriesItems.forEach(element => {
                 ScrollTrigger.create({
                     trigger: element,
@@ -230,8 +159,111 @@ if (categoriesItems.length > 0) {
             });
         }
     }
-    mediaQueryMd3.addEventListener('change', handleMd3Change);
-    handleMd3Change(mediaQueryMd3);
+    mediaQueryMmd3.addEventListener('change', handleMmd3Change);
+    handleMmd3Change(mediaQueryMmd3);
+}
+
+// Запуск анимации секции marquee
+const marquee = document.querySelector('.marquee');
+if (marquee) {
+    ScrollTrigger.create({
+        trigger: marquee,
+        scroller: ".page",
+        start: "top bottom",
+        end: "bottom top",
+        onToggle: function () {
+            marquee.classList.toggle('_active');
+        }
+    })
+}
+
+// Анимация секции features
+const features = document.querySelector('.features');
+if (features) {
+    function handleMmd3Change(e) {
+        if (e.matches) {
+            // Анимация для body
+            ScrollTrigger.create({
+                trigger: ".features__body",
+                scroller: ".page",
+                start: "top top",
+                end: "+=50%",
+                // markers: true,
+                pin: true,
+            })
+
+            const featuresBodyTimeLine = gsap.timeline({
+                scrollTrigger: {
+                    trigger: ".features__body",
+                    scroller: ".page",
+                    start: "top 50%",
+                    end: "bottom top",
+                    scrub: 1,
+                    // markers: true,
+                }
+            })
+
+            featuresBodyTimeLine.add(function () {
+                document.querySelector('.features__title').classList.add('_active');
+            });
+            featuresBodyTimeLine.from(".features__title", { y: "30%" });
+            featuresBodyTimeLine.fromTo(".features__text", { y: "50%" }, { y: "-50%", }, "-=0.5");
+            featuresBodyTimeLine.to(".features__text", { y: "0", duration: 0.5 });
+
+            // Анимация для row
+            ScrollTrigger.create({
+                trigger: ".features__row",
+                scroller: ".page",
+                start: "-700px -600px",
+                end: "+=30%",
+                // markers: true,
+                pin: true,
+            })
+
+            const featuresRowTimeLine = gsap.timeline({
+                scrollTrigger: {
+                    trigger: ".features__row",
+                    scroller: ".page",
+                    start: "top bottom",
+                    end: "bottom top",
+                    scrub: 1,
+                    // markers: true,
+                }
+            })
+
+            featuresRowTimeLine.from('.feature-item__text', { y: "-200%" });
+            featuresRowTimeLine.from('.feature-item__icon', { y: "-100%", opacity: 0 });
+        } else {
+            gsap.to(".features__title", {
+                scrollTrigger: {
+                    trigger: ".features__title",
+                    start: "top 70%",
+                    end: "bottom top",
+                    onToggle: function () {
+                        document.querySelector('.features__title').classList.add('_active');
+                    }
+                }
+            })
+        }
+    }
+    mediaQueryMmd3.addEventListener('change', handleMmd3Change);
+    handleMmd3Change(mediaQueryMmd3);
+
+    // Анимация для features__located
+    const featuresLocatedTimeLine = gsap.timeline({
+        scrollTrigger: {
+            trigger: ".features__located",
+            scroller: ".page",
+            start: "top center",
+            end: "bottom top",
+        }
+    })
+
+    featuresLocatedTimeLine.from(".features__located", { y: "-100%" });
+    featuresLocatedTimeLine.add(function () {
+        document.querySelector('.features__located').classList.add('_active');
+    });
+    featuresLocatedTimeLine.from(".features__located .link-circle", { opacity: 0, rotate: -180, scale: 0.5, delay: 0.5 });
 }
 
 // Текст по кругу кнопки more
@@ -247,6 +279,31 @@ if (featuresMore) {
             featuresMore.classList.toggle('_action');
         },
     })
+}
+
+// Смена цветовой темы при достижении секции #features__located
+const featuresLocated = document.querySelector('.features__located');
+if (featuresLocated) {
+    ScrollTrigger.create({
+        trigger: ".features__located",
+        scroller: ".page",
+        start: "bottom center",
+        end: "bottom top",
+        // markers: true,
+        // onToggle: function () {
+        //     document.documentElement.classList.toggle('dark');
+        //     document.documentElement.classList.toggle('light');
+        // },
+        onEnter: function () {
+            document.documentElement.classList.remove('dark');
+            document.documentElement.classList.add('light');
+            // document.querySelector('.features__located').classList.add('_active');
+        },
+        onLeaveBack: function () {
+            document.documentElement.classList.add('dark');
+            document.documentElement.classList.remove('light');
+        },
+    });
 }
 
 // each time the window updates, we should refresh ScrollTrigger and then update LocomotiveScroll. 
@@ -278,16 +335,25 @@ if (input.length > 0) {
 }
 
 
-/* // Получение значение стиля transform
+// Получение значение стиля transform
 function getMatrix(element) {
     const values = element.style.transform.split(/\w+\(|\);?/);
-    const transform = values[1].split(/,\s?/g).map(parseInt);
+    if (values.length > 1) {
+        const transform = values[1].split(/,\s?/g).map(parseInt);
 
-    return {
-        x: transform[0],
-        y: transform[1],
-        z: transform[2]
-    };
+        return {
+            x: transform[0],
+            y: transform[1],
+            z: transform[2]
+        };
+    }
+    else {
+        return {
+            x: 0,
+            y: 0,
+            z: 0
+        };
+    }
 }
 
 // Анимация наведения у слайдера с кейсами
@@ -299,30 +365,41 @@ if (slider && !isMobile.any()) {
 
     buttonPrev.addEventListener('mouseover', function () {
         slider.classList.remove('_slide-change');
-        moveLeftSliderWrapper();
+        moveLeftSliderWrapper(sliderWrapper);
     })
     buttonPrev.addEventListener('mouseout', function () {
         if (!slider.classList.contains('_slide-change')) {
-            moveRightSliderWrapper();
+            moveRightSliderWrapper(sliderWrapper);
         }
     })
     buttonNext.addEventListener('mouseover', function () {
         slider.classList.remove('_slide-change');
-        moveRightSliderWrapper();
+        moveRightSliderWrapper(sliderWrapper);
     })
     buttonNext.addEventListener('mouseout', function () {
         if (!slider.classList.contains('_slide-change')) {
-            moveLeftSliderWrapper();
+            moveLeftSliderWrapper(sliderWrapper);
         }
     })
 
-    function moveLeftSliderWrapper() {
-        let translateX = getMatrix(sliderWrapper).x;
-        sliderWrapper.style.transform = `translate3d(${translateX + 300}px, 0, 0)`;
+    function moveLeftSliderWrapper(slider) {
+        let translateX = getMatrix(slider).x;
+        slider.style.transform = `translate3d(${translateX + 300}px, 0, 0)`;
     }
-    function moveRightSliderWrapper() {
-        let translateX = getMatrix(sliderWrapper).x;
-        sliderWrapper.style.transform = `translate3d(${translateX - 300}px, 0, 0)`;
+    function moveRightSliderWrapper(slider) {
+        let translateX = getMatrix(slider).x;
+        slider.style.transform = `translate3d(${translateX - 300}px, 0, 0)`;
     }
-} */
+}
 
+// Навигация по странице
+gsap.utils.toArray(".menu__item a").forEach(function (a) {
+    a.addEventListener("click", function (e) {
+        e.preventDefault();
+        document.querySelectorAll(".menu__item a").forEach((item) => {
+            item.classList.remove('active')
+        })
+        e.target.classList.add('active')
+        locoScroll.scrollTo(e.target.getAttribute("href"))
+    });
+});
