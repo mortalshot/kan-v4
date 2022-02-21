@@ -83,8 +83,8 @@ if (document.querySelector('.about')) {
                 }
             })
 
-            aboutTimeLine.from(".about__content", { y: "-100%", duration: 1 })
-            aboutTimeLine.from(".about__image._image-left", { opacity: 0, y: "-10%" }, "-=0.5")
+            aboutTimeLine.from(".about__body", { y: "-100%", duration: 0.6 })
+            aboutTimeLine.from(".about__image._image-left", { opacity: 0, y: "-10%" }, "-=0.4")
             aboutTimeLine.from(".about__image._image-right", { opacity: 0, y: "70%" }, "-=0.5")
         }
     }
@@ -161,6 +161,85 @@ if (categoriesItems.length > 0) {
     }
     mediaQueryMmd3.addEventListener('change', handleMmd3Change);
     handleMmd3Change(mediaQueryMmd3);
+}
+
+// Анимация секции cases
+const cases = document.querySelector('.cases');
+if (cases) {
+    setTimeout(() => {
+        const caseTitles = document.querySelectorAll('.swiper-slide-active .single-case__title');
+        caseTitles.forEach(title => {
+            ScrollTrigger.create({
+                trigger: title,
+                scroller: ".page",
+                start: "top 80%",
+                end: "bottom top",
+                onEnter: function () {
+                    title.classList.add('_active')
+                }
+            });
+        });
+
+        const caseLeftJobs = document.querySelectorAll('.swiper-slide-active ._anim-left .single-case__link');
+        caseLeftJobs.forEach(leftJob => {
+            let caseLeftJobsTimeLine = gsap.timeline({
+                scrollTrigger: {
+                    trigger: leftJob,
+                    scroller: ".page",
+                    start: "top 80%",
+                    end: "bottom top",
+                }
+            })
+            caseLeftJobsTimeLine.from(leftJob.querySelector('.single-case__image'), { opacity: 0, x: "-100%" });
+            caseLeftJobsTimeLine.from(leftJob.querySelector('.single-case__caption'), { opacity: 0, x: "-100%" });
+        });
+
+        const caseRightJobs = document.querySelectorAll('.swiper-slide-active ._anim-right .single-case__link');
+        caseRightJobs.forEach(rightJob => {
+            const rightJobImage = rightJob.querySelector('.single-case__image');
+            const rightJobCaption = rightJob.querySelector('.single-case__caption');
+
+            let caseRightJobsTimeLine = gsap.timeline({
+                scrollTrigger: {
+                    trigger: rightJob,
+                    scroller: ".page",
+                    start: "top 80%",
+                    end: "bottom top",
+                    // markers: true,
+                }
+            })
+            caseRightJobsTimeLine.from(rightJobImage, { opacity: 0, y: "100%" })
+            caseRightJobsTimeLine.from(rightJobCaption, { opacity: 0, x: "100%" });
+        });
+
+        const caseTopJobs = document.querySelectorAll('.swiper-slide-active ._anim-top .single-case__link');
+        caseTopJobs.forEach(topJob => {
+            let caseTopJobsTimeLine = gsap.timeline({
+                scrollTrigger: {
+                    trigger: topJob,
+                    scroller: ".page",
+                    start: "top 80%",
+                    end: "bottom top",
+                }
+            })
+
+            caseTopJobsTimeLine.from(topJob.querySelector('.single-case__image'), { opacity: 0, y: "100%" });
+            caseTopJobsTimeLine.from(topJob.querySelector('.single-case__caption'), { opacity: 0, y: "100%" });
+        });
+
+        const caseMore = document.querySelectorAll('.swiper-slide-active .single-case__more');
+        caseMore.forEach(more => {
+            let moreTimeLine = gsap.timeline({
+                scrollTrigger: {
+                    trigger: more,
+                    scroller: ".page",
+                    start: "top 80%",
+                    end: "bottom top",
+                }
+            })
+            moreTimeLine.from(more, { scale: 0, rotate: "-180" });
+        });
+    }, 300);
 }
 
 // Запуск анимации секции marquee
@@ -393,13 +472,16 @@ if (slider && !isMobile.any()) {
 }
 
 // Навигация по странице
-gsap.utils.toArray(".menu__item a").forEach(function (a) {
+gsap.utils.toArray(".anchor-link a").forEach(function (a) {
     a.addEventListener("click", function (e) {
         e.preventDefault();
-        document.querySelectorAll(".menu__item a").forEach((item) => {
+        document.querySelectorAll(".anchor-link a").forEach((item) => {
             item.classList.remove('active')
         })
         e.target.classList.add('active')
         locoScroll.scrollTo(e.target.getAttribute("href"))
     });
 });
+
+// Подключение swup
+const swup = new Swup();

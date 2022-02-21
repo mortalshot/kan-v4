@@ -1,87 +1,50 @@
 <!DOCTYPE html>
 <html lang="ru" class="dark">
-@@include('html/_head.htm',{
-"title":"Главная"
-})
+
+<head>
+	<title>Главная</title>
+	<meta charset="UTF-8">
+	<meta name="format-detection" content="telephone=no">
+	<!-- <style>body{opacity: 0;}</style> -->
+	<link rel="stylesheet" href="css/style.min.css?_v=20220221184316">
+	<link rel="shortcut icon" href="favicon.ico">
+	<!-- <meta name="robots" content="noindex, nofollow"> -->
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
 
 <body>
 	<div class="wrapper">
-		@@include('html/_header.htm',{})
+		<header class="header">
+			<div class="header__container">
+				<div class="header__menu menu">
+					<button type="button" class="menu__icon icon-menu">
+						<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+							<path id="icon-menu-rect-1" d="M0 0H8V8H0V0Z" fill="#D1D1D1" />
+							<path id="icon-menu-rect-2" d="M0 16H8V24H0V16Z" fill="#D1D1D1" />
+							<path id="icon-menu-rect-3" d="M16 0H24V8H16V0Z" fill="#D1D1D1" />
+							<path id="icon-menu-rect-4" d="M16 16H24V24H16V16Z" fill="#D1D1D1" />
+						</svg>
+					</button>
+
+					<nav class="menu__body">
+						<ul class="menu__list">
+							<li class="menu__item"><a href="home2.html" class="menu__link">About</a></li>
+							<li class="menu__item"><a href="#cases" class="menu__link">Portfolio</a></li>
+							<li class="menu__item"><a href="" class="menu__link">Services</a></li>
+							<li class="menu__item"><a href="" class="menu__link">Blog</a></li>
+							<li class="menu__item"><a href="" class="menu__link">Contacts</a></li>
+						</ul>
+					</nav>
+
+					<div class="header__logo logo">
+						<a href="home.html" class="logo__link">
+							<div class="logo__icon _icon-logo"> </div>
+						</a>
+					</div>
+				</div>
+			</div>
+		</header>
 		<main class="page" id="swup" data-scroll-container>
-			<section id="preview" class="preview" data-fullscreen>
-				<div class="preview__container">
-					<div class="preview__social social">
-						<div class="social__item">
-							<a href="">Twitter</a>
-						</div>
-						<span class="social__separator">/</span>
-						<div class="social__item">
-							<a href="">Facebook</a>
-						</div>
-						<span class="social__separator">/</span>
-						<div class="social__item">
-							<a href="">Instagram</a>
-						</div>
-						<span class="social__separator">/</span>
-						<div class="social__item">
-							<a href="">Behance</a>
-						</div>
-						<span class="social__separator">/</span>
-						<div class="social__item">
-							<a href="">Youtube</a>
-						</div>
-					</div>
-
-					<div class="preview__body">
-						<h1 class="preview__title _anim-show">
-							<span>
-								<div> <div>Design <em>and</em></div> </div>
-								<div> <div>develo<wbr>pment</div> </div>
-							</span>
-						</h1>
-						<h2 class="preview__subtitle _anim-show">
-							<span>
-								<div>
-									<div>With care and attention,</div>
-								</div>
-								<div>
-									<div>we <em>launch</em> your <em>projects</em></div>
-								</div>
-								<div>
-									<div>to the&nbsp;moon</div>
-								</div>
-							</span>
-							<button type="button" class="_icon-link link-circle"></button>
-						</h2>
-					</div>
-					<div class="preview__scroll anchor-link">
-						<a class="_icon-link3" href="#about-content"></a>
-					</div>
-				</div>
-			</section>
-
-			<section id="about" class="about">
-				<div class="about__container">
-					<div class="about__images">
-						<div class="about__image _image-left"><img src="img/home/home-image-1.jpg" alt="" loading="lazy"></div>
-						<div class="about__image _image-right"><img src="img/home/home-image-2.jpg" alt="" loading="lazy"></div>
-					</div>
-
-					<div id="about-content" class="about__content">
-						<div class="about__body">
-							<div class="about__caption">
-								<span>Digital <em>agency</em>&nbsp;—</span>
-								is&nbsp;based on an international exeprienced team
-							</div>
-							<div class="about__text _content">
-								<p> Our agency is equipped with all the necessary specialists to launch your business from idea to combat mode. And at peak loads, it can be increased to a staff of 20-25 specialists.</p>
-							</div>
-						</div>
-						<h2 class="about__title _section-title">ABOUT US</h2>
-					</div>
-				</div>
-			</section>
-
 			<section id="categories" class="categories">
 				<div class="categories__container">
 					<div class="categories__items">
@@ -105,7 +68,7 @@
 								<div class="single-case__job _anim-left">
 									<a href="" class="single-case__link">
 										<div class="single-case__image">
-											<img data-src="img/home/home-image-3.jpg" class="swiper-lazy" alt="">
+											<picture><source data-srcset="img/home/home-image-3.webp" type="image/webp"><img data-src="img/home/home-image-3.jpg" class="swiper-lazy" alt=""></picture>
 											<div class="swiper-lazy-preloader"></div>
 										</div>
 										<div class="single-case__caption">Cryptocurr<wbr>encies exchange</div>
@@ -129,7 +92,7 @@
 								<div class="single-case__job _anim-right">
 									<a href="" class="single-case__link">
 										<div class="single-case__image">
-											<img data-src="img/home/home-image-4.jpg" class="swiper-lazy" alt="">
+											<picture><source data-srcset="img/home/home-image-4.webp" type="image/webp"><img data-src="img/home/home-image-4.jpg" class="swiper-lazy" alt=""></picture>
 											<div class="swiper-lazy-preloader"></div>
 										</div>
 										<div class="single-case__caption">retail light store</div>
@@ -138,7 +101,7 @@
 								<div class="single-case__job _anim-left">
 									<a href="" class="single-case__link">
 										<div class="single-case__image">
-											<img data-src="img/home/home-image-5.jpg" class="swiper-lazy" alt="">
+											<picture><source data-srcset="img/home/home-image-5.webp" type="image/webp"><img data-src="img/home/home-image-5.jpg" class="swiper-lazy" alt=""></picture>
 											<div class="swiper-lazy-preloader"></div>
 										</div>
 										<div class="single-case__caption">Sale, purchase, freight of ships worldwide</div>
@@ -147,7 +110,7 @@
 								<div class="single-case__job _anim-top">
 									<a href="" class="single-case__link">
 										<div class="single-case__image">
-											<img data-src="img/home/home-image-6.jpg" class="swiper-lazy" alt="">
+											<picture><source data-srcset="img/home/home-image-6.webp" type="image/webp"><img data-src="img/home/home-image-6.jpg" class="swiper-lazy" alt=""></picture>
 											<div class="swiper-lazy-preloader"></div>
 										</div>
 										<div class="single-case__caption">Finance consulting</div>
@@ -373,10 +336,67 @@
 			<br>
 			<br>
 		</main>
-		@@include('html/_footer.htm',{})
+		<footer class="footer">
+			<div class="footer__container">
+			</div>
+		</footer>
 	</div>
-	@@include('html/_popup.htm',{})
-	@@include('html/_js.htm',{})
+	<!-- 
+<div id="popup" aria-hidden="true" class="popup">
+	<div class="popup__wrapper">
+		<div class="popup__content">
+			<button data-close type="button" class="popup__close">Закрыть</button>
+			<div class="popup__text">
+			</div>
+		</div>
+	</div>
+</div>
+ -->
+	<div id="request" aria-hidden="true" class="popup popup_request">
+		<div class="popup__wrapper">
+			<div class="popup__content">
+				<button data-close type="button" class="popup__close _icon-plus"></button>
+				<div class="popup__text">
+					<h2 class="popup__title">Подайте заявку на вступление в фонд</h2>
+
+					<form action="" class="form">
+						<div class="form__row row">
+							<div class="form__item col-12">
+								<div class="form__item-wrapper">
+									<label for="request-name" class="form__label">Имя</label>
+									<input id="request-name" autocomplete="off" type="text" name="form[]" class="form__input input">
+								</div>
+							</div>
+							<div class="form__item col-12">
+								<div class="form__item-wrapper">
+									<label for="request-email" class="form__label">Email</label>
+									<input id="request-email" autocomplete="off" type="mail" value="mail@mail.ru" name="form[]" class="form__input input">
+								</div>
+							</div>
+							<div class="form__item col-12">
+								<div class="form__item-wrapper">
+									<label for="request-telegram" class="form__label">Telegram</label>
+									<input id="request-telegram" autocomplete="off" type="text" name="form[]" class="form__input input">
+								</div>
+							</div>
+							<div class="form__item col-12">
+								<div class="form__item-wrapper">
+									<label for="request-comment" class="form__label">Напишите нам</label>
+									<textarea id="request-comment" autocomplete="off" name="form[]" placeholder="" class="form__input input"></textarea>
+								</div>
+							</div>
+						</div>
+						<div class="form__submit">
+							<button class="form__btn _icon-link">Send</button>
+							<div class="form__privacy">Заполняю форму я даю согласие на <a href="">политику конфиденциальности</a></div>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script src="https://unpkg.com/swup@latest/dist/swup.min.js?_v=20220221184316"></script>
+	<script src="js/app.min.js?_v=20220221184316"></script>
 </body>
 
 </html>
