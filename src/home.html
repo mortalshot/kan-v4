@@ -5,9 +5,9 @@
 })
 
 <body>
-	<div class="wrapper transition-fade" id="swup">
+	<div class="wrapper" id="swup">
 		@@include('html/_header.htm',{})
-		<main class="page" data-scroll-container>		
+		<main class="page" data-scroll-container>
 			<section id="preview" class="preview" data-fullscreen>
 				<div class="preview__container">
 					<div class="preview__social social">
@@ -35,8 +35,12 @@
 					<div class="preview__body">
 						<h1 class="preview__title _anim-show">
 							<span>
-								<div> <div>Design <em>and</em></div> </div>
-								<div> <div>develo<wbr>pment</div> </div>
+								<div>
+									<div>Design <em>and</em></div>
+								</div>
+								<div>
+									<div>develo<wbr>pment</div>
+								</div>
 							</span>
 						</h1>
 						<h2 class="preview__subtitle _anim-show">
@@ -100,6 +104,63 @@
 				<div class="cases__slider swiper">
 					<div class="swiper__button swiper__button_prev"></div>
 					<div class="cases__wrapper swiper-wrapper">
+						<div class="cases__slide swiper-slide single-case single-case_template1">
+							<div class="single-case__wrapper">
+								<div class="single-case__job _anim-left">
+									<a href="" class="single-case__link">
+										<div class="single-case__image">
+											<img data-src="img/home/home-image-3.jpg" class="swiper-lazy" alt="">
+											<div class="swiper-lazy-preloader"></div>
+										</div>
+										<div class="single-case__caption">Cryptocurr<wbr>encies exchange</div>
+									</a>
+								</div>
+
+								<h2 class="single-case__title _anim-show">
+									<span>
+										<div>
+											<div>FOR YOUR</div>
+										</div>
+										<div>
+											<div><em>attention</em></div>
+										</div>
+										<div>
+											<div>OUR <a href="">CASES</a></div>
+										</div>
+									</span>
+								</h2>
+
+								<div class="single-case__job _anim-right">
+									<a href="" class="single-case__link">
+										<div class="single-case__image">
+											<img data-src="img/home/home-image-4.jpg" class="swiper-lazy" alt="">
+											<div class="swiper-lazy-preloader"></div>
+										</div>
+										<div class="single-case__caption">retail light store</div>
+									</a>
+								</div>
+								<div class="single-case__job _anim-left">
+									<a href="" class="single-case__link">
+										<div class="single-case__image">
+											<img data-src="img/home/home-image-5.jpg" class="swiper-lazy" alt="">
+											<div class="swiper-lazy-preloader"></div>
+										</div>
+										<div class="single-case__caption">Sale, purchase, freight of ships worldwide</div>
+									</a>
+								</div>
+								<div class="single-case__job _anim-top">
+									<a href="" class="single-case__link">
+										<div class="single-case__image">
+											<img data-src="img/home/home-image-6.jpg" class="swiper-lazy" alt="">
+											<div class="swiper-lazy-preloader"></div>
+										</div>
+										<div class="single-case__caption">Finance consulting</div>
+									</a>
+								</div>
+
+								<a href="" class="single-case__more link-cirlcle2">MORE</a>
+							</div>
+						</div>
 						<div class="cases__slide swiper-slide single-case single-case_template1">
 							<div class="single-case__wrapper">
 								<div class="single-case__job _anim-left">
@@ -226,29 +287,23 @@
 						</div>
 						<div class="features__more">
 							<div class="features__more-bg"></div>
-							<a data-popup="#request" class="_icon-link5 text-link">
+							<a data-popup="#request" class="text-link">
 								<span>More</span>
+								<svg viewBox="0 0 76 22" stroke-width="1" fill="none">
+									<line x1="-40" y1="11" x2="56" y2="11"></line>
+									<polyline points="46,1 56,11 46,21"></polyline>
+								</svg>
 							</a>
 						</div>
 					</div>
 
 					<div class="features__located">
 						<span>
-							<div>
-								<div>We are <em>located</em></div>
-							</div>
-							<div>
-								<div>in <a href="">London</a>, <a href="">Kiev</a>,</div>
-							</div>
-							<div>
-								<div><a href="">Warsaw</a>, <a href="">Vienn</a>,</div>
-							</div>
-							<div>
-								<div><a href="">Wroclaw</a>, <a href="">Mexico</a>,</div>
-							</div>
-							<div>
-								<div><a href="">St.Perersburg</a></div>
-							</div>
+							<div><div>We are <em>located</em> in</div></div>
+							<div><div><a href="">London</a>,<a href="">Warsaw</a>,</div></div>
+							<div><div><a href="">Vienn</a>,<a href="">Mexico</a>,</div></div>
+							<div><div><a href="">St.Perersburg</a>,</div></div>
+							<div><div><a href="">Kiev</a> and <a href="">Wroclaw</a></div></div>
 						</span>
 						<button type="button" class="_icon-link link-circle"></button>
 					</div>

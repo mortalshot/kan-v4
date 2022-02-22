@@ -4079,7 +4079,15 @@
             });
             let mediaQueryMd4 = window.matchMedia("(max-width: 574.98px)");
             function handleMd4Change(e) {
-                if (e.matches) casesSlider.destroy();
+                if (e.matches) {
+                    casesSlider.destroy();
+                    const caseImage = document.querySelectorAll(".single-case__image");
+                    caseImage.forEach((element => {
+                        const elementImage = element.querySelector(".swiper-lazy");
+                        const elementImageSrc = elementImage.dataset.src;
+                        elementImage.src = elementImageSrc;
+                    }));
+                }
             }
             mediaQueryMd4.addEventListener("change", handleMd4Change);
             handleMd4Change(mediaQueryMd4);
@@ -10305,8 +10313,8 @@ object-assign
         lerp: .01
     });
     locoScroll.on("scroll", ScrollTrigger.update);
-    let mediaQueryMmd3 = window.matchMedia("(min-width: 743.98px)");
-    window.matchMedia("(max-width: 743.98px)");
+    let mediaQueryMmd3 = window.matchMedia("(min-width: 744px)");
+    window.matchMedia("(max-width: 744px)");
     ScrollTrigger.scrollerProxy(".page", {
         scrollTop(value) {
             return arguments.length ? locoScroll.scrollTo(value, 0, 0) : locoScroll.scroll.instance.scroll.y;
@@ -10346,9 +10354,14 @@ object-assign
             scale: .5,
             delay: .5
         });
-        previewTimeLine.from(".preview__social", {
+        previewTimeLine.fromTo(".preview__social", {
             opacity: 0,
-            x: "200%"
+            x: "200%",
+            y: "-50%"
+        }, {
+            opacity: 1,
+            y: "-50%",
+            x: 0
         });
         previewTimeLine.from(".preview__scroll a", {
             opacity: 0
@@ -10622,9 +10635,6 @@ object-assign
                 start: "top center",
                 end: "bottom top"
             }
-        });
-        featuresLocatedTimeLine.from(".features__located", {
-            y: "-100%"
         });
         featuresLocatedTimeLine.add((function() {
             document.querySelector(".features__located").classList.add("_active");

@@ -3,11 +3,6 @@ import { isMobile } from "./functions.js";
 // Подключение списка активных модулей
 import { flsModules } from "./modules.js";
 
-// Подключение swup
-/* import "../libs/swup.min.js";
-import "../libs/SwupScriptsPlugin.js";
-const swup = new Swup(); */
-
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger.js';
 gsap.registerPlugin(ScrollTrigger);
@@ -23,8 +18,8 @@ const locoScroll = new LocomotiveScroll({
 // each time Locomotive Scroll updates, tell ScrollTrigger to update too (sync positioning)
 locoScroll.on("scroll", ScrollTrigger.update);
 
-let mediaQueryMmd3 = window.matchMedia('(min-width: 743.98px)');
-let mediaQueryMd3 = window.matchMedia('(max-width: 743.98px)');
+let mediaQueryMmd3 = window.matchMedia('(min-width: 744px)');
+let mediaQueryMd3 = window.matchMedia('(max-width: 744px)');
 
 ScrollTrigger.scrollerProxy(".page", {
     scrollTop(value) {
@@ -59,7 +54,7 @@ if (document.querySelector('.preview')) {
         },
     });
     previewTimeLine.from(".preview__subtitle .link-circle", { opacity: 0, rotate: -180, scale: 0.5, delay: 0.5 });
-    previewTimeLine.from(".preview__social", { opacity: 0, x: "200%" });
+    previewTimeLine.fromTo(".preview__social", { opacity: 0, x: "200%", y: "-50%", }, { opacity: 1, y: "-50%", x: 0 });
     previewTimeLine.from(".preview__scroll a", { opacity: 0 });
 }
 
@@ -339,10 +334,11 @@ if (features) {
             scroller: ".page",
             start: "top center",
             end: "bottom top",
+            // markers: true,
         }
     })
 
-    featuresLocatedTimeLine.from(".features__located", { y: "-100%" });
+    // featuresLocatedTimeLine.from(".features__located", { y: "-100%" });
     featuresLocatedTimeLine.add(function () {
         document.querySelector('.features__located').classList.add('_active');
     });
@@ -482,3 +478,10 @@ gsap.utils.toArray(".anchor-link a").forEach(function (a) {
         locoScroll.scrollTo(e.target.getAttribute("href"))
     });
 });
+
+/* // Подключение swup
+import "../libs/swup.min.js";
+import "../libs/SwupScriptsPlugin.js";
+const swup = new Swup({
+    plugins: [new SwupScriptsPlugin()]
+}); */

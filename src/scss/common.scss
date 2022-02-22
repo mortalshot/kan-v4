@@ -2,8 +2,25 @@
     overflow-y: hidden !important;
 }
 
+.transition-fade {
+    opacity: 1;
+    transition: 0.5s;
+    transform: translateX(0);
+    transform-origin: left;
+}
+
+html.is-animating .transition-fade {
+    opacity: 1;
+    transform: translateX(100%);
+}
+
+html.is-leaving .transition-fade {
+    opacity: 0;
+    transform: translateX(0);
+}
+
 // .swup-thumb
-.swup-thumb {
+/* .swup-thumb {
     position: absolute;
     top: 0;
     z-index: 1;
@@ -24,9 +41,9 @@
         height: rem(50);
         opacity: 0;
         z-index: 10;
-        transition: 0.5s ease all 0s;
+        transition: 0.5s;
     }
-}
+} */
 
 // Анимация перехода по страницам
 /* html {

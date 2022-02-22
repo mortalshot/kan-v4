@@ -117,6 +117,13 @@ function initSliders() {
 		function handleMd4Change(e) {
 			if (e.matches) {
 				casesSlider.destroy();
+
+				const caseImage = document.querySelectorAll('.single-case__image');
+				caseImage.forEach(element => {
+					const elementImage = element.querySelector('.swiper-lazy');
+					const elementImageSrc = elementImage.dataset.src;
+					elementImage.src = elementImageSrc;
+				});
 			}
 		}
 		mediaQueryMd4.addEventListener('change', handleMd4Change);
