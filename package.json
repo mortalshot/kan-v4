@@ -71,6 +71,7 @@
 	},
 	"dependencies": {
 		"@swup/debug-plugin": "^1.0.3",
+		"@swup/scripts-plugin": "^1.1.0",
 		"gsap": "^3.9.1",
 		"locomotive-scroll": "^4.1.3",
 		"scrolltrigger": "^1.0.1",

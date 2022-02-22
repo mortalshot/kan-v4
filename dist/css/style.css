@@ -179,22 +179,10 @@ h6 {
   font-size: inherit;
 }
 
-body {
-  opacity: 0;
-}
 .lock body {
   overflow: hidden;
   touch-action: none;
 }
-.loaded body {
-  opacity: 1;
-  transition: 0.3s ease opacity 0s;
-}
-.loaded body .header {
-  transform: translateY(0%);
-  transition: 0.3s ease transform 0s;
-}
-
 .wrapper {
   min-height: 100%;
   display: flex;
@@ -657,6 +645,23 @@ body::after {
   overflow-y: hidden !important;
 }
 
+.transition-fade {
+  opacity: 1;
+  transition: 0.5s;
+  transform: translateX(0);
+  transform-origin: left;
+}
+
+html.is-animating .transition-fade {
+  opacity: 1;
+  transform: translateX(100%);
+}
+
+html.is-leaving .transition-fade {
+  opacity: 0;
+  transform: translateX(0);
+}
+
 section {
   position: relative;
   z-index: 1;
@@ -929,8 +934,6 @@ img {
   display: flex;
   align-items: center;
   background-color: var(--bgColor);
-  transform: translateY(-100%);
-  transition: 0.3s ease transform 0.3s;
 }
 .header__container {
   width: 100%;

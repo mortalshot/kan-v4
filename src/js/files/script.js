@@ -3,6 +3,12 @@ import { isMobile } from "./functions.js";
 // Подключение списка активных модулей
 import { flsModules } from "./modules.js";
 
+// Подключение swup
+import "../libs/SwupScriptsPlugin.js";
+import "../libs/swup.min.js";
+const swup = new Swup({
+    plugins: [new SwupScriptsPlugin()]
+});
 
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger.js';
@@ -475,13 +481,6 @@ if (slider && !isMobile.any()) {
 gsap.utils.toArray(".anchor-link a").forEach(function (a) {
     a.addEventListener("click", function (e) {
         e.preventDefault();
-        document.querySelectorAll(".anchor-link a").forEach((item) => {
-            item.classList.remove('active')
-        })
-        e.target.classList.add('active')
         locoScroll.scrollTo(e.target.getAttribute("href"))
     });
 });
-
-// Подключение swup
-const swup = new Swup();

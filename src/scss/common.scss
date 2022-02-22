@@ -2,6 +2,23 @@
     overflow-y: hidden !important;
 }
 
+.transition-fade {
+    opacity: 1;
+    transition: 0.5s;
+    transform: translateX(0);
+    transform-origin: left;
+}
+
+html.is-animating .transition-fade {
+    opacity: 1;
+    transform: translateX(100%);
+}
+
+html.is-leaving .transition-fade {
+    opacity: 0;
+    transform: translateX(0);
+}
+
 // Общие стили
 section {
     @include adaptiveValue("padding-top", 100, 50);
