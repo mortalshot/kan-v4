@@ -4,11 +4,9 @@ import { isMobile } from "./functions.js";
 import { flsModules } from "./modules.js";
 
 // Подключение swup
+/* import "../libs/swup.min.js";
 import "../libs/SwupScriptsPlugin.js";
-import "../libs/swup.min.js";
-const swup = new Swup({
-    plugins: [new SwupScriptsPlugin()]
-});
+const swup = new Swup(); */
 
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger.js';
