@@ -4083,7 +4083,7 @@
                     casesSlider.destroy();
                     const caseImage = document.querySelectorAll(".single-case__image");
                     caseImage.forEach((element => {
-                        const elementImage = element.querySelector(".swiper-lazy");
+                        const elementImage = element.querySelector(".single-case__main-image");
                         const elementImageSrc = elementImage.dataset.src;
                         elementImage.src = elementImageSrc;
                     }));
@@ -10313,8 +10313,9 @@ object-assign
         lerp: .01
     });
     locoScroll.on("scroll", ScrollTrigger.update);
-    let mediaQueryMmd3 = window.matchMedia("(min-width: 744px)");
-    window.matchMedia("(max-width: 744px)");
+    let mediaQueryMmd2 = window.matchMedia("(min-width: 991.98px)");
+    let mediaQueryMmd3 = window.matchMedia("(min-width: 743.98px)");
+    window.matchMedia("(max-width: 743.98px)");
     ScrollTrigger.scrollerProxy(".page", {
         scrollTop(value) {
             return arguments.length ? locoScroll.scrollTo(value, 0, 0) : locoScroll.scroll.instance.scroll.y;
@@ -10368,7 +10369,7 @@ object-assign
         });
     }
     if (document.querySelector(".about")) {
-        function handleMmd3Change(e) {
+        function handleMmd2Change(e) {
             if (e.matches) {
                 ScrollTrigger.create({
                     trigger: ".about",
@@ -10398,10 +10399,27 @@ object-assign
                     opacity: 0,
                     y: "70%"
                 }, "-=0.5");
+            } else {
+                const aboutTimeLine = gsapWithCSS.timeline({
+                    scrollTrigger: {
+                        trigger: ".about",
+                        scroller: ".page",
+                        start: "20% bottom",
+                        end: "bottom top"
+                    }
+                });
+                aboutTimeLine.from(".about__image._image-left", {
+                    opacity: 0,
+                    x: "-50%"
+                });
+                aboutTimeLine.from(".about__image._image-right", {
+                    opacity: 0,
+                    x: "100%"
+                });
             }
         }
-        mediaQueryMmd3.addEventListener("change", handleMmd3Change);
-        handleMmd3Change(mediaQueryMmd3);
+        mediaQueryMmd2.addEventListener("change", handleMmd2Change);
+        handleMmd2Change(mediaQueryMmd2);
     }
     const categoriesItems = document.querySelectorAll(".categories__item");
     if (categoriesItems.length > 0) {
@@ -10460,7 +10478,7 @@ object-assign
     }
     const cases = document.querySelector(".cases");
     if (cases) setTimeout((() => {
-        const caseTitles = document.querySelectorAll(".swiper-slide-active .single-case__title");
+        const caseTitles = document.querySelectorAll(".single-case__title");
         caseTitles.forEach((title => {
             ScrollTrigger.create({
                 trigger: title,
@@ -10472,7 +10490,7 @@ object-assign
                 }
             });
         }));
-        const caseLeftJobs = document.querySelectorAll(".swiper-slide-active ._anim-left .single-case__link");
+        const caseLeftJobs = document.querySelectorAll("._anim-left .single-case__link");
         caseLeftJobs.forEach((leftJob => {
             let caseLeftJobsTimeLine = gsapWithCSS.timeline({
                 scrollTrigger: {
@@ -10491,7 +10509,7 @@ object-assign
                 x: "-100%"
             });
         }));
-        const caseRightJobs = document.querySelectorAll(".swiper-slide-active ._anim-right .single-case__link");
+        const caseRightJobs = document.querySelectorAll("._anim-right .single-case__link");
         caseRightJobs.forEach((rightJob => {
             const rightJobImage = rightJob.querySelector(".single-case__image");
             const rightJobCaption = rightJob.querySelector(".single-case__caption");
@@ -10512,7 +10530,7 @@ object-assign
                 x: "100%"
             });
         }));
-        const caseTopJobs = document.querySelectorAll(".swiper-slide-active ._anim-top .single-case__link");
+        const caseTopJobs = document.querySelectorAll("._anim-top .single-case__link");
         caseTopJobs.forEach((topJob => {
             let caseTopJobsTimeLine = gsapWithCSS.timeline({
                 scrollTrigger: {
@@ -10531,7 +10549,7 @@ object-assign
                 y: "100%"
             });
         }));
-        const caseMore = document.querySelectorAll(".swiper-slide-active .single-case__more");
+        const caseMore = document.querySelectorAll(".single-case__more");
         caseMore.forEach((more => {
             let moreTimeLine = gsapWithCSS.timeline({
                 scrollTrigger: {
@@ -10559,7 +10577,7 @@ object-assign
     });
     const features = document.querySelector(".features");
     if (features) {
-        function handleMmd3Change(e) {
+        function handleMmd2Change(e) {
             if (e.matches) {
                 ScrollTrigger.create({
                     trigger: ".features__body",
@@ -10626,8 +10644,8 @@ object-assign
                 }
             });
         }
-        mediaQueryMmd3.addEventListener("change", handleMmd3Change);
-        handleMmd3Change(mediaQueryMmd3);
+        mediaQueryMmd2.addEventListener("change", handleMmd2Change);
+        handleMmd2Change(mediaQueryMmd2);
         const featuresLocatedTimeLine = gsapWithCSS.timeline({
             scrollTrigger: {
                 trigger: ".features__located",
@@ -10733,6 +10751,23 @@ object-assign
         a.addEventListener("click", (function(e) {
             e.preventDefault();
             locoScroll.scrollTo(e.target.getAttribute("href"));
+        }));
+    }));
+    const transitionElement = document.querySelector(".transition-thumb");
+    const links = document.querySelectorAll("a[data-page-link]");
+    setTimeout((() => {
+        transitionElement.classList.remove("_active");
+    }), 500);
+    links.forEach((element => {
+        element.addEventListener("click", (function(e) {
+            e.preventDefault();
+            let target = e.target.href;
+            if (window.location.href != target) {
+                transitionElement.classList.add("_active");
+                setTimeout((() => {
+                    window.location.href = target;
+                }), 500);
+            }
         }));
     }));
     window["FLS"] = true;

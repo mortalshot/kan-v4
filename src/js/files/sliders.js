@@ -120,7 +120,7 @@ function initSliders() {
 
 				const caseImage = document.querySelectorAll('.single-case__image');
 				caseImage.forEach(element => {
-					const elementImage = element.querySelector('.swiper-lazy');
+					const elementImage = element.querySelector('.single-case__main-image');
 					const elementImageSrc = elementImage.dataset.src;
 					elementImage.src = elementImageSrc;
 				});

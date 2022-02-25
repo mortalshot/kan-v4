@@ -1,78 +1,30 @@
 [data-scroll-container] {
     overflow-y: hidden !important;
+    @include adaptiveValue("padding-bottom", 200, 100);
 }
 
-.transition-fade {
-    opacity: 1;
-    transition: 0.5s;
-    transform: translateX(0);
-    transform-origin: left;
-}
-
-html.is-animating .transition-fade {
-    opacity: 1;
-    transform: translateX(100%);
-}
-
-html.is-leaving .transition-fade {
-    opacity: 0;
-    transform: translateX(0);
-}
-
-// .swup-thumb
-/* .swup-thumb {
+.transition-thumb {
+    content: "";
     position: absolute;
-    top: 0;
-    z-index: 1;
-    width: 100%;
-    height: 100vh;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
     border-radius: 50%;
+    background: var(--mainColor);
+    width: 5vw;
+    height: 5vw;
+    opacity: 0;
+    z-index: 55;
+    transition: 0.5s ease-out;
     pointer-events: none;
 
-    &::before {
-        content: "";
-        position: absolute;
-        left: 50%;
-        top: 50%;
-        transform: translate(-50%, -50%);
-        border-radius: 50%;
-        background: var(--mainColor);
-        width: rem(50);
-        height: rem(50);
-        opacity: 0;
-        z-index: 10;
-        transition: 0.5s;
+    &._active {
+        transform: scale(21);
+        opacity: 1;
+        border-radius: 0;
+        pointer-events: all;
     }
-} */
-
-// Анимация перехода по страницам
-/* html {
-    // Анимация конца переключения страницы
-    &.is-animating {
-        .transition-fade {
-            .swup-thumb {
-                &::before {
-                    opacity: 0;
-                    width: rem(50);
-                    height: rem(50);
-                }
-            }
-        }
-    }
-
-    // Анимация начала переключения страницы
-    &.is-leaving {
-        .transition-fade {
-            .swup-thumb {
-                &::before {
-                    opacity: 1;
-                    width: 200vh;
-                    height: 200vh;
-                }
-            }
-        }
-    }
-} */
+}
 
 // Общие стили
 section {
@@ -268,7 +220,7 @@ img {
 
     &._active {
         .marquee__left {
-            animation: marquee-left 20s linear infinite;
+            animation: marquee-left 15s linear infinite;
         }
     }
 

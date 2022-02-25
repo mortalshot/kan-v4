@@ -5,14 +5,14 @@
 	<title>Главная</title>
 	<meta charset="UTF-8">
 	<meta name="format-detection" content="telephone=no">
-	<link rel="stylesheet" href="css/style.min.css?_v=20220222184148">
+	<link rel="stylesheet" href="css/style.min.css?_v=20220225182805">
 	<link rel="shortcut icon" href="favicon.ico">
 	<!-- <meta name="robots" content="noindex, nofollow"> -->
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 
 <body>
-	<div class="wrapper" id="swup">
+	<div class="wrapper transition-link" id="swup">
 		<header class="header">
 			<div class="header__container">
 				<div class="header__menu menu">
@@ -27,11 +27,11 @@
 
 					<nav class="menu__body">
 						<ul class="menu__list">
-							<li class="menu__item"><a href="/home.html" class="menu__link">About</a></li>
-							<li class="menu__item"><a href="/home2.html" class="menu__link">Portfolio</a></li>
-							<li class="menu__item"><a href="" class="menu__link">Services</a></li>
-							<li class="menu__item"><a href="" class="menu__link">Blog</a></li>
-							<li class="menu__item"><a href="" class="menu__link">Contacts</a></li>
+							<li class="menu__item"><a href="home.html" class="menu__link" data-page-link>About</a></li>
+							<li class="menu__item"><a href="home2.html" class="menu__link" data-page-link>Portfolio</a></li>
+							<li class="menu__item"><a href="" class="menu__link" data-page-link>Services</a></li>
+							<li class="menu__item"><a href="" class="menu__link" data-page-link>Blog</a></li>
+							<li class="menu__item"><a href="" class="menu__link" data-page-link>Contacts</a></li>
 						</ul>
 					</nav>
 
@@ -44,7 +44,7 @@
 			</div>
 		</header>
 
-		<div class="swup-thumb"></div>
+		<div class="transition-thumb _active"></div>
 
 		<main class="page" data-scroll-container>
 			<section id="preview" class="preview" data-fullscreen>
@@ -148,7 +148,8 @@
 								<div class="single-case__job _anim-left">
 									<a href="" class="single-case__link">
 										<div class="single-case__image">
-											<picture><source data-srcset="img/home/home-image-3.webp" type="image/webp"><img data-src="img/home/home-image-3.jpg" class="swiper-lazy" alt=""></picture>
+											<img data-src="img/home/home-image-3-2.gif" class="single-case__giff swiper-lazy" alt="">
+											<picture><source data-srcset="img/home/home-image-3.webp" type="image/webp"><img data-src="img/home/home-image-3.jpg" class="single-case__main-image swiper-lazy" alt=""></picture>
 											<div class="swiper-lazy-preloader"></div>
 										</div>
 										<div class="single-case__caption">Cryptocurr<wbr>encies exchange</div>
@@ -172,7 +173,8 @@
 								<div class="single-case__job _anim-right">
 									<a href="" class="single-case__link">
 										<div class="single-case__image">
-											<picture><source data-srcset="img/home/home-image-4.webp" type="image/webp"><img data-src="img/home/home-image-4.jpg" class="swiper-lazy" alt=""></picture>
+											<img data-src="img/home/home-image-3-2.gif" class="single-case__giff swiper-lazy" alt="">
+											<picture><source data-srcset="img/home/home-image-4.webp" type="image/webp"><img data-src="img/home/home-image-4.jpg" class="single-case__main-image swiper-lazy" alt=""></picture>
 											<div class="swiper-lazy-preloader"></div>
 										</div>
 										<div class="single-case__caption">retail light store</div>
@@ -181,7 +183,8 @@
 								<div class="single-case__job _anim-left">
 									<a href="" class="single-case__link">
 										<div class="single-case__image">
-											<picture><source data-srcset="img/home/home-image-5.webp" type="image/webp"><img data-src="img/home/home-image-5.jpg" class="swiper-lazy" alt=""></picture>
+											<img data-src="img/home/home-image-3-2.gif" class="single-case__giff swiper-lazy" alt="">
+											<picture><source data-srcset="img/home/home-image-5.webp" type="image/webp"><img data-src="img/home/home-image-5.jpg" class="single-case__main-image swiper-lazy" alt=""></picture>
 											<div class="swiper-lazy-preloader"></div>
 										</div>
 										<div class="single-case__caption">Sale, purchase, freight of ships worldwide</div>
@@ -190,14 +193,15 @@
 								<div class="single-case__job _anim-top">
 									<a href="" class="single-case__link">
 										<div class="single-case__image">
-											<picture><source data-srcset="img/home/home-image-6.webp" type="image/webp"><img data-src="img/home/home-image-6.jpg" class="swiper-lazy" alt=""></picture>
+											<img data-src="img/home/home-image-3-2.gif" class="single-case__giff swiper-lazy" alt="">
+											<picture><source data-srcset="img/home/home-image-6.webp" type="image/webp"><img data-src="img/home/home-image-6.jpg" class="single-case__main-image swiper-lazy" alt=""></picture>
 											<div class="swiper-lazy-preloader"></div>
 										</div>
 										<div class="single-case__caption">Finance consulting</div>
 									</a>
 								</div>
 
-								<a href="" class="single-case__more link-cirlcle2">MORE</a>
+								<a href="portfolio.html" class="single-case__more link-cirlcle2">MORE</a>
 							</div>
 						</div>
 						<div class="cases__slide swiper-slide single-case single-case_template1">
@@ -205,7 +209,69 @@
 								<div class="single-case__job _anim-left">
 									<a href="" class="single-case__link">
 										<div class="single-case__image">
-											<picture><source data-srcset="img/home/home-image-3.webp" type="image/webp"><img data-src="img/home/home-image-3.jpg" class="swiper-lazy" alt=""></picture>
+											<img data-src="img/home/home-image-3-2.gif" class="single-case__giff swiper-lazy" alt="">
+											<picture><source data-srcset="img/home/home-image-3.webp" type="image/webp"><img data-src="img/home/home-image-3.jpg" class="single-case__main-image swiper-lazy" alt=""></picture>
+											<div class="swiper-lazy-preloader"></div>
+										</div>
+										<div class="single-case__caption">Cryptocurr<wbr>encies exchange</div>
+									</a>
+								</div>
+
+								<h2 class="single-case__title _anim-show">
+									<span>
+										<div>
+											<div>FOR YOUR qweqwe</div>
+										</div>
+										<div>
+											<div><em>attention</em></div>
+										</div>
+										<div>
+											<div>OUR <a href="">CASES</a></div>
+										</div>
+									</span>
+								</h2>
+
+								<div class="single-case__job _anim-right">
+									<a href="" class="single-case__link">
+										<div class="single-case__image">
+											<img data-src="img/home/home-image-3-2.gif" class="single-case__giff swiper-lazy" alt="">
+											<picture><source data-srcset="img/home/home-image-4.webp" type="image/webp"><img data-src="img/home/home-image-4.jpg" class="single-case__main-image swiper-lazy" alt=""></picture>
+											<div class="swiper-lazy-preloader"></div>
+										</div>
+										<div class="single-case__caption">retail light store</div>
+									</a>
+								</div>
+								<div class="single-case__job _anim-left">
+									<a href="" class="single-case__link">
+										<div class="single-case__image">
+											<img data-src="img/home/home-image-3-2.gif" class="single-case__giff swiper-lazy" alt="">
+											<picture><source data-srcset="img/home/home-image-5.webp" type="image/webp"><img data-src="img/home/home-image-5.jpg" class="single-case__main-image swiper-lazy" alt=""></picture>
+											<div class="swiper-lazy-preloader"></div>
+										</div>
+										<div class="single-case__caption">Sale, purchase, freight of ships worldwide</div>
+									</a>
+								</div>
+								<div class="single-case__job _anim-top">
+									<a href="" class="single-case__link">
+										<div class="single-case__image">
+											<img data-src="img/home/home-image-3-2.gif" class="single-case__giff swiper-lazy" alt="">
+											<picture><source data-srcset="img/home/home-image-6.webp" type="image/webp"><img data-src="img/home/home-image-6.jpg" class="single-case__main-image swiper-lazy" alt=""></picture>
+											<div class="swiper-lazy-preloader"></div>
+										</div>
+										<div class="single-case__caption">Finance consulting</div>
+									</a>
+								</div>
+
+								<a href="portfolio.html" class="single-case__more link-cirlcle2">MORE</a>
+							</div>
+						</div>
+						<div class="cases__slide swiper-slide single-case single-case_template1">
+							<div class="single-case__wrapper">
+								<div class="single-case__job _anim-left">
+									<a href="" class="single-case__link">
+										<div class="single-case__image">
+											<img data-src="img/home/home-image-3-2.gif" class="single-case__giff swiper-lazy" alt="">
+											<picture><source data-srcset="img/home/home-image-3.webp" type="image/webp"><img data-src="img/home/home-image-3.jpg" class="single-case__main-image swiper-lazy" alt=""></picture>
 											<div class="swiper-lazy-preloader"></div>
 										</div>
 										<div class="single-case__caption">Cryptocurr<wbr>encies exchange</div>
@@ -229,7 +295,8 @@
 								<div class="single-case__job _anim-right">
 									<a href="" class="single-case__link">
 										<div class="single-case__image">
-											<picture><source data-srcset="img/home/home-image-4.webp" type="image/webp"><img data-src="img/home/home-image-4.jpg" class="swiper-lazy" alt=""></picture>
+											<img data-src="img/home/home-image-3-2.gif" class="single-case__giff swiper-lazy" alt="">
+											<picture><source data-srcset="img/home/home-image-4.webp" type="image/webp"><img data-src="img/home/home-image-4.jpg" class="single-case__main-image swiper-lazy" alt=""></picture>
 											<div class="swiper-lazy-preloader"></div>
 										</div>
 										<div class="single-case__caption">retail light store</div>
@@ -238,7 +305,8 @@
 								<div class="single-case__job _anim-left">
 									<a href="" class="single-case__link">
 										<div class="single-case__image">
-											<picture><source data-srcset="img/home/home-image-5.webp" type="image/webp"><img data-src="img/home/home-image-5.jpg" class="swiper-lazy" alt=""></picture>
+											<img data-src="img/home/home-image-3-2.gif" class="single-case__giff swiper-lazy" alt="">
+											<picture><source data-srcset="img/home/home-image-5.webp" type="image/webp"><img data-src="img/home/home-image-5.jpg" class="single-case__main-image swiper-lazy" alt=""></picture>
 											<div class="swiper-lazy-preloader"></div>
 										</div>
 										<div class="single-case__caption">Sale, purchase, freight of ships worldwide</div>
@@ -247,14 +315,198 @@
 								<div class="single-case__job _anim-top">
 									<a href="" class="single-case__link">
 										<div class="single-case__image">
-											<picture><source data-srcset="img/home/home-image-6.webp" type="image/webp"><img data-src="img/home/home-image-6.jpg" class="swiper-lazy" alt=""></picture>
+											<img data-src="img/home/home-image-3-2.gif" class="single-case__giff swiper-lazy" alt="">
+											<picture><source data-srcset="img/home/home-image-6.webp" type="image/webp"><img data-src="img/home/home-image-6.jpg" class="single-case__main-image swiper-lazy" alt=""></picture>
 											<div class="swiper-lazy-preloader"></div>
 										</div>
 										<div class="single-case__caption">Finance consulting</div>
 									</a>
 								</div>
 
-								<a href="" class="single-case__more link-cirlcle2">MORE</a>
+								<a href="portfolio.html" class="single-case__more link-cirlcle2">MORE</a>
+							</div>
+						</div>
+						<div class="cases__slide swiper-slide single-case single-case_template1">
+							<div class="single-case__wrapper">
+								<div class="single-case__job _anim-left">
+									<a href="" class="single-case__link">
+										<div class="single-case__image">
+											<img data-src="img/home/home-image-3-2.gif" class="single-case__giff swiper-lazy" alt="">
+											<picture><source data-srcset="img/home/home-image-3.webp" type="image/webp"><img data-src="img/home/home-image-3.jpg" class="single-case__main-image swiper-lazy" alt=""></picture>
+											<div class="swiper-lazy-preloader"></div>
+										</div>
+										<div class="single-case__caption">Cryptocurr<wbr>encies exchange</div>
+									</a>
+								</div>
+
+								<h2 class="single-case__title _anim-show">
+									<span>
+										<div>
+											<div>FOR YOUR qweqwe</div>
+										</div>
+										<div>
+											<div><em>attention</em></div>
+										</div>
+										<div>
+											<div>OUR <a href="">CASES</a></div>
+										</div>
+									</span>
+								</h2>
+
+								<div class="single-case__job _anim-right">
+									<a href="" class="single-case__link">
+										<div class="single-case__image">
+											<img data-src="img/home/home-image-3-2.gif" class="single-case__giff swiper-lazy" alt="">
+											<picture><source data-srcset="img/home/home-image-4.webp" type="image/webp"><img data-src="img/home/home-image-4.jpg" class="single-case__main-image swiper-lazy" alt=""></picture>
+											<div class="swiper-lazy-preloader"></div>
+										</div>
+										<div class="single-case__caption">retail light store</div>
+									</a>
+								</div>
+								<div class="single-case__job _anim-left">
+									<a href="" class="single-case__link">
+										<div class="single-case__image">
+											<img data-src="img/home/home-image-3-2.gif" class="single-case__giff swiper-lazy" alt="">
+											<picture><source data-srcset="img/home/home-image-5.webp" type="image/webp"><img data-src="img/home/home-image-5.jpg" class="single-case__main-image swiper-lazy" alt=""></picture>
+											<div class="swiper-lazy-preloader"></div>
+										</div>
+										<div class="single-case__caption">Sale, purchase, freight of ships worldwide</div>
+									</a>
+								</div>
+								<div class="single-case__job _anim-top">
+									<a href="" class="single-case__link">
+										<div class="single-case__image">
+											<img data-src="img/home/home-image-3-2.gif" class="single-case__giff swiper-lazy" alt="">
+											<picture><source data-srcset="img/home/home-image-6.webp" type="image/webp"><img data-src="img/home/home-image-6.jpg" class="single-case__main-image swiper-lazy" alt=""></picture>
+											<div class="swiper-lazy-preloader"></div>
+										</div>
+										<div class="single-case__caption">Finance consulting</div>
+									</a>
+								</div>
+
+								<a href="portfolio.html" class="single-case__more link-cirlcle2">MORE</a>
+							</div>
+						</div>
+						<div class="cases__slide swiper-slide single-case single-case_template1">
+							<div class="single-case__wrapper">
+								<div class="single-case__job _anim-left">
+									<a href="" class="single-case__link">
+										<div class="single-case__image">
+											<img data-src="img/home/home-image-3-2.gif" class="single-case__giff swiper-lazy" alt="">
+											<picture><source data-srcset="img/home/home-image-3.webp" type="image/webp"><img data-src="img/home/home-image-3.jpg" class="single-case__main-image swiper-lazy" alt=""></picture>
+											<div class="swiper-lazy-preloader"></div>
+										</div>
+										<div class="single-case__caption">Cryptocurr<wbr>encies exchange</div>
+									</a>
+								</div>
+
+								<h2 class="single-case__title _anim-show">
+									<span>
+										<div>
+											<div>FOR YOUR</div>
+										</div>
+										<div>
+											<div><em>attention</em></div>
+										</div>
+										<div>
+											<div>OUR <a href="">CASES</a></div>
+										</div>
+									</span>
+								</h2>
+
+								<div class="single-case__job _anim-right">
+									<a href="" class="single-case__link">
+										<div class="single-case__image">
+											<img data-src="img/home/home-image-3-2.gif" class="single-case__giff swiper-lazy" alt="">
+											<picture><source data-srcset="img/home/home-image-4.webp" type="image/webp"><img data-src="img/home/home-image-4.jpg" class="single-case__main-image swiper-lazy" alt=""></picture>
+											<div class="swiper-lazy-preloader"></div>
+										</div>
+										<div class="single-case__caption">retail light store</div>
+									</a>
+								</div>
+								<div class="single-case__job _anim-left">
+									<a href="" class="single-case__link">
+										<div class="single-case__image">
+											<img data-src="img/home/home-image-3-2.gif" class="single-case__giff swiper-lazy" alt="">
+											<picture><source data-srcset="img/home/home-image-5.webp" type="image/webp"><img data-src="img/home/home-image-5.jpg" class="single-case__main-image swiper-lazy" alt=""></picture>
+											<div class="swiper-lazy-preloader"></div>
+										</div>
+										<div class="single-case__caption">Sale, purchase, freight of ships worldwide</div>
+									</a>
+								</div>
+								<div class="single-case__job _anim-top">
+									<a href="" class="single-case__link">
+										<div class="single-case__image">
+											<img data-src="img/home/home-image-3-2.gif" class="single-case__giff swiper-lazy" alt="">
+											<picture><source data-srcset="img/home/home-image-6.webp" type="image/webp"><img data-src="img/home/home-image-6.jpg" class="single-case__main-image swiper-lazy" alt=""></picture>
+											<div class="swiper-lazy-preloader"></div>
+										</div>
+										<div class="single-case__caption">Finance consulting</div>
+									</a>
+								</div>
+
+								<a href="portfolio.html" class="single-case__more link-cirlcle2">MORE</a>
+							</div>
+						</div>
+						<div class="cases__slide swiper-slide single-case single-case_template1">
+							<div class="single-case__wrapper">
+								<div class="single-case__job _anim-left">
+									<a href="" class="single-case__link">
+										<div class="single-case__image">
+											<img data-src="img/home/home-image-3-2.gif" class="single-case__giff swiper-lazy" alt="">
+											<picture><source data-srcset="img/home/home-image-3.webp" type="image/webp"><img data-src="img/home/home-image-3.jpg" class="single-case__main-image swiper-lazy" alt=""></picture>
+											<div class="swiper-lazy-preloader"></div>
+										</div>
+										<div class="single-case__caption">Cryptocurr<wbr>encies exchange</div>
+									</a>
+								</div>
+
+								<h2 class="single-case__title _anim-show">
+									<span>
+										<div>
+											<div>FOR YOUR qweqwe</div>
+										</div>
+										<div>
+											<div><em>attention</em></div>
+										</div>
+										<div>
+											<div>OUR <a href="">CASES</a></div>
+										</div>
+									</span>
+								</h2>
+
+								<div class="single-case__job _anim-right">
+									<a href="" class="single-case__link">
+										<div class="single-case__image">
+											<img data-src="img/home/home-image-3-2.gif" class="single-case__giff swiper-lazy" alt="">
+											<picture><source data-srcset="img/home/home-image-4.webp" type="image/webp"><img data-src="img/home/home-image-4.jpg" class="single-case__main-image swiper-lazy" alt=""></picture>
+											<div class="swiper-lazy-preloader"></div>
+										</div>
+										<div class="single-case__caption">retail light store</div>
+									</a>
+								</div>
+								<div class="single-case__job _anim-left">
+									<a href="" class="single-case__link">
+										<div class="single-case__image">
+											<img data-src="img/home/home-image-3-2.gif" class="single-case__giff swiper-lazy" alt="">
+											<picture><source data-srcset="img/home/home-image-5.webp" type="image/webp"><img data-src="img/home/home-image-5.jpg" class="single-case__main-image swiper-lazy" alt=""></picture>
+											<div class="swiper-lazy-preloader"></div>
+										</div>
+										<div class="single-case__caption">Sale, purchase, freight of ships worldwide</div>
+									</a>
+								</div>
+								<div class="single-case__job _anim-top">
+									<a href="" class="single-case__link">
+										<div class="single-case__image">
+											<img data-src="img/home/home-image-3-2.gif" class="single-case__giff swiper-lazy" alt="">
+											<picture><source data-srcset="img/home/home-image-6.webp" type="image/webp"><img data-src="img/home/home-image-6.jpg" class="single-case__main-image swiper-lazy" alt=""></picture>
+											<div class="swiper-lazy-preloader"></div>
+										</div>
+										<div class="single-case__caption">Finance consulting</div>
+									</a>
+								</div>
+
+								<a href="portfolio.html" class="single-case__more link-cirlcle2">MORE</a>
 							</div>
 						</div>
 					</div>
@@ -336,7 +588,7 @@
 						</div>
 					</div>
 
-					<div class="features__located">
+					<div class="features__located _anim-show">
 						<span>
 							<div>
 								<div>We are <em>located</em> in</div>
@@ -452,7 +704,7 @@
 					<div class="seo__right">
 						<div class="seo__social">
 							<span>
-								<em>Follow us</em> on <a href="">Instagram</a>, <a href="">Twitter</a>, <a href="">Facebook</a>, <a href="">Youtube</a>, read our <a href="">Blog</a> and learn more about <em>our&nbsp;approach</em>
+								<em>Follow us</em> on <a href="">Inst</a>, <a href="">Twitter</a>, <a href="">Fb</a>, <a href="">Youtube</a>, read our <a href="">Blog</a> and learn more about <em>our&nbsp;approach</em>
 							</span>
 						</div>
 						<div class="seo__contacts">
@@ -464,18 +716,6 @@
 					</div>
 				</div>
 			</section>
-
-			<br>
-			<br>
-			<br>
-			<br>
-			<br>
-			<br>
-			<br>
-			<br>
-			<br>
-			<br>
-			<br>
 		</main>
 		<footer class="footer">
 			<div class="footer__container">
@@ -536,7 +776,7 @@
 			</div>
 		</div>
 	</div>
-	<script src="js/app.min.js?_v=20220222184148"></script>
+	<script src="js/app.min.js?_v=20220225182805"></script>
 </body>
 
 </html>

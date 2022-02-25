@@ -18,8 +18,9 @@ const locoScroll = new LocomotiveScroll({
 // each time Locomotive Scroll updates, tell ScrollTrigger to update too (sync positioning)
 locoScroll.on("scroll", ScrollTrigger.update);
 
-let mediaQueryMmd3 = window.matchMedia('(min-width: 744px)');
-let mediaQueryMd3 = window.matchMedia('(max-width: 744px)');
+let mediaQueryMmd2 = window.matchMedia('(min-width: 991.98px)');
+let mediaQueryMmd3 = window.matchMedia('(min-width: 743.98px)');
+let mediaQueryMd3 = window.matchMedia('(max-width: 743.98px)');
 
 ScrollTrigger.scrollerProxy(".page", {
     scrollTop(value) {
@@ -60,7 +61,7 @@ if (document.querySelector('.preview')) {
 
 // Анимация секции about
 if (document.querySelector('.about')) {
-    function handleMmd3Change(e) {
+    function handleMmd2Change(e) {
         if (e.matches) {
             ScrollTrigger.create({
                 trigger: ".about",
@@ -86,9 +87,23 @@ if (document.querySelector('.about')) {
             aboutTimeLine.from(".about__image._image-left", { opacity: 0, y: "-10%" }, "-=0.4")
             aboutTimeLine.from(".about__image._image-right", { opacity: 0, y: "70%" }, "-=0.5")
         }
+        else {
+            const aboutTimeLine = gsap.timeline({
+                scrollTrigger: {
+                    trigger: ".about",
+                    scroller: ".page",
+                    start: "20% bottom",
+                    end: "bottom top",
+                    // markers: true,
+                }
+            })
+
+            aboutTimeLine.from(".about__image._image-left", { opacity: 0, x: "-50%" })
+            aboutTimeLine.from(".about__image._image-right", { opacity: 0, x: "100%" })
+        }
     }
-    mediaQueryMmd3.addEventListener('change', handleMmd3Change);
-    handleMmd3Change(mediaQueryMmd3);
+    mediaQueryMmd2.addEventListener('change', handleMmd2Change);
+    handleMmd2Change(mediaQueryMmd2);
 }
 
 // Печатаем текст категорий при скролле только один раз на десктопе
@@ -166,7 +181,7 @@ if (categoriesItems.length > 0) {
 const cases = document.querySelector('.cases');
 if (cases) {
     setTimeout(() => {
-        const caseTitles = document.querySelectorAll('.swiper-slide-active .single-case__title');
+        const caseTitles = document.querySelectorAll('.single-case__title');
         caseTitles.forEach(title => {
             ScrollTrigger.create({
                 trigger: title,
@@ -179,7 +194,7 @@ if (cases) {
             });
         });
 
-        const caseLeftJobs = document.querySelectorAll('.swiper-slide-active ._anim-left .single-case__link');
+        const caseLeftJobs = document.querySelectorAll('._anim-left .single-case__link');
         caseLeftJobs.forEach(leftJob => {
             let caseLeftJobsTimeLine = gsap.timeline({
                 scrollTrigger: {
@@ -193,7 +208,7 @@ if (cases) {
             caseLeftJobsTimeLine.from(leftJob.querySelector('.single-case__caption'), { opacity: 0, x: "-100%" });
         });
 
-        const caseRightJobs = document.querySelectorAll('.swiper-slide-active ._anim-right .single-case__link');
+        const caseRightJobs = document.querySelectorAll('._anim-right .single-case__link');
         caseRightJobs.forEach(rightJob => {
             const rightJobImage = rightJob.querySelector('.single-case__image');
             const rightJobCaption = rightJob.querySelector('.single-case__caption');
@@ -211,7 +226,7 @@ if (cases) {
             caseRightJobsTimeLine.from(rightJobCaption, { opacity: 0, x: "100%" });
         });
 
-        const caseTopJobs = document.querySelectorAll('.swiper-slide-active ._anim-top .single-case__link');
+        const caseTopJobs = document.querySelectorAll('._anim-top .single-case__link');
         caseTopJobs.forEach(topJob => {
             let caseTopJobsTimeLine = gsap.timeline({
                 scrollTrigger: {
@@ -226,7 +241,7 @@ if (cases) {
             caseTopJobsTimeLine.from(topJob.querySelector('.single-case__caption'), { opacity: 0, y: "100%" });
         });
 
-        const caseMore = document.querySelectorAll('.swiper-slide-active .single-case__more');
+        const caseMore = document.querySelectorAll('.single-case__more');
         caseMore.forEach(more => {
             let moreTimeLine = gsap.timeline({
                 scrollTrigger: {
@@ -258,7 +273,7 @@ if (marquee) {
 // Анимация секции features
 const features = document.querySelector('.features');
 if (features) {
-    function handleMmd3Change(e) {
+    function handleMmd2Change(e) {
         if (e.matches) {
             // Анимация для body
             ScrollTrigger.create({
@@ -324,8 +339,8 @@ if (features) {
             })
         }
     }
-    mediaQueryMmd3.addEventListener('change', handleMmd3Change);
-    handleMmd3Change(mediaQueryMmd3);
+    mediaQueryMmd2.addEventListener('change', handleMmd2Change);
+    handleMmd2Change(mediaQueryMmd2);
 
     // Анимация для features__located
     const featuresLocatedTimeLine = gsap.timeline({
@@ -479,9 +494,24 @@ gsap.utils.toArray(".anchor-link a").forEach(function (a) {
     });
 });
 
-/* // Подключение swup
-import "../libs/swup.min.js";
-import "../libs/SwupScriptsPlugin.js";
-const swup = new Swup({
-    plugins: [new SwupScriptsPlugin()]
-}); */
+const transitionElement = document.querySelector('.transition-thumb');
+const links = document.querySelectorAll('a[data-page-link]');
+
+setTimeout(() => {
+    transitionElement.classList.remove('_active');
+}, 500);
+
+links.forEach(element => {
+    element.addEventListener('click', function (e) {
+        e.preventDefault();
+        let target = e.target.href;
+
+        if (window.location.href != target) {
+            transitionElement.classList.add('_active');
+
+            setTimeout(() => {
+                window.location.href = target;
+            }, 500);
+        }
+    })
+});
