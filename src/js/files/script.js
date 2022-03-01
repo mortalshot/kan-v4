@@ -33,6 +33,7 @@ ScrollTrigger.scrollerProxy(".page", {
     pinType: document.querySelector(".page").style.transform ? "transform" : "fixed"
 });
 
+// !Главная страница
 // Анимация home preview
 if (document.querySelector('.preview')) {
     const previewTimeLine = gsap.timeline({
@@ -341,11 +342,14 @@ if (features) {
     }
     mediaQueryMmd2.addEventListener('change', handleMmd2Change);
     handleMmd2Change(mediaQueryMmd2);
+}
 
+const featuresLocated = document.querySelector('.features__located');
+if (featuresLocated) {
     // Анимация для features__located
     const featuresLocatedTimeLine = gsap.timeline({
         scrollTrigger: {
-            trigger: ".features__located",
+            trigger: featuresLocated,
             scroller: ".page",
             start: "top center",
             end: "bottom top",
@@ -353,9 +357,8 @@ if (features) {
         }
     })
 
-    // featuresLocatedTimeLine.from(".features__located", { y: "-100%" });
     featuresLocatedTimeLine.add(function () {
-        document.querySelector('.features__located').classList.add('_active');
+        featuresLocated.classList.add('_active');
     });
     featuresLocatedTimeLine.from(".features__located .link-circle", { opacity: 0, rotate: -180, scale: 0.5, delay: 0.5 });
 }
@@ -376,10 +379,10 @@ if (featuresMore) {
 }
 
 // Смена цветовой темы при достижении секции #features__located
-const featuresLocated = document.querySelector('.features__located');
-if (featuresLocated) {
+const bgColorChangeTarget = document.querySelector('.home .features__located');
+if (bgColorChangeTarget) {
     ScrollTrigger.create({
-        trigger: ".features__located",
+        trigger: ".home .features__located",
         scroller: ".page",
         start: "bottom center",
         end: "bottom top",
@@ -400,6 +403,87 @@ if (featuresLocated) {
     });
 }
 
+// !Архивная страница
+// Анимация для категорий
+const taxonomyCategories = document.querySelectorAll('.portfolio-archive__categories ul');
+if (taxonomyCategories.length > 0) {
+    taxonomyCategories.forEach(category => {
+        ScrollTrigger.create({
+            trigger: category,
+            scroller: ".page",
+            start: "-90px bottom",
+            end: "bottom top",
+            // markers: true,
+
+            onEnter: function () {
+                category.classList.add('_show');
+            },
+        });
+    });
+}
+
+const archivePortfolioItems = document.querySelectorAll('.portfolio-archive__item');
+if (archivePortfolioItems.length > 0) {
+    let j = 0;
+    archivePortfolioItems.forEach(element => {
+        if (j % 2 == 0) {
+            let elementRightTimeLine = gsap.timeline({
+                scrollTrigger: {
+                    trigger: element,
+                    scroller: ".page",
+                    start: "-90px 60%",
+                    end: "bottom top",
+                    // markers: true,
+                }
+            });
+            elementRightTimeLine.from(element.querySelector('.single-case__image'), { opacity: 0, x: "100%" });
+            elementRightTimeLine.from(element.querySelector('.single-case__caption'), { opacity: 0, x: "100%" });
+        }
+        else {
+            let elementLeftTimeLine = gsap.timeline({
+                scrollTrigger: {
+                    trigger: element,
+                    scroller: ".page",
+                    start: "-90px 60%",
+                    end: "bottom top",
+                    // markers: true,
+                }
+            });
+            elementLeftTimeLine.from(element.querySelector('.single-case__image'), { opacity: 0, x: "-100%" });
+            elementLeftTimeLine.from(element.querySelector('.single-case__caption'), { opacity: 0, x: "-100%" });
+        }
+        j++;
+    });
+}
+
+// !Страница услуг
+const services = document.querySelector('.services');
+if (services) {
+    let servicesTimeLine = gsap.timeline({
+        scrollTrigger: {
+            trigger: ".services",
+            scroller: ".page",
+            start: "-90px bottom",
+            end: "bottom top",
+            // markers: true,
+        }
+    })
+
+    servicesTimeLine.to(".services__title", {
+        onComplete: function () {
+            document.querySelector('.services__title').classList.add('_active');
+        },
+    });
+
+    const servicesItems = document.querySelectorAll('.spollers__item');
+    servicesItems.forEach(element => {
+        servicesTimeLine.to(element, {
+            onComplete: function () {
+                element.classList.add('_active');
+            },
+        });
+    });
+}
 // each time the window updates, we should refresh ScrollTrigger and then update LocomotiveScroll. 
 ScrollTrigger.addEventListener("refresh", () => locoScroll.update());
 
@@ -427,7 +511,6 @@ if (input.length > 0) {
         });
     });
 }
-
 
 // Получение значение стиля transform
 function getMatrix(element) {
@@ -494,6 +577,7 @@ gsap.utils.toArray(".anchor-link a").forEach(function (a) {
     });
 });
 
+// Анимация перехода по страницам
 const transitionElement = document.querySelector('.transition-thumb');
 const links = document.querySelectorAll('a[data-page-link]');
 

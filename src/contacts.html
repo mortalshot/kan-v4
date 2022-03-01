@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="ru" class="dark">
+@@include('html/_head.htm',{
+"title":"Contacts"
+})
+
+<body>
+	<div class="wrapper transition-link" id="swup">
+		@@include('html/_header.htm',{})
+		<main class="page" data-scroll-container>
+            <section class="contacts">
+                <div class="contacts__container">
+                    <div class="contacts__located features__located _anim-show">
+						<span>
+							<div><div>We are <em>located</em> in</div></div>
+							<div><div><a href="">London</a>,<a href="">Warsaw</a>,</div></div>
+							<div><div><a href="">Vienn</a>,<a href="">Mexico</a>,</div></div>
+							<div><div><a href="">St.Perersburg</a>,</div></div>
+							<div><div><a href="">Kiev</a> and <a href="">Wroclaw</a></div></div>
+						</span>
+						<button type="button" class="_icon-link link-circle"></button>
+					</div>
+                    <h1 class="contacts__title _section-title">Contacts</h1>
+                    <div class="contacts__text">
+                        <div class="_content">
+                            <p>             Our agency is equipped with all the necessary specialists to launch your business from idea to combat mode. And at peak loads, it can be increased to a staff of 20-25 specialists.</p>
+                        </div>
+                    </div>
+                    <div class="contacts__contacts seo__contacts">
+                        <a href="mailto:info@thekan.agency" class="seo__link">info@thekan.agency</a>
+                        <a href="" class="seo__app-link _icon-telegram"></a>
+                        <div class="seo__app-separator"></div>
+                        <a href="" class="seo__app-link _icon-whatsapp"></a>
+                    </div>
+                    <div class="contacts__social social">
+						<div class="social__item">
+							<a href="">Twitter</a>
+						</div>
+						<span class="social__separator">/</span>
+						<div class="social__item">
+							<a href="">Facebook</a>
+						</div>
+						<span class="social__separator">/</span>
+						<div class="social__item">
+							<a href="">Instagram</a>
+						</div>
+						<span class="social__separator">/</span>
+						<div class="social__item">
+							<a href="">Behance</a>
+						</div>
+						<span class="social__separator">/</span>
+						<div class="social__item">
+							<a href="">Youtube</a>
+						</div>
+					</div>
+                </div>
+            </section>
+		</main>
+		@@include('html/_footer.htm',{})
+	</div>
+	@@include('html/_popup.htm',{})
+	@@include('html/_js.htm',{})
+</body>
+
+</html>

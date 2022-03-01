@@ -1,0 +1,129 @@
+.contacts {
+    @include adaptiveValue("padding-top", 144, 25);
+    padding-bottom: 0;
+
+    // .contacts__container
+    &__container {
+        max-width: rem(1152);
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-template-areas:
+            "title"
+            "located"
+            "text"
+            "contacts"
+            "social";
+
+        @media (min-width: $tablet) {
+            grid-template-columns: 1fr percent(333, 1152);
+            grid-template-areas:
+                "located title"
+                "text text"
+                "contacts contacts"
+                "social social";
+        }
+    }
+
+    // .contacts__located
+    &__located {
+        grid-area: located;
+
+        @media (min-width: $mobile) {
+            margin: 0 !important;
+        }
+    }
+
+    // .contacts__title
+    &__title {
+        grid-area: title;
+
+        @media (min-width: $tablet) {
+            margin-top: rem(37);
+        }
+        @media (max-width: $tablet) {
+            text-align: left;
+            margin-bottom: rem(37);
+        }
+        @media (max-width: $mobile) {
+            display: none;
+        }
+    }
+
+    // .contacts__text
+    &__text {
+        grid-area: text;
+        margin-top: rem(184);
+
+        @media (min-width: $pc) {
+            margin-top: rem(-65);
+        }
+        @media (max-width: $tablet) {
+            margin-bottom: rem(120);
+        }
+
+        ._content {
+            border-top: 1px solid var(--DGrey);
+            font-size: rem(20);
+            line-height: math.div(26, 20);
+            padding-top: rem(65);
+            @extend %firstletter;
+
+            @media (min-width: $mobile) {
+                max-width: rem(333);
+                margin-left: auto;
+            }
+
+            p {
+                font-size: inherit;
+            }
+        }
+    }
+
+    // .contacts__contacts
+    &__contacts {
+        grid-area: contacts;
+
+        @media (min-width: $mobile) {
+            margin-top: rem(25);
+            flex-direction: row-reverse;
+            justify-content: flex-end;
+
+            // .seo__app-separator
+            .seo__app-separator {
+                margin-right: rem(40);
+                margin-left: rem(40);
+            }
+        }
+    }
+
+    .seo {
+        // .seo__link
+        &__link {
+            font-weight: 300;
+            @include adaptiveValue("font-size", 28, 20);
+            line-height: 1;
+
+            @media (min-width: $mobile) {
+                margin-left: rem(25);
+            }
+        }
+    }
+
+    // .contacts__social
+    &__social {
+        display: none;
+
+        @media (min-width: $mobile) {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            grid-area: social;
+            font-size: rem(14);
+            gap: rem(28);
+
+            &:not(:first-child) {
+                margin-top: rem(180);
+            }
+        }
+    }
+}

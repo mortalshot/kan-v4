@@ -4062,6 +4062,7 @@
                 autoHeight: false,
                 speed: 800,
                 watchOverflow: true,
+                loop: true,
                 preloadImages: true,
                 lazy: {
                     loanOnTransitionStart: true,
@@ -10646,16 +10647,19 @@ object-assign
         }
         mediaQueryMmd2.addEventListener("change", handleMmd2Change);
         handleMmd2Change(mediaQueryMmd2);
+    }
+    const featuresLocated = document.querySelector(".features__located");
+    if (featuresLocated) {
         const featuresLocatedTimeLine = gsapWithCSS.timeline({
             scrollTrigger: {
-                trigger: ".features__located",
+                trigger: featuresLocated,
                 scroller: ".page",
                 start: "top center",
                 end: "bottom top"
             }
         });
         featuresLocatedTimeLine.add((function() {
-            document.querySelector(".features__located").classList.add("_active");
+            featuresLocated.classList.add("_active");
         }));
         featuresLocatedTimeLine.from(".features__located .link-circle", {
             opacity: 0,
@@ -10674,9 +10678,9 @@ object-assign
             featuresMore.classList.toggle("_action");
         }
     });
-    const featuresLocated = document.querySelector(".features__located");
-    if (featuresLocated) ScrollTrigger.create({
-        trigger: ".features__located",
+    const bgColorChangeTarget = document.querySelector(".home .features__located");
+    if (bgColorChangeTarget) ScrollTrigger.create({
+        trigger: ".home .features__located",
         scroller: ".page",
         start: "bottom center",
         end: "bottom top",
@@ -10689,6 +10693,84 @@ object-assign
             document.documentElement.classList.remove("light");
         }
     });
+    const taxonomyCategories = document.querySelectorAll(".portfolio-archive__categories ul");
+    if (taxonomyCategories.length > 0) taxonomyCategories.forEach((category => {
+        ScrollTrigger.create({
+            trigger: category,
+            scroller: ".page",
+            start: "-90px bottom",
+            end: "bottom top",
+            onEnter: function() {
+                category.classList.add("_show");
+            }
+        });
+    }));
+    const archivePortfolioItems = document.querySelectorAll(".portfolio-archive__item");
+    if (archivePortfolioItems.length > 0) {
+        let j = 0;
+        archivePortfolioItems.forEach((element => {
+            if (j % 2 == 0) {
+                let elementRightTimeLine = gsapWithCSS.timeline({
+                    scrollTrigger: {
+                        trigger: element,
+                        scroller: ".page",
+                        start: "-90px 60%",
+                        end: "bottom top"
+                    }
+                });
+                elementRightTimeLine.from(element.querySelector(".single-case__image"), {
+                    opacity: 0,
+                    x: "100%"
+                });
+                elementRightTimeLine.from(element.querySelector(".single-case__caption"), {
+                    opacity: 0,
+                    x: "100%"
+                });
+            } else {
+                let elementLeftTimeLine = gsapWithCSS.timeline({
+                    scrollTrigger: {
+                        trigger: element,
+                        scroller: ".page",
+                        start: "-90px 60%",
+                        end: "bottom top"
+                    }
+                });
+                elementLeftTimeLine.from(element.querySelector(".single-case__image"), {
+                    opacity: 0,
+                    x: "-100%"
+                });
+                elementLeftTimeLine.from(element.querySelector(".single-case__caption"), {
+                    opacity: 0,
+                    x: "-100%"
+                });
+            }
+            j++;
+        }));
+    }
+    const services = document.querySelector(".services");
+    if (services) {
+        let servicesTimeLine = gsapWithCSS.timeline({
+            scrollTrigger: {
+                trigger: ".services",
+                scroller: ".page",
+                start: "-90px bottom",
+                end: "bottom top"
+            }
+        });
+        servicesTimeLine.to(".services__title", {
+            onComplete: function() {
+                document.querySelector(".services__title").classList.add("_active");
+            }
+        });
+        const servicesItems = document.querySelectorAll(".spollers__item");
+        servicesItems.forEach((element => {
+            servicesTimeLine.to(element, {
+                onComplete: function() {
+                    element.classList.add("_active");
+                }
+            });
+        }));
+    }
     ScrollTrigger.addEventListener("refresh", (() => locoScroll.update()));
     ScrollTrigger.refresh();
     let input = document.querySelectorAll(".input");

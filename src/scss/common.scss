@@ -124,6 +124,14 @@ section {
     font-size: rem(22);
     line-height: math.div(26, 22);
     text-transform: uppercase;
+    transition: $transition ease color, $transition background-color 0s;
+
+    @media (any-hover: hover) {
+        &:hover {
+            background-color: var(--mainColor);
+            color: var(--bgColor);
+        }
+    }
 }
 
 em {

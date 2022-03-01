@@ -119,4 +119,7 @@ body {
 @import "footer";
 
 // Подключение стилей отдельных страниц
-@import "home";
+@import "pages/home";
+@import "pages/portfolio";
+@import "pages/contacts";
+@import "pages/services";

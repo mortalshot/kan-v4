@@ -170,3 +170,14 @@
 		text-decoration: underline var(--mainColor) from-font;
 	}
 }
+%hoverUnderlineTransparent {
+	text-decoration: underline transparent from-font;
+	text-underline-offset: 3px;
+	transition: $transition ease text-decoration 0s;
+
+	@media (any-hover: hover) {
+		&:hover {
+			text-decoration: underline var(--mainColor) from-font;
+		}
+	}
+}

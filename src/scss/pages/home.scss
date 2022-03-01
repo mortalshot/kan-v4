@@ -636,6 +636,11 @@
                     }
                 }
 
+                // .single-case__giff
+                .single-case__giff {
+                    opacity: 1;
+                }
+
                 // .single-case__main-image
                 .single-case__main-image {
                     opacity: 0;
@@ -889,7 +894,6 @@
         font-size: rem(20);
         line-height: math.div(28, 20);
         @include adaptiveValue("padding-bottom", 64, 40);
-        padding-bottom: rem(64);
         border-bottom: 1px solid var(--DGrey);
         @extend %firstletter;
         @include adaptiveValue("margin-right", 36, 0, 1528, 1400, 1);
