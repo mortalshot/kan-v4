@@ -1,0 +1,193 @@
+.blog {
+    // .blog__container
+    &__container {
+    }
+
+    // .blog__heading
+    &__heading {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        column-gap: rem(40);
+        row-gap: rem(32);
+
+        &:not(:last-child) {
+            margin-bottom: rem(140);
+        }
+    }
+
+    // .blog__title
+    &__title {
+        font-weight: 300;
+        font-size: rem(100);
+        line-height: math.div(120, 100);
+    }
+
+    // .blog__categories
+    &__categories {
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: rem(16) rem(58);
+
+        ._active {
+            a {
+                font-family: LibreCaslonText;
+                color: var(--DGrey);
+            }
+        }
+
+        a {
+            display: block;
+            font-size: rem(20);
+            line-height: math.div(28, 20);
+            padding: rem(5);
+            margin: rem(-5);
+            transition: $transition ease color 0s;
+
+            @media (any-hover: hover) {
+                &:hover {
+                    color: var(--DGrey);
+                }
+            }
+        }
+    }
+
+    // .blog__items
+    &__items {
+        display: grid;
+        row-gap: rem(170);
+
+        &:not(:last-child) {
+            margin-bottom: rem(220);
+        }
+    }
+
+    // .blog__item
+    &__item {
+        &:nth-child(2n) {
+            // margin-left: calc(1192px - 98px * ((332 / 1192) * 100));
+            margin-left: rem(430);
+        }
+    }
+
+    // .blog__pagination
+    &__pagination {
+    }
+}
+
+.blog-card {
+    // .blog-card__wrapper
+    &__wrapper {
+        display: grid;
+        grid-template-columns: rem(332) 1fr;
+        column-gap: rem(98);
+    }
+
+    // .blog-card__image
+    &__image {
+        width: 100%;
+        position: relative;
+        padding-bottom: percent(275, 332);
+        transition: $transition ease opacity 0s;
+
+        @media (any-hover: hover) {
+            &:hover {
+                opacity: 0.7;
+            }
+        }
+
+        img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+    }
+
+    // .blog-card__body
+    &__body {
+        display: grid;
+        row-gap: rem(18);
+        max-width: rem(330);
+    }
+
+    // .blog-card__name
+    &__name {
+        display: block;
+        font-weight: 700;
+        font-size: rem(30);
+        line-height: math.div(42, 30);
+        text-decoration: underline transparent from-font;
+        text-underline-offset: 3px;
+        transition: $transition ease text-decoration 0s;
+
+        @media (any-hover: hover) {
+            &:hover {
+                text-decoration: underline var(--mainColor) from-font;
+            }
+        }
+    }
+
+    // .blog-card__excerpt
+    &__excerpt {
+    }
+
+    // .blog-card__tags
+    &__tags {
+        display: flex;
+        flex-wrap: wrap;
+        column-gap: rem(14);
+
+        a {
+            font-size: rem(14);
+            line-height: math.div(20, 14);
+            text-decoration: underline transparent from-font;
+            text-underline-offset: 3px;
+            transition: $transition ease text-decoration 0s;
+
+            @media (any-hover: hover) {
+                &:hover {
+                    text-decoration: underline var(--mainColor) from-font;
+                }
+            }
+        }
+    }
+}
+
+.pagination {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    ul {
+        display: flex;
+        column-gap: rem(50);
+    }
+
+    .page-numbers {
+        display: flex;
+        font-weight: 300;
+        font-size: rem(30);
+        line-height: 1;
+        padding: rem(5) rem(10);
+        margin: rem(-5) rem(-10);
+
+        &.prev {
+            transform: rotate(180deg);
+        }
+    }
+
+    a.page-numbers {
+        @media (any-hover: hover) {
+            transition: $transition ease opacity 0s;
+
+            &:hover {
+                opacity: 0.6;
+            }
+        }
+    }
+}

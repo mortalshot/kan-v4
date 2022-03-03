@@ -14,7 +14,7 @@
             "contacts"
             "social";
 
-        @media (min-width: $tablet) {
+        @media (min-width: $pc) {
             grid-template-columns: 1fr percent(333, 1152);
             grid-template-areas:
                 "located title"
@@ -22,14 +22,18 @@
                 "contacts contacts"
                 "social social";
         }
+        @media (max-width: $pc) {
+            max-width: rem(562);
+        }
     }
 
     // .contacts__located
     &__located {
         grid-area: located;
 
-        @media (min-width: $mobile) {
-            margin: 0 !important;
+        @media (min-width: $pc) {
+            margin-left: auto;
+            margin-right: auto;
         }
     }
 
@@ -37,14 +41,10 @@
     &__title {
         grid-area: title;
 
-        @media (min-width: $tablet) {
+        @media (min-width: $pc) {
             margin-top: rem(37);
         }
-        @media (max-width: $tablet) {
-            text-align: left;
-            margin-bottom: rem(37);
-        }
-        @media (max-width: $mobile) {
+        @media (max-width: $pc) {
             display: none;
         }
     }
@@ -57,7 +57,7 @@
         @media (min-width: $pc) {
             margin-top: rem(-65);
         }
-        @media (max-width: $tablet) {
+        @media (max-width:$pc){
             margin-bottom: rem(120);
         }
 
@@ -68,7 +68,7 @@
             padding-top: rem(65);
             @extend %firstletter;
 
-            @media (min-width: $mobile) {
+            @media (min-width:$pc){
                 max-width: rem(333);
                 margin-left: auto;
             }

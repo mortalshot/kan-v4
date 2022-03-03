@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="ru" class="light">
+@@include('html/_head.htm',{
+"title":"Blog"
+})
+
+<body>
+    <div class="wrapper transition-link" id="swup">
+        @@include('html/_header.htm',{})
+        <main class="page" data-scroll-container>
+            <section class="blog">
+                <div class="blog__container">
+                    <div class="blog__heading">
+                        <h1 class="blog__title">Blog</h1>
+
+                        <ul class="blog__categories">
+                            <li class="_active"><a href="">All</a></li>
+                            <li><a href="">Design</a></li>
+                            <li><a href="">SEO</a></li>
+                            <li><a href="">Lessons</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="blog__items">
+                        <article class="blog__item blog-card">
+                            <div class="blog-card__wrapper">
+                                <a href="" class="blog-card__image"><img src="img/blog/blog-1-1.jpg" alt="" loading="lazy"></a>
+
+                                <div class="blog-card__body">
+                                    <a href="" class="blog-card__name">Creative Photo Manipulations by Flora Borsi</a>
+                                    <div class="blog-card__excerpt _content">
+                                        <p>Impressive new photographic creations by Hungarian artist and photographer Flora Borsi (previously).</p>
+                                    </div>
+                                    <ul class="blog-card__tags">
+                                        <li><a href="">#design</a></li>
+                                        <li><a href="">#illustrations</a></li>
+                                        <li><a href="">#pixelart</a></li>
+                                        <li><a href="">#hatayosi</a></li>
+                                        <li><a href="">#japandesign</a></li>
+                                        <li><a href="">#japan</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </article>
+                        <article class="blog__item blog-card">
+                            <div class="blog-card__wrapper">
+                                <a href="" class="blog-card__image"><img src="img/blog/blog-2-1.jpg" alt="" loading="lazy"></a>
+
+                                <div class="blog-card__body">
+                                    <a href="" class="blog-card__name">Pixel Art Portraits by Hatayosi</a>
+                                    <div class="blog-card__excerpt _content">
+                                        <p>Japanese artist Hatayosi creates awesome 8-bit style celebrity caricatures using Windows Paint.</p>
+                                    </div>
+                                    <ul class="blog-card__tags">
+                                        <li><a href="">#design</a></li>
+                                        <li><a href="">#illustrations</a></li>
+                                        <li><a href="">#pixelart</a></li>
+                                        <li><a href="">#hatayosi</a></li>
+                                        <li><a href="">#japandesign</a></li>
+                                        <li><a href="">#japan</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </article>
+                        <article class="blog__item blog-card">
+                            <div class="blog-card__wrapper">
+                                <a href="" class="blog-card__image"><img src="img/blog/blog-3-1.jpg" alt="" loading="lazy"></a>
+
+                                <div class="blog-card__body">
+                                    <a href="" class="blog-card__name">Collage Artworks by Akemi Kodama</a>
+                                    <div class="blog-card__excerpt _content">
+                                        <p>Japanese artist Akemi Kodama combines different materials and techniques to create abstract collage artworks.</p>
+                                    </div>
+                                    <ul class="blog-card__tags">
+                                        <li><a href="">#design</a></li>
+                                        <li><a href="">#illustrations</a></li>
+                                        <li><a href="">#pixelart</a></li>
+                                        <li><a href="">#hatayosi</a></li>
+                                        <li><a href="">#japandesign</a></li>
+                                        <li><a href="">#japan</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </article>
+                    </div>
+
+                    <nav class="blog__pagination pagination">
+                        <ul>
+                            <span aria-current="page" class="page-numbers current">1</span>
+                            <a class="page-numbers" href="https://armadainvest.ru/news/page/2/">2</a>
+                            <span class="page-numbers dots">…</span>
+                            <a class="page-numbers" href="https://armadainvest.ru/news/page/34/">34</a>
+                        </ul>
+
+                        <ul>
+                            <a class="prev page-numbers _icon-link5" href="https://armadainvest.ru/news/page/2/"></a>
+                            <a class="next page-numbers _icon-link5" href="https://armadainvest.ru/news/page/2/"></a>
+                        </ul>
+                    </nav>
+                </div>
+            </section>
+
+            @@include('html/_marquee.htm',{})
+
+            @@include('html/_seo.htm',{})
+        </main>
+        @@include('html/_footer.htm',{})
+    </div>
+    @@include('html/_popup.htm',{})
+    @@include('html/_js.htm',{})
+</body>
+
+</html>

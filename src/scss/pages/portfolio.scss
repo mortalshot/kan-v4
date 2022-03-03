@@ -188,5 +188,10 @@
                 @include adaptiveValue("max-width", 280, 240, 1024, 744, 1);
             }
         }
+
+        // .single-case__caption
+        .single-case__caption {
+            color: var(--mainColor);
+        }
     }
 }
