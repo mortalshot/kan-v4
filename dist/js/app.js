@@ -218,7 +218,7 @@
                         spollerTitle.classList.toggle("_spoller-active");
                         _slideToggle(spollerTitle.nextElementSibling, spollerSpeed);
                     }
-                    e.preventDefault();
+                    if (!el.classList.contains("services__link")) e.preventDefault();
                 }
             }
             function hideSpollersBody(spollersBlock) {
@@ -4062,7 +4062,6 @@
                 autoHeight: false,
                 speed: 800,
                 watchOverflow: true,
-                loop: true,
                 preloadImages: true,
                 lazy: {
                     loanOnTransitionStart: true,
@@ -10309,15 +10308,15 @@ object-assign
     const locomotive_scroll_esm = Smooth;
     gsapWithCSS.registerPlugin(ScrollTrigger);
     const locoScroll = new locomotive_scroll_esm({
-        el: document.querySelector(".page"),
+        el: document.querySelector("main.page"),
         smooth: true,
-        lerp: .01
+        lerp: .015
     });
     locoScroll.on("scroll", ScrollTrigger.update);
     let mediaQueryMmd2 = window.matchMedia("(min-width: 991.98px)");
     let mediaQueryMmd3 = window.matchMedia("(min-width: 743.98px)");
     window.matchMedia("(max-width: 743.98px)");
-    ScrollTrigger.scrollerProxy(".page", {
+    ScrollTrigger.scrollerProxy("main.page", {
         scrollTop(value) {
             return arguments.length ? locoScroll.scrollTo(value, 0, 0) : locoScroll.scroll.instance.scroll.y;
         },
@@ -10329,34 +10328,34 @@ object-assign
                 height: window.innerHeight
             };
         },
-        pinType: document.querySelector(".page").style.transform ? "transform" : "fixed"
+        pinType: document.querySelector("main.page").style.transform ? "transform" : "fixed"
     });
     if (document.querySelector(".preview")) {
         const previewTimeLine = gsapWithCSS.timeline({
             scrollTrigger: {
                 trigger: ".preview",
-                scroller: ".page",
+                scroller: "main.page",
                 start: "top bottom",
                 end: "bottom top"
             }
         });
-        previewTimeLine.to(".preview__title", {
+        if (document.querySelector(".preview__title")) previewTimeLine.to(".preview__title", {
             onComplete: function() {
                 document.querySelector(".preview__title").classList.add("_active");
             }
         });
-        previewTimeLine.to(".preview__subtitle", {
+        if (document.querySelector(".preview__subtitle")) previewTimeLine.to(".preview__subtitle", {
             onComplete: function() {
                 document.querySelector(".preview__subtitle").classList.add("_active");
             }
         });
-        previewTimeLine.from(".preview__subtitle .link-circle", {
+        if (document.querySelector(".preview__subtitle .link-circle")) previewTimeLine.from(".preview__subtitle .link-circle", {
             opacity: 0,
             rotate: -180,
             scale: .5,
             delay: .5
         });
-        previewTimeLine.fromTo(".preview__social", {
+        if (document.querySelector(".preview__social")) previewTimeLine.fromTo(".preview__social", {
             opacity: 0,
             x: "200%",
             y: "-50%"
@@ -10365,38 +10364,27 @@ object-assign
             y: "-50%",
             x: 0
         });
-        previewTimeLine.from(".preview__scroll a", {
+        if (document.querySelector(".preview__scroll a")) previewTimeLine.from(".preview__scroll a", {
             opacity: 0
         });
     }
     if (document.querySelector(".about")) {
         function handleMmd2Change(e) {
             if (e.matches) {
-                ScrollTrigger.create({
-                    trigger: ".about",
-                    scroller: ".page",
-                    start: "top top",
-                    end: "+=100%",
-                    pin: true
-                });
                 const aboutTimeLine = gsapWithCSS.timeline({
                     scrollTrigger: {
                         trigger: ".about",
-                        scroller: ".page",
+                        scroller: "main.page",
                         start: "50% bottom",
                         end: "bottom top",
                         scrub: 1
                     }
                 });
-                aboutTimeLine.from(".about__body", {
-                    y: "-100%",
-                    duration: .6
-                });
-                aboutTimeLine.from(".about__image._image-left", {
+                if (document.querySelector(".about__image._image-left")) aboutTimeLine.from(".about__image._image-left", {
                     opacity: 0,
                     y: "-10%"
                 }, "-=0.4");
-                aboutTimeLine.from(".about__image._image-right", {
+                if (document.querySelector(".about__image._image-right")) aboutTimeLine.from(".about__image._image-right", {
                     opacity: 0,
                     y: "70%"
                 }, "-=0.5");
@@ -10404,16 +10392,16 @@ object-assign
                 const aboutTimeLine = gsapWithCSS.timeline({
                     scrollTrigger: {
                         trigger: ".about",
-                        scroller: ".page",
+                        scroller: "main.page",
                         start: "20% bottom",
                         end: "bottom top"
                     }
                 });
-                aboutTimeLine.from(".about__image._image-left", {
+                if (document.querySelector(".about__image._image-left")) aboutTimeLine.from(".about__image._image-left", {
                     opacity: 0,
                     x: "-50%"
                 });
-                aboutTimeLine.from(".about__image._image-right", {
+                if (document.querySelector(".about__image._image-right")) aboutTimeLine.from(".about__image._image-right", {
                     opacity: 0,
                     x: "100%"
                 });
@@ -10454,7 +10442,7 @@ object-assign
                 }
                 ScrollTrigger.create({
                     trigger: element,
-                    scroller: ".page",
+                    scroller: "main.page",
                     start: "top bottom",
                     end: "bottom top",
                     once: true,
@@ -10465,7 +10453,7 @@ object-assign
             })); else categoriesItems.forEach((element => {
                 ScrollTrigger.create({
                     trigger: element,
-                    scroller: ".page",
+                    scroller: "main.page",
                     start: "bottom bottom",
                     end: "bottom top",
                     onEnter: function() {
@@ -10483,7 +10471,7 @@ object-assign
         caseTitles.forEach((title => {
             ScrollTrigger.create({
                 trigger: title,
-                scroller: ".page",
+                scroller: "main.page",
                 start: "top 80%",
                 end: "bottom top",
                 onEnter: function() {
@@ -10496,7 +10484,7 @@ object-assign
             let caseLeftJobsTimeLine = gsapWithCSS.timeline({
                 scrollTrigger: {
                     trigger: leftJob,
-                    scroller: ".page",
+                    scroller: "main.page",
                     start: "top 80%",
                     end: "bottom top"
                 }
@@ -10517,7 +10505,7 @@ object-assign
             let caseRightJobsTimeLine = gsapWithCSS.timeline({
                 scrollTrigger: {
                     trigger: rightJob,
-                    scroller: ".page",
+                    scroller: "main.page",
                     start: "top 80%",
                     end: "bottom top"
                 }
@@ -10536,7 +10524,7 @@ object-assign
             let caseTopJobsTimeLine = gsapWithCSS.timeline({
                 scrollTrigger: {
                     trigger: topJob,
-                    scroller: ".page",
+                    scroller: "main.page",
                     start: "top 80%",
                     end: "bottom top"
                 }
@@ -10555,7 +10543,7 @@ object-assign
             let moreTimeLine = gsapWithCSS.timeline({
                 scrollTrigger: {
                     trigger: more,
-                    scroller: ".page",
+                    scroller: "main.page",
                     start: "top 80%",
                     end: "bottom top"
                 }
@@ -10569,7 +10557,7 @@ object-assign
     const marquee = document.querySelector(".marquee");
     if (marquee) ScrollTrigger.create({
         trigger: marquee,
-        scroller: ".page",
+        scroller: "main.page",
         start: "top bottom",
         end: "bottom top",
         onToggle: function() {
@@ -10582,48 +10570,44 @@ object-assign
             if (e.matches) {
                 ScrollTrigger.create({
                     trigger: ".features__body",
-                    scroller: ".page",
+                    scroller: "main.page",
                     start: "top top",
-                    end: "+=50%",
-                    pin: true
+                    end: "+=50%"
                 });
                 const featuresBodyTimeLine = gsapWithCSS.timeline({
                     scrollTrigger: {
                         trigger: ".features__body",
-                        scroller: ".page",
+                        scroller: "main.page",
                         start: "top 50%",
                         end: "bottom top",
                         scrub: 1
                     }
                 });
-                featuresBodyTimeLine.add((function() {
-                    document.querySelector(".features__title").classList.add("_active");
-                }));
-                featuresBodyTimeLine.from(".features__title", {
-                    y: "30%"
-                });
-                featuresBodyTimeLine.fromTo(".features__text", {
-                    y: "50%"
-                }, {
-                    y: "-50%"
-                }, "-=0.5");
-                featuresBodyTimeLine.to(".features__text", {
-                    y: "0",
-                    duration: .5
-                });
-                ScrollTrigger.create({
-                    trigger: ".features__row",
-                    scroller: ".page",
-                    start: "-700px -600px",
-                    end: "+=30%",
-                    pin: true
-                });
+                if (document.querySelector(".features__title")) {
+                    featuresBodyTimeLine.add((function() {
+                        document.querySelector(".features__title").classList.add("_active");
+                    }));
+                    featuresBodyTimeLine.from(".features__title", {
+                        y: "30%"
+                    });
+                }
+                if (document.querySelector(".features__text")) {
+                    featuresBodyTimeLine.fromTo(".features__text", {
+                        y: "50%"
+                    }, {
+                        y: "-50%"
+                    }, "-=0.5");
+                    featuresBodyTimeLine.to(".features__text", {
+                        y: "0",
+                        duration: .5
+                    });
+                }
                 const featuresRowTimeLine = gsapWithCSS.timeline({
                     scrollTrigger: {
                         trigger: ".features__row",
-                        scroller: ".page",
+                        scroller: "main.page",
                         start: "top bottom",
-                        end: "bottom top",
+                        end: "top center",
                         scrub: 1
                     }
                 });
@@ -10653,8 +10637,8 @@ object-assign
         const featuresLocatedTimeLine = gsapWithCSS.timeline({
             scrollTrigger: {
                 trigger: featuresLocated,
-                scroller: ".page",
-                start: "top center",
+                scroller: "main.page",
+                start: "top 75%",
                 end: "bottom top"
             }
         });
@@ -10671,7 +10655,7 @@ object-assign
     const featuresMore = document.querySelector(".features__more-bg");
     if (featuresMore) ScrollTrigger.create({
         trigger: ".features",
-        scroller: ".page",
+        scroller: "main.page",
         start: "top bottom",
         end: "bottom top",
         onToggle: function() {
@@ -10681,9 +10665,9 @@ object-assign
     const bgColorChangeTarget = document.querySelector(".home .features__located");
     if (bgColorChangeTarget) ScrollTrigger.create({
         trigger: ".home .features__located",
-        scroller: ".page",
-        start: "bottom center",
-        end: "bottom top",
+        scroller: "main.page",
+        start: "top center",
+        end: "top top",
         onEnter: function() {
             document.documentElement.classList.remove("dark");
             document.documentElement.classList.add("light");
@@ -10697,7 +10681,7 @@ object-assign
     if (taxonomyCategories.length > 0) taxonomyCategories.forEach((category => {
         ScrollTrigger.create({
             trigger: category,
-            scroller: ".page",
+            scroller: "main.page",
             start: "-90px bottom",
             end: "bottom top",
             onEnter: function() {
@@ -10713,7 +10697,7 @@ object-assign
                 let elementRightTimeLine = gsapWithCSS.timeline({
                     scrollTrigger: {
                         trigger: element,
-                        scroller: ".page",
+                        scroller: "main.page",
                         start: "-90px 60%",
                         end: "bottom top"
                     }
@@ -10730,7 +10714,7 @@ object-assign
                 let elementLeftTimeLine = gsapWithCSS.timeline({
                     scrollTrigger: {
                         trigger: element,
-                        scroller: ".page",
+                        scroller: "main.page",
                         start: "-90px 60%",
                         end: "bottom top"
                     }
@@ -10752,7 +10736,7 @@ object-assign
         let servicesTimeLine = gsapWithCSS.timeline({
             scrollTrigger: {
                 trigger: ".services",
-                scroller: ".page",
+                scroller: "main.page",
                 start: "-90px bottom",
                 end: "bottom top"
             }
@@ -10836,20 +10820,27 @@ object-assign
         }));
     }));
     const transitionElement = document.querySelector(".transition-thumb");
-    const links = document.querySelectorAll("a[data-page-link]");
-    setTimeout((() => {
+    const links = document.querySelectorAll(".menu__body a, a[data-page-link]");
+    if (transitionElement) setTimeout((() => {
         transitionElement.classList.remove("_active");
     }), 500);
-    links.forEach((element => {
+    if (links.length > 0) links.forEach((element => {
         element.addEventListener("click", (function(e) {
             e.preventDefault();
             let target = e.target.href;
             if (window.location.href != target) {
-                transitionElement.classList.add("_active");
+                if (transitionElement) transitionElement.classList.add("_active");
                 setTimeout((() => {
                     window.location.href = target;
                 }), 500);
             }
+        }));
+    }));
+    const spollersTitles = document.querySelectorAll(".spollers__title");
+    if (spollersTitles.length > 0) spollersTitles.forEach((element => {
+        element.addEventListener("click", (function() {
+            locoScroll.update();
+            ScrollTrigger.update;
         }));
     }));
     window["FLS"] = true;

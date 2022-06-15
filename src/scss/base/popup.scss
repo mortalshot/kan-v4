@@ -37,7 +37,7 @@ body::after {
 		.popup__content {
 			visibility: visible;
 			transform: scale(1);
-			transition: $transition ease transform 0s;
+			transition: 0.5s ease transform 0s;
 		}
 	}
 
@@ -73,6 +73,10 @@ body::after {
 		@include adaptiveValue("right", 40, 20);
 		font-size: rem(28);
 		transform: rotate(45deg);
+
+		&:focus-visible {
+			outline: 0;
+		}
 	}
 
 	// .popup__text

@@ -59,23 +59,28 @@
 		}
 	}
 
+	li {
+		a {
+			padding: rem(5);
+			margin: rem(-5);
+			font-size: rem(14);
+			line-height: 1;
+			transition: $transition ease color 0s;
+
+			@media (any-hover: hover) {
+				&:hover {
+					color: var(--DGrey);
+				}
+			}
+		}
+	}
+
 	// .menu__item
 	&__item {
 	}
 
 	// .menu__link
 	&__link {
-		padding: rem(5);
-		margin: rem(-5);
-		font-size: rem(14);
-		line-height: 1;
-		transition: $transition ease color 0s;
-
-		@media (any-hover: hover) {
-			&:hover {
-				color: var(--DGrey);
-			}
-		}
 	}
 }
 
@@ -85,25 +90,31 @@
 	// .logo__link
 	&__link {
 		@media (any-hover: hover) {
-			transition: $transition ease color 0s;
-
 			&:hover {
-				color: var(--DGrey);
+				.logo__icon {
+					color: var(--DGrey);
+				}
 			}
 		}
 	}
 
 	// .logo__icon
 	&__icon {
+		transition: $transition ease color 0s;
+		color: var(--mainColor);
 	}
 }
 
 .icon-menu {
 	display: flex;
 
-	@for $i from 1 through 4 {
-		#icon-menu-rect-#{$i} {
-			transition: $transition ease transform 0s;
+	@media (any-hover: hover) {
+		&:hover {
+			svg {
+				path {
+					fill: var(--DGrey);
+				}
+			}
 		}
 	}
 

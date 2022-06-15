@@ -19,9 +19,8 @@
 	text-align: left;
 	position: relative;
 
-	@media (min-width:$mobile){
-	font-size: rem(22);
-		  
+	@media (min-width: $mobile) {
+		font-size: rem(22);
 	}
 
 	._spoller-init & {
@@ -30,13 +29,21 @@
 		justify-content: space-between;
 		cursor: pointer;
 
+		@media (any-hover: hover) {
+			transition: $transition ease color 0s;
+
+			&:hover {
+				color: var(--DGrey);
+			}
+		}
+
 		&::after {
 			content: "\e909";
 			@extend %ic;
 			color: $DGrey;
 			font-size: rem(26);
 			margin-left: rem(20);
-			transition: $transition ease transform 0s;
+			transition: $transition ease transform, $transition color 0s;
 		}
 
 		&._spoller-active {

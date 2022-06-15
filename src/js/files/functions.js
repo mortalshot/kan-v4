@@ -259,7 +259,9 @@ export function spollers() {
 					spollerTitle.classList.toggle('_spoller-active');
 					_slideToggle(spollerTitle.nextElementSibling, spollerSpeed);
 				}
-				e.preventDefault();
+				if (!el.classList.contains('services__link')) {
+					e.preventDefault();
+				}
 			}
 		}
 		function hideSpollersBody(spollersBlock) {

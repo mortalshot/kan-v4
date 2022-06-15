@@ -11,9 +11,9 @@ import LocomotiveScroll from 'locomotive-scroll';
 import "../../scss/libs/locomotive-scroll.scss";
 
 const locoScroll = new LocomotiveScroll({
-    el: document.querySelector(".page"),
+    el: document.querySelector("main.page"),
     smooth: true,
-    lerp: 0.01,
+    lerp: 0.015,
 });
 // each time Locomotive Scroll updates, tell ScrollTrigger to update too (sync positioning)
 locoScroll.on("scroll", ScrollTrigger.update);
@@ -22,7 +22,7 @@ let mediaQueryMmd2 = window.matchMedia('(min-width: 991.98px)');
 let mediaQueryMmd3 = window.matchMedia('(min-width: 743.98px)');
 let mediaQueryMd3 = window.matchMedia('(max-width: 743.98px)');
 
-ScrollTrigger.scrollerProxy(".page", {
+ScrollTrigger.scrollerProxy("main.page", {
     scrollTop(value) {
         return arguments.length ? locoScroll.scrollTo(value, 0, 0) : locoScroll.scroll.instance.scroll.y;
     }, // we don't have to define a scrollLeft because we're only scrolling vertically.
@@ -30,7 +30,7 @@ ScrollTrigger.scrollerProxy(".page", {
         return { top: 0, left: 0, width: window.innerWidth, height: window.innerHeight };
     },
     // LocomotiveScroll handles things completely differently on mobile devices - it doesn't even transform the container at all! So to get the correct behavior and avoid jitters, we should pin things with position: fixed on mobile. We sense it by checking to see if there's a transform applied to the container (the LocomotiveScroll-controlled element).
-    pinType: document.querySelector(".page").style.transform ? "transform" : "fixed"
+    pinType: document.querySelector("main.page").style.transform ? "transform" : "fixed"
 });
 
 // !Главная страница
@@ -39,34 +39,44 @@ if (document.querySelector('.preview')) {
     const previewTimeLine = gsap.timeline({
         scrollTrigger: {
             trigger: ".preview",
-            scroller: ".page",
+            scroller: "main.page",
             start: "top bottom",
             end: "bottom top",
         }
     })
 
-    previewTimeLine.to(".preview__title", {
-        onComplete: function () {
-            document.querySelector('.preview__title').classList.add('_active');
-        },
-    });
-    previewTimeLine.to(".preview__subtitle", {
-        onComplete: function () {
-            document.querySelector('.preview__subtitle').classList.add('_active');
-        },
-    });
-    previewTimeLine.from(".preview__subtitle .link-circle", { opacity: 0, rotate: -180, scale: 0.5, delay: 0.5 });
-    previewTimeLine.fromTo(".preview__social", { opacity: 0, x: "200%", y: "-50%", }, { opacity: 1, y: "-50%", x: 0 });
-    previewTimeLine.from(".preview__scroll a", { opacity: 0 });
+    if (document.querySelector('.preview__title')) {
+        previewTimeLine.to(".preview__title", {
+            onComplete: function () {
+                document.querySelector('.preview__title').classList.add('_active');
+            },
+        });
+    }
+    if (document.querySelector('.preview__subtitle')) {
+        previewTimeLine.to(".preview__subtitle", {
+            onComplete: function () {
+                document.querySelector('.preview__subtitle').classList.add('_active');
+            },
+        });
+    }
+    if (document.querySelector('.preview__subtitle .link-circle')) {
+        previewTimeLine.from(".preview__subtitle .link-circle", { opacity: 0, rotate: -180, scale: 0.5, delay: 0.5 });
+    }
+    if (document.querySelector('.preview__social')) {
+        previewTimeLine.fromTo(".preview__social", { opacity: 0, x: "200%", y: "-50%", }, { opacity: 1, y: "-50%", x: 0 });
+    }
+    if (document.querySelector('.preview__scroll a')) {
+        previewTimeLine.from(".preview__scroll a", { opacity: 0 });
+    }
 }
 
 // Анимация секции about
 if (document.querySelector('.about')) {
     function handleMmd2Change(e) {
         if (e.matches) {
-            ScrollTrigger.create({
+           /*  ScrollTrigger.create({
                 trigger: ".about",
-                scroller: ".page",
+                scroller: "main.page",
                 start: "top top",
                 end: "+=100%",
                 // markers: true,
@@ -76,7 +86,7 @@ if (document.querySelector('.about')) {
             const aboutTimeLine = gsap.timeline({
                 scrollTrigger: {
                     trigger: ".about",
-                    scroller: ".page",
+                    scroller: "main.page",
                     start: "50% bottom",
                     end: "bottom top",
                     scrub: 1,
@@ -84,23 +94,52 @@ if (document.querySelector('.about')) {
                 }
             })
 
-            aboutTimeLine.from(".about__body", { y: "-100%", duration: 0.6 })
-            aboutTimeLine.from(".about__image._image-left", { opacity: 0, y: "-10%" }, "-=0.4")
-            aboutTimeLine.from(".about__image._image-right", { opacity: 0, y: "70%" }, "-=0.5")
+            if (document.querySelector('.about__body')) {
+                aboutTimeLine.from(".about__body", { y: "-100%", duration: 0.6 })
+            }
+            if (document.querySelector('.about__image._image-left')) {
+                aboutTimeLine.from(".about__image._image-left", { opacity: 0, y: "-10%" }, "-=0.4")
+            }
+            if (document.querySelector('.about__image._image-right')) {
+                aboutTimeLine.from(".about__image._image-right", { opacity: 0, y: "70%" }, "-=0.5")
+            } */
+
+
+            const aboutTimeLine = gsap.timeline({
+                scrollTrigger: {
+                    trigger: ".about",
+                    scroller: "main.page",
+                    start: "50% bottom",
+                    end: "bottom top",
+                    scrub: 1,
+                    // markers: true,
+                }
+            })
+            if (document.querySelector('.about__image._image-left')) {
+                aboutTimeLine.from(".about__image._image-left", { opacity: 0, y: "-10%" }, "-=0.4")
+            }
+            if (document.querySelector('.about__image._image-right')) {
+                aboutTimeLine.from(".about__image._image-right", { opacity: 0, y: "70%" }, "-=0.5")
+            }
+
         }
         else {
             const aboutTimeLine = gsap.timeline({
                 scrollTrigger: {
                     trigger: ".about",
-                    scroller: ".page",
+                    scroller: "main.page",
                     start: "20% bottom",
                     end: "bottom top",
                     // markers: true,
                 }
             })
 
-            aboutTimeLine.from(".about__image._image-left", { opacity: 0, x: "-50%" })
-            aboutTimeLine.from(".about__image._image-right", { opacity: 0, x: "100%" })
+            if (document.querySelector('.about__image._image-left')) {
+                aboutTimeLine.from(".about__image._image-left", { opacity: 0, x: "-50%" })
+            }
+            if (document.querySelector('.about__image._image-right')) {
+                aboutTimeLine.from(".about__image._image-right", { opacity: 0, x: "100%" })
+            }
         }
     }
     mediaQueryMmd2.addEventListener('change', handleMmd2Change);
@@ -150,7 +189,7 @@ if (categoriesItems.length > 0) {
 
                 ScrollTrigger.create({
                     trigger: element,
-                    scroller: ".page",
+                    scroller: "main.page",
                     start: "top bottom",
                     end: "bottom top",
                     once: true,
@@ -164,7 +203,7 @@ if (categoriesItems.length > 0) {
             categoriesItems.forEach(element => {
                 ScrollTrigger.create({
                     trigger: element,
-                    scroller: ".page",
+                    scroller: "main.page",
                     start: "bottom bottom",
                     end: "bottom top",
                     onEnter: function () {
@@ -186,7 +225,7 @@ if (cases) {
         caseTitles.forEach(title => {
             ScrollTrigger.create({
                 trigger: title,
-                scroller: ".page",
+                scroller: "main.page",
                 start: "top 80%",
                 end: "bottom top",
                 onEnter: function () {
@@ -200,7 +239,7 @@ if (cases) {
             let caseLeftJobsTimeLine = gsap.timeline({
                 scrollTrigger: {
                     trigger: leftJob,
-                    scroller: ".page",
+                    scroller: "main.page",
                     start: "top 80%",
                     end: "bottom top",
                 }
@@ -217,7 +256,7 @@ if (cases) {
             let caseRightJobsTimeLine = gsap.timeline({
                 scrollTrigger: {
                     trigger: rightJob,
-                    scroller: ".page",
+                    scroller: "main.page",
                     start: "top 80%",
                     end: "bottom top",
                     // markers: true,
@@ -232,7 +271,7 @@ if (cases) {
             let caseTopJobsTimeLine = gsap.timeline({
                 scrollTrigger: {
                     trigger: topJob,
-                    scroller: ".page",
+                    scroller: "main.page",
                     start: "top 80%",
                     end: "bottom top",
                 }
@@ -247,7 +286,7 @@ if (cases) {
             let moreTimeLine = gsap.timeline({
                 scrollTrigger: {
                     trigger: more,
-                    scroller: ".page",
+                    scroller: "main.page",
                     start: "top 80%",
                     end: "bottom top",
                 }
@@ -262,7 +301,7 @@ const marquee = document.querySelector('.marquee');
 if (marquee) {
     ScrollTrigger.create({
         trigger: marquee,
-        scroller: ".page",
+        scroller: "main.page",
         start: "top bottom",
         end: "bottom top",
         onToggle: function () {
@@ -279,17 +318,17 @@ if (features) {
             // Анимация для body
             ScrollTrigger.create({
                 trigger: ".features__body",
-                scroller: ".page",
+                scroller: "main.page",
                 start: "top top",
                 end: "+=50%",
                 // markers: true,
-                pin: true,
+                // pin: true,
             })
 
             const featuresBodyTimeLine = gsap.timeline({
                 scrollTrigger: {
                     trigger: ".features__body",
-                    scroller: ".page",
+                    scroller: "main.page",
                     start: "top 50%",
                     end: "bottom top",
                     scrub: 1,
@@ -297,29 +336,36 @@ if (features) {
                 }
             })
 
-            featuresBodyTimeLine.add(function () {
-                document.querySelector('.features__title').classList.add('_active');
-            });
-            featuresBodyTimeLine.from(".features__title", { y: "30%" });
-            featuresBodyTimeLine.fromTo(".features__text", { y: "50%" }, { y: "-50%", }, "-=0.5");
-            featuresBodyTimeLine.to(".features__text", { y: "0", duration: 0.5 });
+            if (document.querySelector('.features__title')) {
+                featuresBodyTimeLine.add(function () {
+                    document.querySelector('.features__title').classList.add('_active');
+                });
+
+                featuresBodyTimeLine.from(".features__title", { y: "30%" });
+            }
+            if (document.querySelector('.features__text')) {
+                featuresBodyTimeLine.fromTo(".features__text", { y: "50%" }, { y: "-50%", }, "-=0.5");
+                featuresBodyTimeLine.to(".features__text", { y: "0", duration: 0.5 });
+            }
 
             // Анимация для row
-            ScrollTrigger.create({
+/*             ScrollTrigger.create({
                 trigger: ".features__row",
-                scroller: ".page",
+                scroller: "main.page",
                 start: "-700px -600px",
                 end: "+=30%",
                 // markers: true,
                 pin: true,
-            })
+            }) */
 
             const featuresRowTimeLine = gsap.timeline({
                 scrollTrigger: {
                     trigger: ".features__row",
-                    scroller: ".page",
+                    scroller: "main.page",
                     start: "top bottom",
-                    end: "bottom top",
+                    end: "top center",
+                    // start: "top bottom",
+                    // end: "bottom top",
                     scrub: 1,
                     // markers: true,
                 }
@@ -350,8 +396,10 @@ if (featuresLocated) {
     const featuresLocatedTimeLine = gsap.timeline({
         scrollTrigger: {
             trigger: featuresLocated,
-            scroller: ".page",
-            start: "top center",
+            scroller: "main.page",
+            // start: "top center",
+            // end: "bottom top",
+            start: "top 75%",
             end: "bottom top",
             // markers: true,
         }
@@ -368,7 +416,7 @@ const featuresMore = document.querySelector('.features__more-bg');
 if (featuresMore) {
     ScrollTrigger.create({
         trigger: ".features",
-        scroller: ".page",
+        scroller: "main.page",
         start: "top bottom",
         end: "bottom top",
 
@@ -383,14 +431,10 @@ const bgColorChangeTarget = document.querySelector('.home .features__located');
 if (bgColorChangeTarget) {
     ScrollTrigger.create({
         trigger: ".home .features__located",
-        scroller: ".page",
-        start: "bottom center",
-        end: "bottom top",
+        scroller: "main.page",
+        start: "top center",
+        end: "top top",
         // markers: true,
-        // onToggle: function () {
-        //     document.documentElement.classList.toggle('dark');
-        //     document.documentElement.classList.toggle('light');
-        // },
         onEnter: function () {
             document.documentElement.classList.remove('dark');
             document.documentElement.classList.add('light');
@@ -410,7 +454,7 @@ if (taxonomyCategories.length > 0) {
     taxonomyCategories.forEach(category => {
         ScrollTrigger.create({
             trigger: category,
-            scroller: ".page",
+            scroller: "main.page",
             start: "-90px bottom",
             end: "bottom top",
             // markers: true,
@@ -430,7 +474,7 @@ if (archivePortfolioItems.length > 0) {
             let elementRightTimeLine = gsap.timeline({
                 scrollTrigger: {
                     trigger: element,
-                    scroller: ".page",
+                    scroller: "main.page",
                     start: "-90px 60%",
                     end: "bottom top",
                     // markers: true,
@@ -443,7 +487,7 @@ if (archivePortfolioItems.length > 0) {
             let elementLeftTimeLine = gsap.timeline({
                 scrollTrigger: {
                     trigger: element,
-                    scroller: ".page",
+                    scroller: "main.page",
                     start: "-90px 60%",
                     end: "bottom top",
                     // markers: true,
@@ -462,7 +506,7 @@ if (services) {
     let servicesTimeLine = gsap.timeline({
         scrollTrigger: {
             trigger: ".services",
-            scroller: ".page",
+            scroller: "main.page",
             start: "-90px bottom",
             end: "bottom top",
             // markers: true,
@@ -579,23 +623,40 @@ gsap.utils.toArray(".anchor-link a").forEach(function (a) {
 
 // Анимация перехода по страницам
 const transitionElement = document.querySelector('.transition-thumb');
-const links = document.querySelectorAll('a[data-page-link]');
+const links = document.querySelectorAll('.menu__body a, a[data-page-link]');
 
-setTimeout(() => {
-    transitionElement.classList.remove('_active');
-}, 500);
+if (transitionElement) {
+    setTimeout(() => {
+        transitionElement.classList.remove('_active');
+    }, 500);
+}
 
-links.forEach(element => {
-    element.addEventListener('click', function (e) {
-        e.preventDefault();
-        let target = e.target.href;
+if (links.length > 0) {
+    links.forEach(element => {
+        element.addEventListener('click', function (e) {
+            e.preventDefault();
+            let target = e.target.href;
 
-        if (window.location.href != target) {
-            transitionElement.classList.add('_active');
+            if (window.location.href != target) {
+                if (transitionElement) {
+                    transitionElement.classList.add('_active');
+                }
 
-            setTimeout(() => {
-                window.location.href = target;
-            }, 500);
-        }
-    })
-});
+                setTimeout(() => {
+                    window.location.href = target;
+                }, 500);
+            }
+        })
+    });
+}
+
+// Обновляем высоту страницы при клике на спойлер
+const spollersTitles = document.querySelectorAll('.spollers__title');
+if (spollersTitles.length > 0) {
+    spollersTitles.forEach(element => {
+        element.addEventListener('click', function () {
+            locoScroll.update();
+            ScrollTrigger.update;
+        })
+    });
+}

@@ -5,7 +5,7 @@
 
 .transition-thumb {
     content: "";
-    position: absolute;
+    position: fixed;
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
@@ -19,7 +19,8 @@
     pointer-events: none;
 
     &._active {
-        transform: scale(21);
+        transform: scale(45);
+        // transform: scale(21);
         opacity: 1;
         border-radius: 0;
         pointer-events: all;
@@ -194,6 +195,21 @@ img {
     }
     :last-child {
         margin-bottom: 0;
+    }
+}
+
+.d-none {
+    // .d-none-md3
+    &-md3 {
+        @media (max-width: $mobile) {
+            display: none;
+        }
+    }
+    // .d-none-mmd3
+    &-mmd3 {
+        @media (min-width: $mobile) {
+            display: none;
+        }
     }
 }
 
